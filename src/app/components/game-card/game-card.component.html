@@ -1,0 +1,18 @@
+<div class="max-w-sm rounded overflow-hidden shadow-lg shadow-white">
+    <img *ngIf="game.cover != null" class="w-full" [src]="coverURL" alt="Cover">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2 text-[#C69749]">{{game.name}}</div>
+      <p class="text-white text-base">
+        {{game.name}} <span *ngIf="game.genres != null"> es un {{game.genres[0].name}} que </span> <span *ngIf="game.genres != null || date != null"> ha salido </span> <span *ngIf="game.platforms!=null"> en <span *ngFor="let item of game.platforms; let i = index">{{item.name}}<span *ngIf="i < game.platforms.length-2">, </span> <span *ngIf="i == game.platforms.length - 2"> y </span></span></span> <span *ngIf="date != null "> el {{date}} </span> 
+      </p>
+    </div>
+    <div *ngIf="game.platforms[0]" class="px-6 pt-4 pb-2">
+        <button *ngFor="let item of game.platforms; let i = index" routerLink="/{{game.platforms[i].abbreviation ? game.platforms[i].abbreviation : game.platforms[i].id}}" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{item.name}} </button>
+
+    </div>
+
+    <div class="px-6 pt-4 pb-2">
+        <button class="inline-block bg-[#282A3A] rounded-md px-3 py-1 text-sm font-semibold text-[#C69749] mr-2 mb-2">Hilo oficial</button>
+        <button (click)="onAddToList()" class="inline-block bg-[#282A3A] rounded-md px-3 py-1 text-sm font-semibold text-[#C69749] mr-2 mb-2">Añadir a lista</button>
+    </div>
+</div>        

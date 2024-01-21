@@ -1,0 +1,62 @@
+::ng-deep .mat-dialog-container{
+    background-color: #1a1a1a !important;
+}
+
+.signup-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.close-icon, .back-button{
+    position: absolute !important;
+    cursor: pointer;
+}
+
+.close-icon {
+    top: -10px;
+    right: -10px; 
+  }
+
+.back-button{
+    top: -7px;
+    left: -10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    margin-top: 10px;
+}
+
+h1, label, p, .close-icon, .back-button{
+    color: #C69749;
+}
+
+input {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    color: #333; 
+  }
+
+
+button {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover, a:hover {
+    background-color: #2980b9;
+}
+
+

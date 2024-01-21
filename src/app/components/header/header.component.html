@@ -1,0 +1,62 @@
+<nav class="border-gray-200 bg-[#17082d]">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+  <a href="/latest" class="flex items-center">
+      <img src="./assets/img/logo.png" class="h-8 mr-3" alt="Logo" />
+      <span class="self-center text-2xl text-white font-semibold whitespace-nowrap dark:text-white">La viciopedia</span>
+  </a>
+  <div class="flex items-center md:order-3">
+      <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+        <span class="sr-only">Open user menu</span>
+        <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+      </button>
+      <!-- Dropdown menu -->
+      <div class="z-50 hidden my-4 text-base list-none divide-y  rounded-lg shadow bg-gray-700 divide-gray-600" id="user-dropdown">
+        <div class="px-4 py-3">
+          <span class="block text-sm text-white">Bonnie Green</span>
+          <span class="block text-sm  truncate text-gray-400">name@flowbite.com</span>
+        </div>
+        <ul class="py-2" aria-labelledby="user-menu-button">
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm  hover:bg-gray-600 text-gray-200 hover:text-white">Dashboard</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Settings</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Earnings</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 hover:bg-gray-600 text-gray-200 hover:text-white">Sign out</a>
+          </li>
+        </ul>
+      </div>
+      <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+    </button>
+  </div>
+  <app-finder class="flex md:order-2"></app-finder>
+  </div>
+</nav>
+
+
+<!-- <div class="flex justify-between items-center bg-[#282A3A] h-12">
+    <div class="marca flex">
+        <img class="logo" src="" alt="">
+        <h1 (click)="onRefresh()" class="cursor-pointer text-[#C69749] ml-4 2xl:ml-48">Nombre de web</h1>
+    </div>
+    <form class="flex">
+        <input type="text" placeholder = "Buscar..." name="searchbar">
+        <button (click)="onSearch()" class="lupa text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit" value="Submit">
+        <svg aria-hidden="true" class="invert" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="20px" height="20px"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"/></svg>
+        <span class="sr-only">Icon description</span>
+        </button>
+    </form>
+    <div class="flex items-center gap-x-20 2xl:mr-20">
+        <h2 class="text-[#C69749]">Tus listas</h2>
+        <div class="flex items-center gap-x-6">
+            <h2 class="usuario text-[#C69749]">Usuario</h2>
+            <img class="avatar h-12 hover:cursor-pointer" src="./assets/img/17004.png" alt="">
+        </div>
+    </div>
+</div> -->
