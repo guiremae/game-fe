@@ -1,6 +1,6 @@
 // login.component.ts
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -12,9 +12,9 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class LoginComponent {
 
-  loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+  loginForm = new UntypedFormGroup({
+    username: new UntypedFormControl('', Validators.required),
+    password: new UntypedFormControl('', Validators.required),
   });
 
   constructor(

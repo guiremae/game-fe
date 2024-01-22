@@ -1,6 +1,6 @@
 // login.component.ts
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -18,9 +18,9 @@ export class AddToListComponent {
     // ... otros alimentos
   ];
 
-  addForm = new FormGroup({
-    list: new FormControl('', Validators.required),
-    listname: new FormControl('', Validators.required),
+  addForm = new UntypedFormGroup({
+    list: new UntypedFormControl('', Validators.required),
+    listname: new UntypedFormControl('', Validators.required),
   });
 
   constructor(

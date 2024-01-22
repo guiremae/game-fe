@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter,Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { GamesService } from 'src/app/services/games.service';
 
 @Component({
@@ -8,8 +8,8 @@ import { GamesService } from 'src/app/services/games.service';
   styleUrls: ['./finder.component.scss']
 })
 export class FinderComponent implements OnInit {
-  searchForm = new FormGroup({
-    gameName: new FormControl('', Validators.required),
+  searchForm = new UntypedFormGroup({
+    gameName: new UntypedFormControl('', Validators.required),
   });
 
   @Output() textSearched = new EventEmitter<string>();
