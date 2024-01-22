@@ -13,13 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { FinderComponent } from './components/finder/finder.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SignupComponent } from './components/sign-up/sign-up.component';
 import { AddToListComponent } from './components/add-to-list/add-to-list.component';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { GameComponent } from './pages/game/game.component';
@@ -46,10 +42,6 @@ import { GameComponent } from './pages/game/game.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
     MatToolbarModule,
     MatIconModule,
   ],
