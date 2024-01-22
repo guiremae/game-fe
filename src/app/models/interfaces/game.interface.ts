@@ -10,4 +10,6 @@ export interface Game{
     platforms: Platforms[];
     features: any;
     first_release_date: number;
+    summary: string;
+    videos: any[];
 }

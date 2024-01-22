@@ -22,7 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-
+import { GameComponent } from './pages/game/game.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import {MatIconModule} from '@angular/material/icon';
     LayoutComponent,
     SignupComponent,
     AddToListComponent,
+    GameComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +51,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatSelectModule,
     MatInputModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

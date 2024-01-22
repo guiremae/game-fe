@@ -1,0 +1,11 @@
+<h1>{{game.name}}</h1>
+<img *ngIf="game.cover != null" class="cover" [src]="coverURL" alt="Cover">
+<iframe *ngIf="videoURL"
+width="560"   
+height="315"  
+[src]="videoURL"
+frameborder="0"
+allowfullscreen
+></iframe>
+<br>
+<p>{{game.summary}}</p>

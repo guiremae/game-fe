@@ -22,6 +22,10 @@ export class IgdbService {
     return this.httpClient.post<any>("https://id.twitch.tv/oauth2/token", {client_id: this.clientID, client_secret: this.clientSecret, grant_type: "client_credentials"})
   }
 
+  public hasAuthToken(): boolean{
+    return this.authToken? true : false;
+  }
+
   public findLastGames(date: number, page:number): Observable<Game[]>{
     this.searching = ""
     this.platform = 0
@@ -66,6 +70,10 @@ export class IgdbService {
     const apiUrl = this.cors_api_host + 'https://api.igdb.com/v4/platforms'
 
     return this.httpClient.post<any>(apiUrl, 'fields *; where abbreviation = "' + name + '"; limit 1;', {headers: {'Client-ID': this.clientID, Authorization: 'Bearer ' + this.authToken}})
+  }
+
+  public getGame(id: number): Observable<Game[]>{
+    return this.httpClient.post<Game[]>(`${this.cors_api_host}${this.baseURL}`, `fields platforms.name, platforms.abbreviation, videos.video_id, cover.url, genres.name, summary, *; where id = ${id};`, {headers: {'Client-ID': this.clientID, Authorization: `Bearer ${this.authToken}`}})
   }
 
 }
