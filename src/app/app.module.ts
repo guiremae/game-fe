@@ -19,6 +19,8 @@ import { AddToListComponent } from './components/add-to-list/add-to-list.compone
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { GameComponent } from './pages/game/game.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { GameComponent } from './pages/game/game.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

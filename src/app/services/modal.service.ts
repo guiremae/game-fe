@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoginComponent } from '../components/login/login.component';
 import { SignupComponent } from '../components/sign-up/sign-up.component';
 import { AddToListComponent } from '../components/add-to-list/add-to-list.component';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 
 @Injectable({
