@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IgdbService } from '../services/igdb.service'; // Ajusta la importación según tu estructura
 import { Observable, Subscription, catchError, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class IgdbAuthGuard implements CanActivate {
+export class IgdbAuthGuard  {
   private subs = new Subscription();
 
   
