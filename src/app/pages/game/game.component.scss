@@ -1,24 +1,22 @@
-*{
-    padding: 5vh;
+h1 {
+  color: #c69749;
+  text-align: center;
+  font-size: 2rem;
 }
 
-h1{
-    color: #C69749;
-    margin-top: 3vh;
-    font-size: 4rem;
-
-}
-.cover{
-    margin: auto;
-    height: 50vh;
-    border: 1px solid black;
-    padding: 0px;
+.banner {
+  width: 100%;
+  min-height: 100%;
+  filter: blur(0.3rem);
 }
 
-h1, p{
-    text-align:center;
+.card {
+  position: relative;
+  top: -10rem;
 }
 
-p{
-    color: white;
+.media-container {
+  position: relative;
+  top: -5rem;
+  text-overflow: visible;
 }

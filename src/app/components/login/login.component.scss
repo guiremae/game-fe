@@ -1,53 +1,57 @@
-::ng-deep .mat-dialog-container{
-    background-color: #1a1a1a !important;
-}
+/* login.component.css */
 
 .login-form {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+  width: 400px;
+  padding: 20px;
+  background-color: #1a1a1a;
 }
 
 .close-icon {
-    position: absolute !important;
-    top: -10px; /* Ajusta la distancia desde la parte superior según tus preferencias */
-    right: -10px; /* Ajusta la distancia desde la derecha según tus preferencias */
-  }
-
-.close-icon, a{
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #c69749;
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #c69749;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 label {
-    margin-top: 10px;
-}
-
-h1, label, p, .close-icon{
-    color: #C69749;
+  color: #c69749;
 }
 
 input {
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    color: #333; 
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-button {
-    background-color: #3498db;
-    color: #ffffff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+p,
+label {
+  color: #ffffff;
 }
 
-button:hover {
-    background-color: #2980b9;
+a {
+  color: #c69749;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button[type="submit"] {
+  width: 100%; /* Hace que el botón ocupe el ancho completo del formulario */
+  margin-bottom: 20px;
 }

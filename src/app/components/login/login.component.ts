@@ -1,6 +1,10 @@
 // login.component.ts
 import { Component } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 
@@ -10,7 +14,6 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-
   loginForm = new UntypedFormGroup({
     username: new UntypedFormControl('', Validators.required),
     password: new UntypedFormControl('', Validators.required),
@@ -18,7 +21,7 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    public modalService: ModalService,
+    public modalService: ModalService
   ) {}
 
   onSubmit() {

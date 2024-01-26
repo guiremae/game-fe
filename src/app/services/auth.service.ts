@@ -8,7 +8,7 @@ import { shareReplay } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiURL: string = 'http:/192.168.1.45:8090'
+  private apiURL: string = 'http:/192.168.1.45:8090';
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn$(): Observable<boolean> {

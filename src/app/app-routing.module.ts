@@ -5,13 +5,13 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { GameComponent } from './pages/game/game.component';
 import { IgdbAuthGuard } from './guards/igdb-auth.guard';
 import { GameResolverService } from './resolvers/game-resolver.service';
+import { SearchGameResolverService } from './resolvers/search-game-resolver.service';
+import { LatestGamesResolverService } from './resolvers/latest-games-resolver.service';
+import { PlatformGamesResolverService } from './resolvers/platform-games-resolver.service';
+
+// Importar componentes y servicios necesarios...
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full', // Agrega pathMatch: 'full' para que coincida solo con una cadena de ruta vacía
-    redirectTo: 'latest', // Redirecciona a 'latest' cuando la ruta es una cadena vacía
-  },
   {
     path: '',
     component: LayoutComponent,
@@ -20,22 +20,30 @@ const routes: Routes = [
       {
         path: 'latest',
         component: HomeComponent,
-        data: { action: 'latest' },
+        resolve: {
+          resolver: LatestGamesResolverService,
+        },
       },
       {
         path: 'latest/:page',
         component: HomeComponent,
-        data: { action: 'page' },
-      },
-      {
-        path: 'search/:name/:page',
-        component: HomeComponent,
-        data: { action: 'search' },
+        resolve: {
+          resolver: LatestGamesResolverService,
+        },
       },
       {
         path: 'search/:name',
         component: HomeComponent,
-        data: { action: 'search' },
+        resolve: {
+          resolver: SearchGameResolverService,
+        },
+      },
+      {
+        path: 'search/:name/:page',
+        component: HomeComponent,
+        resolve: {
+          resolver: SearchGameResolverService,
+        },
       },
       {
         path: 'game/:id',
@@ -47,10 +55,21 @@ const routes: Routes = [
       {
         path: ':platform/:page',
         component: HomeComponent,
+        resolve: {
+          resolver: PlatformGamesResolverService,
+        },
       },
       {
         path: ':platform',
         component: HomeComponent,
+        resolve: {
+          resolver: PlatformGamesResolverService,
+        },
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'latest',
       },
     ],
   },

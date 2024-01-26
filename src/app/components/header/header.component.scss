@@ -1,4 +1,34 @@
-.example-spacer {
-    flex: 1 1 auto;
-  }
+button[mat-icon-button] {
+  $size-button: 2.5rem;
+  $size-icon: 2.5rem;
 
+  &.icon-button {
+    width: $size-button;
+    height: $size-button;
+    line-height: $size-button;
+    padding: 0;
+
+    .mat-icon {
+      font-size: $size-icon;
+      width: $size-icon;
+      height: $size-icon;
+      line-height: $size-icon;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mat-button-ripple {
+      font-size: inherit;
+      width: inherit;
+      height: inherit;
+      line-height: inherit;
+    }
+  }
+}
+
+.rounded {
+  border-radius: 50px;
+  width: 2.5rem;
+  height: 2.5rem;
+}

@@ -1,11 +1,15 @@
-import { Component, OnInit, EventEmitter,Output } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { GamesService } from 'src/app/services/games.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-finder',
   templateUrl: './finder.component.html',
-  styleUrls: ['./finder.component.scss']
+  styleUrls: ['./finder.component.scss'],
 })
 export class FinderComponent implements OnInit {
   searchForm = new UntypedFormGroup({
@@ -14,17 +18,14 @@ export class FinderComponent implements OnInit {
 
   @Output() textSearched = new EventEmitter<string>();
 
-  public searchingInput : string = ""
+  public searchingInput: string = '';
 
-  constructor(private gamesService : GamesService) { }
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  onSubmit(){
+  onSubmit() {
     const formData = this.searchForm.value;
-    this.gamesService.SearchGame(formData.gameName);
+    this.router.navigate([`/search/${formData.gameName}`]);
   }
-
 }

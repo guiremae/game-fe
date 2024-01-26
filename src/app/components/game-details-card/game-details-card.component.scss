@@ -1,0 +1,37 @@
+::ng-deep {
+  mat-grid-tile:nth-child(5) > div {
+    align-items: normal !important;
+  }
+}
+
+.home-card {
+  border-radius: 4px;
+  margin-top: 100px;
+  padding: 0 !important;
+  width: 100%;
+  background-color: transparent;
+}
+
+img {
+  margin: 0;
+  height: 100%;
+  object-fit: contain;
+}
+
+h1 {
+  font-size: 3rem;
+  color: white;
+  text-overflow: ellipsis;
+  text-align: center;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+p {
+  color: white;
+  text-align: justify;
+}
+
+.rating {
+  margin-top: 3px;
+}
