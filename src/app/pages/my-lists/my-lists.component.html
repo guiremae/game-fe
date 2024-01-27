@@ -1,0 +1,49 @@
+<mat-form-field>
+  <mat-label>Selecciona una lista</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let movie of movies" [value]="movie.title">
+      {{ movie.title }}
+    </mat-option>
+    <mat-option value="newList"> Crear nueva lista </mat-option>
+  </mat-select>
+  <button mat-icon-button matSuffix>
+    <mat-icon [ngStyle]="{ color: 'white' }">delete</mat-icon>
+  </button>
+</mat-form-field>
+
+<!-- Lista de películas -->
+<div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
+  <div class="action-buttons">
+    <button
+      mat-icon-button
+      [disabled]="moviesFormArray.pristine"
+      color="primary"
+      (click)="undoChanges()"
+    >
+      <mat-icon>undo</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="saveChanges()"
+      [disabled]="moviesFormArray.pristine"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
+  <div
+    *ngFor="let movie of moviesFormArray.controls; let i = index"
+    class="box"
+    cdkDrag
+  >
+    {{ movie.get("title")?.value }}
+    <img
+      *cdkDragPreview
+      [src]="movie.get('poster')?.value"
+      [alt]="movie.get('title')?.value"
+    />
+    <button type="button" (click)="removeMovie(i)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

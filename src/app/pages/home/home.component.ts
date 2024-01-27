@@ -11,7 +11,6 @@ import { GamesService } from '../../services/games.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  dataResolver: any;
   constructor(
     public gamesService: GamesService,
     private igdb: IgdbService,
@@ -19,6 +18,8 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
+
+  private dataResolver: any;
 
   public latestGames: Game[] = [];
   public platforms!: any[];

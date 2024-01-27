@@ -8,6 +8,7 @@ import { GameResolverService } from './resolvers/game-resolver.service';
 import { SearchGameResolverService } from './resolvers/search-game-resolver.service';
 import { LatestGamesResolverService } from './resolvers/latest-games-resolver.service';
 import { PlatformGamesResolverService } from './resolvers/platform-games-resolver.service';
+import { MyListsComponent } from './pages/my-lists/my-lists.component';
 
 // Importar componentes y servicios necesarios...
 
@@ -51,6 +52,10 @@ const routes: Routes = [
         resolve: {
           game: GameResolverService,
         },
+      },
+      {
+        path: 'mylists',
+        component: MyListsComponent,
       },
       {
         path: ':platform/:page',

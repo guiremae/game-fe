@@ -35,6 +35,8 @@ import { GameComponent } from './pages/game/game.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MyListsComponent } from './pages/my-lists/my-lists.component';
+import { CdkDropList, CdkDragPreview, CdkDrag } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { MatMenuModule } from '@angular/material/menu';
     GameDetailsCardComponent,
     PictureModalComponent,
     LoaderComponent,
+    MyListsComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatExpansionModule,
     MatListModule,
     MatMenuModule,
+    CdkDropList,
+    CdkDrag,
+    CdkDragPreview,
   ],
   providers: [
     {

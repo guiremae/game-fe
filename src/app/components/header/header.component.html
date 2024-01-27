@@ -2,7 +2,7 @@
   <div
     class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
   >
-    <a href="/latest" class="flex items-center">
+    <a routerLink="/latest" class="flex items-center">
       <img src="./assets/img/logo.png" class="h-8 mr-3" alt="Logo" />
       <span
         class="self-center text-2xl text-white font-semibold whitespace-nowrap dark:text-white"
@@ -23,7 +23,11 @@
       </mat-icon>
     </button>
     <mat-menu #menu="matMenu" xPosition="after">
-      <button mat-menu-item *ngIf="authService.getLoggedInValue()">
+      <button
+        mat-menu-item
+        *ngIf="authService.getLoggedInValue()"
+        routerLink="/mylists"
+      >
         <mat-icon>list</mat-icon>
         <span>Mis listas</span>
       </button>
