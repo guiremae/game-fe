@@ -1,19 +1,42 @@
-<mat-form-field>
-  <mat-label>Selecciona una lista</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let movie of movies" [value]="movie.title">
-      {{ movie.title }}
-    </mat-option>
-    <mat-option value="newList"> Crear nueva lista </mat-option>
-  </mat-select>
-  <button mat-icon-button matSuffix>
-    <mat-icon [ngStyle]="{ color: 'white' }">delete</mat-icon>
-  </button>
-</mat-form-field>
+<div class="list-selection">
+  <div class="buttons-container">
+    <button mat-icon-button matPrefix (click)="adding = true">
+      <mat-icon [ngStyle]="{ color: 'white' }">add</mat-icon>
+    </button>
+    <button mat-icon-button matSuffix>
+      <mat-icon [ngStyle]="{ color: 'white' }">delete</mat-icon>
+    </button>
+  </div>
+  <mat-selection-list
+    #list
+    [multiple]="false"
+    (selectionChange)="onListSelection($event)"
+  >
+    @if(adding){
+    <mat-form-field class="new-list-name" [formGroup]="formGroup">
+      <mat-label>Nombre de la lista</mat-label>
+      <input matInput formControlName="title" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="$event.stopPropagation(); adding = false; formGroup.reset()"
+      >
+        <mat-icon [ngStyle]="{ color: 'white' }">backspace</mat-icon>
+      </button>
+      <button mat-icon-button matSuffix (click)="saveNewList($event)">
+        <mat-icon [ngStyle]="{ color: 'white' }">save</mat-icon>
+      </button>
+    </mat-form-field>
+    } @if (listCollection && listCollection.length > 0) {@for (list of
+    listCollection; track list) {
+    <mat-list-option [value]="list">{{ list.title }}</mat-list-option>
+    }}
+  </mat-selection-list>
+</div>
 
-<!-- Lista de películas -->
 <div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
   <div class="action-buttons">
+    <h1>{{ list.selectedOptions.selected[0]?.value.title }}</h1>
     <button
       mat-icon-button
       [disabled]="moviesFormArray.pristine"
@@ -31,6 +54,8 @@
       <mat-icon>save</mat-icon>
     </button>
   </div>
+
+  @if (list.selectedOptions.selected[0]?.value.games?.length > 0) {
   <div
     *ngFor="let movie of moviesFormArray.controls; let i = index"
     class="box"
@@ -42,8 +67,18 @@
       [src]="movie.get('poster')?.value"
       [alt]="movie.get('title')?.value"
     />
-    <button type="button" (click)="removeMovie(i)">
-      <mat-icon>delete</mat-icon>
-    </button>
+    <div class="buttons-container">
+      <button type="button" routerLink="/game/{{ movie.get('index')?.value }}">
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button type="button" (click)="removeMovie(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
+  } @else if (list.selectedOptions.selected[0]) {
+  <p>No hay juegos en esta lista</p>
+  } @else {
+  <p>Selecciona una lista</p>
+  }
 </div>

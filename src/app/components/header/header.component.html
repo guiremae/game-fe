@@ -1,52 +1,149 @@
 <nav class="border-gray-200 bg-[#17082d] sticky top-0">
-  <div
-    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
-  >
-    <a routerLink="/latest" class="flex items-center">
-      <img src="./assets/img/logo.png" class="h-8 mr-3" alt="Logo" />
-      <span
-        class="self-center text-2xl text-white font-semibold whitespace-nowrap dark:text-white"
-        >La viciopedia</span
-      >
-    </a>
-
-    <app-finder></app-finder>
-
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="icon-button">
-      <mat-icon>
-        <img
-          class="rounded"
-          src="../../../assets/img/pcasda.png"
-          onerror="this.src='//surgassociates.com/wp-content/uploads/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg'"
-          alt="user photo"
-        />
-      </mat-icon>
-    </button>
-    <mat-menu #menu="matMenu" xPosition="after">
+  <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
+    <div class="logo-container flex items-center">
       <button
-        mat-menu-item
-        *ngIf="authService.getLoggedInValue()"
-        routerLink="/mylists"
+        mat-icon-button
+        (click)="layoutService.toggleSidenav()"
+        class="icon-button"
       >
-        <mat-icon>list</mat-icon>
-        <span>Mis listas</span>
+        <mat-icon [ngStyle]="{ color: 'white', 'font-size': '2rem' }"
+          >menu</mat-icon
+        >
       </button>
-      <button mat-menu-item *ngIf="authService.getLoggedInValue()">
-        <mat-icon>settings</mat-icon>
-        <span>Configuración</span>
-      </button>
-      <button mat-menu-item *ngIf="authService.getLoggedInValue()">
-        <mat-icon>logout</mat-icon>
-        <span>Cerrar sesión</span>
-      </button>
+      <a routerLink="/latest" class="flex items-center">
+        <img src="./assets/img/logo.png" class="h-8 mr-3" alt="Logo" />
+        <span
+          class="text-2xl text-white font-semibold whitespace-nowrap dark:text-white"
+          >La viciopedia</span
+        >
+      </a>
+    </div>
+
+    <div class="buttons-container flex items-center">
       <button
-        mat-menu-item
-        *ngIf="!authService.getLoggedInValue()"
-        (click)="modalService.openLoginModal()"
+        mat-icon-button
+        [matMenuTriggerFor]="searchMenu"
+        class="icon-button"
       >
-        <mat-icon>login</mat-icon>
-        <span>Iniciar sesión</span>
+        <mat-icon [ngStyle]="{ color: 'white', 'font-size': '2rem' }"
+          >search</mat-icon
+        >
       </button>
-    </mat-menu>
+      <mat-menu #searchMenu="matMenu" xPosition="before">
+        <app-finder (click)="$event.stopPropagation()"></app-finder>
+      </mat-menu>
+
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="userMenu"
+        class="icon-button"
+      >
+        <mat-icon [ngStyle]="{ color: 'white', 'font-size': '2rem' }">
+          <img
+            class="rounded"
+            src="//surgassociates.com/wp-content/uploads/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg"
+            onerror="this.src='//surgassociates.com/wp-content/uploads/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg'"
+            alt="user photo"
+          />
+        </mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu" xPosition="before">
+        <button
+          mat-menu-item
+          *ngIf="authService.getLoggedInValue()"
+          routerLink="/mylists"
+        >
+          <mat-icon>list</mat-icon>
+          <span>Mis listas</span>
+        </button>
+        <button mat-menu-item *ngIf="authService.getLoggedInValue()">
+          <mat-icon>settings</mat-icon>
+          <span>Configuración</span>
+        </button>
+        <button mat-menu-item *ngIf="authService.getLoggedInValue()">
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!authService.getLoggedInValue()"
+          (click)="modalService.openLoginModal()"
+        >
+          <mat-icon>login</mat-icon>
+          <span>Iniciar sesión</span>
+        </button>
+      </mat-menu>
+    </div>
   </div>
 </nav>
+<!-- <nav class="border-gray-200 bg-[#17082d] sticky top-0">
+  <div class="max-w-screen-xl flex flex-wrap justify-between mx-auto p-4">
+    <div class="logo-container">
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon [ngStyle]="{ color: 'white' }">menu</mat-icon>
+      </button>
+      <a routerLink="/latest" class="flex items-center">
+        <img src="./assets/img/logo.png" class="h-8 mr-3" alt="Logo" />
+        <span
+          class="self-center text-2xl text-white font-semibold whitespace-nowrap dark:text-white"
+          >La viciopedia</span
+        >
+      </a>
+    </div>
+
+    <div class="buttons-container">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="searchMenu"
+        class="icon-button"
+      >
+        <mat-icon [ngStyle]="{ color: 'white' }"> search </mat-icon>
+      </button>
+      <mat-menu #searchMenu="matMenu" xPosition="before">
+        <app-finder (click)="$event.stopPropagation()"></app-finder>
+      </mat-menu>
+
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="userMenu"
+        class="icon-button"
+      >
+        <mat-icon>
+          <img
+            class="rounded"
+            src="//surgassociates.com/wp-content/uploads/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg"
+            onerror="this.src='//surgassociates.com/wp-content/uploads/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg'"
+            alt="user photo"
+          />
+        </mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu" xPosition="before">
+        <button
+          mat-menu-item
+          *ngIf="authService.getLoggedInValue()"
+          routerLink="/mylists"
+        >
+          <mat-icon>list</mat-icon>
+          <span>Mis listas</span>
+        </button>
+        <button mat-menu-item *ngIf="authService.getLoggedInValue()">
+          <mat-icon>settings</mat-icon>
+          <span>Configuración</span>
+        </button>
+        <button mat-menu-item *ngIf="authService.getLoggedInValue()">
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!authService.getLoggedInValue()"
+          (click)="modalService.openLoginModal()"
+        >
+          <mat-icon>login</mat-icon>
+          <span>Iniciar sesión</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</nav>
+ -->

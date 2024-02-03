@@ -1,36 +1,50 @@
-<mat-form class="login-form" [formGroup]="addForm" (ngSubmit)="onSubmit()" >
-
+<mat-form class="login-form" [formGroup]="addForm" (ngSubmit)="onSubmit()">
   <div class="close-icon" (click)="modalService.closeModal()">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      width="24"
+      height="24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      ></path>
     </svg>
   </div>
 
   <h1>Añadir juego a la lista</h1>
 
-
-
-
-
   <mat-form-field>
     <mat-label>Lista</mat-label>
-    <mat-select formControlName="list">
-      <mat-option *ngFor="let food of foods" [value]="food.value">
+    <mat-select formControlName="list" multiple>
+      <mat-option
+        *ngFor="let food of foods"
+        [value]="food.value"
+        track
+        food.value
+      >
         {{ food.viewValue }}
       </mat-option>
-      <mat-option value="newList">
-        Crear nueva lista
-      </mat-option>
+      <mat-option value="newList"> Crear nueva lista </mat-option>
     </mat-select>
-    <mat-error *ngIf="addForm.controls['list'].hasError('required')">Selecciona una lista</mat-error>
+    <mat-error *ngIf="addForm.controls['list'].hasError('required')"
+      >Selecciona una lista</mat-error
+    >
   </mat-form-field>
 
-<mat-form-field *ngIf="addForm.controls['list'].value === 'newList'">
-  <mat-label>Nombre</mat-label>
-  <input matInput type="text" formControlName="listname" required>
-  <mat-error *ngIf="addForm.controls['listname'].hasError('required')">El nombre de la lista es obligatorio</mat-error>
-</mat-form-field>
+  <mat-form-field *ngIf="addForm.controls['list'].value === 'newList'">
+    <mat-label>Nombre</mat-label>
+    <input matInput type="text" formControlName="listname" required />
+    <mat-error *ngIf="addForm.controls['listname'].hasError('required')"
+      >El nombre de la lista es obligatorio</mat-error
+    >
+  </mat-form-field>
 
-  <br/>
+  <br />
   <button type="submit">Añadir</button>
 </mat-form>

@@ -37,6 +37,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MyListsComponent } from './pages/my-lists/my-lists.component';
 import { CdkDropList, CdkDragPreview, CdkDrag } from '@angular/cdk/drag-drop';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { LayoutService } from 'src/app/services/layout.service';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,7 @@ import { CdkDropList, CdkDragPreview, CdkDrag } from '@angular/cdk/drag-drop';
     CdkDropList,
     CdkDrag,
     CdkDragPreview,
+    MatSidenavModule,
   ],
   providers: [
     {
@@ -88,6 +91,7 @@ import { CdkDropList, CdkDragPreview, CdkDrag } from '@angular/cdk/drag-drop';
       useClass: LoaderInterceptor,
       multi: true,
     },
+    LayoutService,
   ],
   bootstrap: [AppComponent],
 })

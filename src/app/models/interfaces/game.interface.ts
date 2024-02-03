@@ -6,6 +6,7 @@ export interface Game {
   id: number;
   cover: Cover;
   name: string;
+  rating: number;
   genres: Genres[];
   platforms: Platforms[];
   features: any;

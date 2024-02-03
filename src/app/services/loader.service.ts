@@ -17,7 +17,7 @@ export class LoaderService {
   }
 
   hide() {
-    timer(1500)
+    timer(1000)
       .pipe(take(1))
       .subscribe(() => {
         this.loaderSubject.next(false);

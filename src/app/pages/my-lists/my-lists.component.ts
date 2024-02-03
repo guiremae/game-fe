@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 import {
   FormBuilder,
   UntypedFormArray,
+  UntypedFormControl,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { List } from 'src/app/models/interfaces/list.interface';
+import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
   selector: 'app-my-lists',
@@ -13,11 +16,17 @@ import {
   styleUrl: './my-lists.component.scss',
 })
 export class MyListsComponent {
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private el: ElementRef) {}
   movieForm!: UntypedFormGroup;
   changesHistory: any[] = [];
   currentIndex: number = 0;
   deletedMovies: any[] = [];
+  public adding: boolean = false;
+
+  formGroup = new UntypedFormGroup({
+    title: new UntypedFormControl('', Validators.required),
+    id: new UntypedFormControl(''),
+  });
 
   movies = [
     {
@@ -74,6 +83,52 @@ export class MyListsComponent {
         'https://upload.wikimedia.org/wikipedia/en/a/af/Star_Wars_The_Rise_of_Skywalker_poster.jpg',
       index: 8,
     },
+    {
+      title: 'Episode V - The Empire Strikes Back',
+      poster:
+        'https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg',
+      index: 9,
+    },
+    {
+      title: 'Episode VI - Return of the Jedi',
+      poster:
+        'https://upload.wikimedia.org/wikipedia/en/b/b2/ReturnOfTheJediPoster1983.jpg',
+      index: 10,
+    },
+    {
+      title: 'Episode VII - The Force Awakens',
+      poster:
+        'https://upload.wikimedia.org/wikipedia/en/a/a2/Star_Wars_The_Force_Awakens_Theatrical_Poster.jpg',
+      index: 11,
+    },
+    {
+      title: 'Episode VIII - The Last Jedi',
+      poster:
+        'https://upload.wikimedia.org/wikipedia/en/7/7f/Star_Wars_The_Last_Jedi.jpg',
+      index: 12,
+    },
+    {
+      title: 'Episode IX – The Rise of Skywalker',
+      poster:
+        'https://upload.wikimedia.org/wikipedia/en/a/af/Star_Wars_The_Rise_of_Skywalker_poster.jpg',
+      index: 13,
+    },
+    {
+      title: 'Episode VIII - The Last Jedi',
+      poster:
+        'https://upload.wikimedia.org/wikipedia/en/7/7f/Star_Wars_The_Last_Jedi.jpg',
+      index: 14,
+    },
+    {
+      title: 'Episode IX – The Rise of Skywalker',
+      poster:
+        'https://upload.wikimedia.org/wikipedia/en/a/af/Star_Wars_The_Rise_of_Skywalker_poster.jpg',
+      index: 15,
+    },
+  ];
+
+  public listCollection: List[] = [
+    { title: 'Lista 1', id: 0, games: this.movies },
   ];
 
   ngOnInit() {
@@ -158,6 +213,32 @@ export class MyListsComponent {
     if (this.deletedMovies.length > 0) {
       const lastDeletedMovie = this.deletedMovies.pop();
       this.addMovie(lastDeletedMovie);
+    }
+  }
+
+  onListSelection(ev: MatSelectionListChange) {
+    while (this.moviesFormArray.length !== 0) {
+      this.moviesFormArray.removeAt(0);
+    }
+    this.changesHistory = [];
+    this.currentIndex = 0;
+    const games = ev.source.selectedOptions.selected[0].value.games
+      ? ev.source.selectedOptions.selected[0].value.games
+      : [];
+    games.forEach((game: any) => {
+      this.addMovie(game);
+    });
+    if (games[0]) this.saveChangesToHistory(false);
+  }
+
+  saveNewList(event: any) {
+    event.stopPropagation();
+    if (this.formGroup.valid) {
+      this.listCollection.push(this.formGroup.getRawValue());
+      this.adding = false;
+      this.formGroup.reset();
+    } else {
+      this.formGroup.markAllAsTouched();
     }
   }
 }

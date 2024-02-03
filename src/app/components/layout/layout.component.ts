@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import {
   Router,
   NavigationStart,
@@ -8,17 +9,25 @@ import {
 } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
+import { NavComponent } from '../nav/nav.component';
+import { LayoutService } from 'src/app/services/layout.service';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
 })
-export class LayoutComponent implements OnDestroy {
+export class LayoutComponent implements OnInit, OnDestroy {
   private loaderSubscription: Subscription;
   showContent: boolean = true;
+  events: string[] = [];
+  @ViewChild('sidenav') sidenav!: MatSidenav;
 
-  constructor(private loaderService: LoaderService, private router: Router) {
+  constructor(
+    private loaderService: LoaderService,
+    private router: Router,
+    private layoutService: LayoutService
+  ) {
     this.loaderSubscription = this.loaderService.showContent$.subscribe(
       (value) => (this.showContent = value)
     );
@@ -33,6 +42,12 @@ export class LayoutComponent implements OnDestroy {
       ) {
         this.loaderService.hide();
       }
+    });
+  }
+
+  ngOnInit() {
+    this.layoutService.toggleSidenav$.subscribe(() => {
+      this.sidenav.toggle();
     });
   }
 

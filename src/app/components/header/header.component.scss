@@ -1,3 +1,15 @@
+::ng-deep {
+  #mat-menu-panel-0 {
+    background-color: transparent !important ;
+    width: 110% !important;
+  }
+}
+
+nav {
+  height: 50px;
+  padding-top: 10px;
+}
+
 button[mat-icon-button] {
   $size-button: 2.5rem;
   $size-icon: 2.5rem;
@@ -31,4 +43,18 @@ button[mat-icon-button] {
   border-radius: 50px;
   width: 2.5rem;
   height: 2.5rem;
+}
+
+.logo-container {
+  position: absolute;
+  left: 0;
+}
+
+.buttons-container {
+  position: absolute;
+  right: 10px;
+
+  button {
+    margin-right: 20px;
+  }
 }

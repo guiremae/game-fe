@@ -1,14 +1,32 @@
+::ng-deep {
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+    padding-bottom: 0px !important;
+    margin-bottom: -20px !important;
+    margin-top: -9px !important;
+  }
+}
+
 :host {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
 
-  mat-form-field {
-    margin-top: 2vh;
-    margin-bottom: 0;
-    width: 500px;
+  mat-list-option {
+    border-bottom: 1px solid black;
   }
+
+  mat-list-option:first-child {
+    margin-top: -9px;
+  }
+
+  mat-list-option:last-child {
+    border-bottom: none !important;
+    margin-bottom: -9px;
+  }
+}
+
+h1 {
+  color: white;
 }
 
 .action-buttons {
@@ -17,16 +35,52 @@
   justify-content: flex-end;
 }
 
+.list-selection {
+  width: 25%;
+  margin: 5vh 5% 0 5%;
+  border: 2px solid black;
+  background: linear-gradient(to right, #17082d, #2c1b4a);
+  max-height: 85vh;
+  height: 85vh;
+  overflow-y: auto;
+
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+  }
+
+  .new-list-name {
+    color: white;
+    margin: 0px;
+    background: transparent;
+    width: 100%;
+    border-bottom: 1px solid black;
+  }
+}
+
 .list {
-  margin-top: 0;
-  width: 500px;
-  max-width: 100%;
+  width: 60%;
+  height: 85vh;
+  max-height: 85vh;
   border: solid 1px #ccc;
   min-height: 60px;
-  display: block;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   background: white;
   border-radius: 4px;
-  overflow: hidden;
+  margin-top: 5vh;
+  padding: 0px;
+
+  h1 {
+    margin: auto;
+  }
+
+  p {
+    margin: auto;
+  }
 }
 
 .box {

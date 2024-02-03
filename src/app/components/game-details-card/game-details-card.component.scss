@@ -15,7 +15,8 @@
 img {
   margin: 0;
   height: 100%;
-  object-fit: contain;
+  width: 300px;
+  object-fit: cover;
 }
 
 h1 {
@@ -32,6 +33,46 @@ p {
   text-align: justify;
 }
 
+h2 {
+  font-size: 2rem;
+  font-weight: "bold";
+}
+
 .rating {
-  margin-top: 3px;
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+}
+
+.rating-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.rating-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 350%);
+  z-index: 1;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.list-add-button {
+  position: absolute;
+  top: 0%;
+  margin: auto;
+  translate: -130px;
+  color: gold;
+}
+
+.cover {
+  position: relative;
+  padding: 0px;
 }

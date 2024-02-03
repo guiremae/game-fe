@@ -36,11 +36,13 @@ export class GameComponent implements OnInit {
       this.game = data['game'][0];
       const randomIndex = Math.floor(
         Math.random() *
-          (this.game.screenshots.length + this.game.artworks.length)
+          (this.game.screenshots?.length + this.game.artworks?.length)
       );
-      this.pictures = this.game.artworks.concat(this.game.screenshots);
+      this.pictures = this.game.artworks
+        ? this.game.artworks.concat(this.game.screenshots)
+        : this.game.screenshots;
       const banner = this.pictures[randomIndex];
-      this.cover = `https://${banner.url.replace('thumb', '1080p')}`;
+      this.cover = `https://${banner?.url.replace('thumb', '1080p')}`;
 
       if (this.game.videos)
         this.game.videos.forEach((video) =>
