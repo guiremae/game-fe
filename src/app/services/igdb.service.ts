@@ -57,9 +57,9 @@ export class IgdbService {
       this.cors_api_host + this.baseURL,
       'fields platforms.name, platforms.abbreviation, cover.url, genres.name, *; sort first_release_date desc; where first_release_date != null & first_release_date < ' +
         date +
-        ' & rating != null & platforms = (' +
+        ' & platforms = (' +
         platformId +
-        ') & genres != null & category != (1, 2, 3, 5) & cover != null; limit 6; offset ' +
+        ') & genres != null & category = (0,4,6,8,9,10) & version_parent = null & cover != null; limit 6; offset ' +
         (page - 1) * 6 +
         ';',
       {
@@ -140,6 +140,20 @@ export class IgdbService {
         headers: {
           'Client-ID': this.clientID,
           Authorization: `Bearer ${this.authToken}`,
+        },
+      }
+    );
+  }
+
+  public getListGames(id: number): Observable<Game[]> {
+    return this.httpClient.post<Game[]>(
+      `${this.cors_api_host}${this.baseURL}`,
+      `fields platforms.name, platforms.abbreviation, videos.video_id, cover.url, rating, screenshots.url , artworks.url, genres.name, summary, name; where id = (${id});`,
+      {
+        headers: {
+          'Client-ID': this.clientID,
+          Authorization: `Bearer ${this.authToken}`,
+          'X-Exclude-Loader': 'true',
         },
       }
     );

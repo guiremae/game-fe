@@ -1,6 +1,6 @@
 // auth.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
@@ -8,7 +8,7 @@ import { shareReplay } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiURL: string = 'http:/192.168.1.45:8090';
+  private apiURL: string = 'http://192.168.1.45:8090/api/v1';
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn$(): Observable<boolean> {
@@ -17,9 +17,29 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    const loginData = { username, password };
-    return this.http.post<any>(`${this.apiURL}/login`, loginData);
+  login(id: string, password: string): Observable<any> {
+    const loginData = { id, password };
+    const headers = new HttpHeaders().set('X-Exclude-Loader', 'true');
+    return this.http.post<any>(`${this.apiURL}/login`, loginData, { headers });
+  }
+
+  signUp(
+    email: string,
+    username: string,
+    name: string,
+    password: string
+  ): Observable<any> {
+    const userData = { email, username, name, password };
+    const headers = new HttpHeaders().set('X-Exclude-Loader', 'true');
+    return this.http.post<any>(`${this.apiURL}/user`, userData, { headers });
+  }
+
+  logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userID');
+
+    this.setLoggedIn(false);
+    window.location.reload();
   }
 
   setLoggedIn(value: boolean) {
@@ -27,6 +47,10 @@ export class AuthService {
   }
 
   getLoggedInValue(): boolean {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      this.setLoggedIn(true);
+    }
     return this.loggedIn.getValue();
   }
 }

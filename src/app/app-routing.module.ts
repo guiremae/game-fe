@@ -9,6 +9,8 @@ import { SearchGameResolverService } from './resolvers/search-game-resolver.serv
 import { LatestGamesResolverService } from './resolvers/latest-games-resolver.service';
 import { PlatformGamesResolverService } from './resolvers/platform-games-resolver.service';
 import { MyListsComponent } from './pages/my-lists/my-lists.component';
+import { MyListsResolverService } from './resolvers/my-lists-resolver.service';
+import { AuthGuard } from './guards/auth.guard';
 
 // Importar componentes y servicios necesarios...
 
@@ -56,6 +58,8 @@ const routes: Routes = [
       {
         path: 'mylists',
         component: MyListsComponent,
+        resolve: { listCollection: MyListsResolverService },
+        canActivate: [AuthGuard],
       },
       {
         path: ':platform/:page',
@@ -74,13 +78,13 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'latest',
+        redirectTo: '/latest',
       },
     ],
   },
   {
     path: '**',
-    redirectTo: 'latest',
+    redirectTo: '/latest',
   },
 ];
 

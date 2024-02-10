@@ -18,8 +18,7 @@ export class GameDetailsCardComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.game.cover.url)
-      this.coverURL =
-        'https://' + this.game.cover.url.replace('thumb', '1080p');
+      this.coverURL = 'https://' + this.game.cover.url.replace('thumb', '720p');
     this.rating = this.game.rating
       ? Math.round((this.game.rating / 10) * 10) / 10
       : 0;
@@ -27,7 +26,7 @@ export class GameDetailsCardComponent implements OnInit {
     this.ratingText = this.getRating(this.rating);
     const element = this.elem.nativeElement;
     const circle = element.querySelector('circle');
-    circle.style.stroke = this.ratingColor;
+    if (circle) circle.style.stroke = this.ratingColor;
   }
 
   getColor(value: number): string {

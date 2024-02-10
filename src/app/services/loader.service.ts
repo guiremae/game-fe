@@ -17,13 +17,12 @@ export class LoaderService {
   }
 
   hide() {
-    timer(1000)
+    timer(1)
       .pipe(take(1))
       .subscribe(() => {
         this.loaderSubject.next(false);
         this.showContentSubject.next(true);
       });
-    // Establecer el tiempo según tus necesidades
   }
 
   reset() {

@@ -119,3 +119,26 @@ h1 {
 .list.cdk-drop-list-dragging .box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+.loader {
+  margin: auto;
+}
+
+.rating {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  height: fit-content;
+}
+
+.rating-number {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  z-index: 1;
+  font-size: 0.7rem;
+  font-weight: bold;
+}

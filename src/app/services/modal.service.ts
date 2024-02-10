@@ -27,13 +27,14 @@ export class ModalService {
     });
   }
 
-  openAddToListModal(): void {
+  openAddToListModal(listData: any[], game: any): void {
     if (this.dialogRef) {
       this.dialogRef.close();
     }
     this.dialogRef = this.dialog.open(AddToListComponent, {
       width: '400px',
       panelClass: 'dialog-container',
+      data: { listData: listData, game: game },
     });
   }
 

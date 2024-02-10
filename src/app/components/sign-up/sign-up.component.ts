@@ -5,6 +5,7 @@ import {
   UntypedFormControl,
   Validators,
 } from '@angular/forms';
+import { tap, catchError, throwError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 
@@ -17,6 +18,7 @@ export class SignupComponent {
   signUpForm = new UntypedFormGroup({
     email: new UntypedFormControl('', [Validators.required, Validators.email]),
     username: new UntypedFormControl('', Validators.required),
+    name: new UntypedFormControl('', Validators.required),
     password: new UntypedFormControl('', Validators.required),
   });
 
@@ -26,24 +28,22 @@ export class SignupComponent {
   ) {}
 
   onSubmit() {
-    /*     this.authService.login(this.username, this.password).subscribe(
-      (response) => {
-        // Manejar la respuesta del backend, que debería incluir el token de sesión
-        const token = response.token;
+    if (this.signUpForm.valid) {
+      const { email, username, name, password } = this.signUpForm.value;
 
-        // Guardar el token de sesión en localStorage o en una cookie
-        localStorage.setItem('token', token);
-
-        // Establecer el estado de autenticación en el servicio
-        this.authService.setLoggedIn(true);
-
-        // Cerrar la modal después de un inicio de sesión exitoso
-        this.modalService.closeModal();
-      },
-      (error) => {
-        // Manejar errores de autenticación
-        console.error('Error durante el inicio de sesión:', error);
-      }
-    ); */
+      this.authService
+        .signUp(email, username, name, password)
+        .pipe(
+          tap((response) => {
+            console.log(response);
+            this.modalService.closeModal();
+          }),
+          catchError((error) => {
+            console.log('Error durante el registro:', error);
+            return [];
+          })
+        )
+        .subscribe();
+    }
   }
 }

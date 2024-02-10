@@ -1,4 +1,4 @@
-<mat-form class="login-form" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+<form class="login-form" [formGroup]="addForm" (ngSubmit)="onSubmit()">
   <div class="close-icon" (click)="modalService.closeModal()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -21,23 +21,19 @@
 
   <mat-form-field>
     <mat-label>Lista</mat-label>
-    <mat-select formControlName="list" multiple>
-      <mat-option
-        *ngFor="let food of foods"
-        [value]="food.value"
-        track
-        food.value
-      >
-        {{ food.viewValue }}
+    <mat-select formControlName="list"
+      ><!-- (selectionChange)="onListSelectionChange($event)" -->
+      <mat-option *ngFor="let list of listCollection" [value]="list">
+        {{ list.title }}
       </mat-option>
-      <mat-option value="newList"> Crear nueva lista </mat-option>
+      <mat-option [value]="'newList'"> Crear nueva lista </mat-option>
     </mat-select>
-    <mat-error *ngIf="addForm.controls['list'].hasError('required')"
-      >Selecciona una lista</mat-error
-    >
+    <mat-error *ngIf="addForm.controls['list'].hasError('required')">
+      Selecciona una lista
+    </mat-error>
   </mat-form-field>
 
-  <mat-form-field *ngIf="addForm.controls['list'].value === 'newList'">
+  <mat-form-field *ngIf="addForm.controls['list'].value[0] === 'newList'">
     <mat-label>Nombre</mat-label>
     <input matInput type="text" formControlName="listname" required />
     <mat-error *ngIf="addForm.controls['listname'].hasError('required')"
@@ -46,5 +42,5 @@
   </mat-form-field>
 
   <br />
-  <button type="submit">Añadir</button>
-</mat-form>
+  <button type="submit" mat-button color="primary">Añadir</button>
+</form>

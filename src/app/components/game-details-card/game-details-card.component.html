@@ -13,6 +13,7 @@
   >
 
   <mat-grid-tile colspan="1" rowspan="2">
+    @if(game.rating){
     <div class="rating">
       <mat-progress-spinner mode="determinate" [value]="game.rating">
       </mat-progress-spinner>
@@ -22,7 +23,8 @@
     </div>
     <span class="rating-text" [ngStyle]="{ color: ratingColor }">{{
       ratingText.toUpperCase()
-    }}</span>
+    }}</span
+    >}
   </mat-grid-tile>
 
   <mat-grid-tile colspan="1" rowspan="2"

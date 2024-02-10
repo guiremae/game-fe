@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -21,29 +22,39 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    public modalService: ModalService
+    public modalService: ModalService,
+    private _snackBar: MatSnackBar
   ) {}
 
   onSubmit() {
-    const formData = this.loginForm.value;
-    this.authService.login(formData.username, formData.password).subscribe(
-      (response) => {
-        // Manejar la respuesta del backend, que debería incluir el token de sesión
-        const token = response.token;
+    if (this.loginForm.valid) {
+      const formData = this.loginForm.value;
+      this.authService.login(formData.username, formData.password).subscribe(
+        (response) => {
+          // Manejar la respuesta del backend, que debería incluir el token de sesión
+          const token = response.authToken;
+          const id = response.id;
+          const username = response.userName;
 
-        // Guardar el token de sesión en localStorage o en una cookie
-        localStorage.setItem('token', token);
+          // Guardar el token de sesión en localStorage o en una cookie
+          localStorage.setItem('authToken', token);
+          localStorage.setItem('userID', id);
+          localStorage.setItem('userName', username);
 
-        // Establecer el estado de autenticación en el servicio
-        this.authService.setLoggedIn(true);
+          // Establecer el estado de autenticación en el servicio
+          this.authService.setLoggedIn(true);
 
-        // Cerrar la modal después de un inicio de sesión exitoso
-        this.modalService.closeModal();
-      },
-      (error) => {
-        // Manejar errores de autenticación
-        console.error('Error durante el inicio de sesión:', error);
-      }
-    );
+          this._snackBar.open('Sesión iniciada con éxito', 'Vale', {
+            duration: 1500,
+          });
+          // Cerrar la modal después de un inicio de sesión exitoso
+          this.modalService.closeModal();
+        },
+        (error) => {
+          // Manejar errores de autenticación
+          console.error('Error durante el inicio de sesión:', error);
+        }
+      );
+    }
   }
 }
