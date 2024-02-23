@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiURL: string = 'http://192.168.1.45:8090/api/v1';
+  private apiURL: string = environment.apiUrl;
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn$(): Observable<boolean> {
