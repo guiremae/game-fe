@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  apiListUrl: 'http://192.168.1.45:8080/api/v1',
-  apiUsersUrl: 'http://192.168.1.45:8090/api/v1',
+  apiUrl: 'http://gamelog.hopto.org:80/api/v1',
 };
 
 /*
