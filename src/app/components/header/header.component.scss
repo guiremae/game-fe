@@ -1,0 +1,60 @@
+::ng-deep {
+  #mat-menu-panel-0 {
+    background-color: transparent !important ;
+    width: 110% !important;
+  }
+}
+
+nav {
+  height: 50px;
+  padding-top: 10px;
+}
+
+button[mat-icon-button] {
+  $size-button: 2.5rem;
+  $size-icon: 2.5rem;
+
+  &.icon-button {
+    width: $size-button;
+    height: $size-button;
+    line-height: $size-button;
+    padding: 0;
+
+    .mat-icon {
+      font-size: $size-icon;
+      width: $size-icon;
+      height: $size-icon;
+      line-height: $size-icon;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mat-button-ripple {
+      font-size: inherit;
+      width: inherit;
+      height: inherit;
+      line-height: inherit;
+    }
+  }
+}
+
+.rounded {
+  border-radius: 50px;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.logo-container {
+  position: absolute;
+  left: 0;
+}
+
+.buttons-container {
+  position: absolute;
+  right: 10px;
+
+  button {
+    margin-right: 20px;
+  }
+}

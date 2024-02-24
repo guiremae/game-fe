@@ -1,0 +1,144 @@
+::ng-deep {
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+    padding-bottom: 0px !important;
+    margin-bottom: -20px !important;
+    margin-top: -9px !important;
+  }
+}
+
+:host {
+  display: flex;
+  flex-direction: row;
+
+  mat-list-option {
+    border-bottom: 1px solid black;
+  }
+
+  mat-list-option:first-child {
+    margin-top: -9px;
+  }
+
+  mat-list-option:last-child {
+    border-bottom: none !important;
+    margin-bottom: -9px;
+  }
+}
+
+h1 {
+  color: white;
+}
+
+.action-buttons {
+  background-color: rgb(23 8 45);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.list-selection {
+  width: 25%;
+  margin: 5vh 5% 0 5%;
+  border: 2px solid black;
+  background: linear-gradient(to right, #17082d, #2c1b4a);
+  max-height: 85vh;
+  height: 85vh;
+  overflow-y: auto;
+
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+  }
+
+  .new-list-name {
+    color: white;
+    margin: 0px;
+    background: transparent;
+    width: 100%;
+    border-bottom: 1px solid black;
+  }
+}
+
+.list {
+  width: 60%;
+  height: 85vh;
+  max-height: 85vh;
+  border: solid 1px #ccc;
+  min-height: 60px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 4px;
+  margin-top: 5vh;
+  padding: 0px;
+
+  h1 {
+    margin: auto;
+  }
+
+  p {
+    margin: auto;
+  }
+}
+
+.box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.box:last-child {
+  border: none;
+}
+
+.list.cdk-drop-list-dragging .box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.loader {
+  margin: auto;
+}
+
+.rating {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  height: fit-content;
+}
+
+.rating-number {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  z-index: 1;
+  font-size: 0.7rem;
+  font-weight: bold;
+}

@@ -1,0 +1,56 @@
+<!-- login.component.html -->
+
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <!-- Icono para cerrar la ventana modal -->
+  <div class="close-icon" (click)="modalService.closeModal()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      width="24"
+      height="24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      ></path>
+    </svg>
+  </div>
+
+  <h1 mat-dialog-title>Inicio de sesión</h1>
+
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+      <input matInput type="text" formControlName="username" />
+      <mat-error *ngIf="loginForm.controls['username'].hasError('required')"
+        >El usuario es obligatorio</mat-error
+      >
+    </mat-form-field>
+    <br />
+
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error *ngIf="loginForm.controls['password'].hasError('required')"
+        >La contraseña es obligatoria</mat-error
+      >
+    </mat-form-field>
+    <br />
+
+    <button type="submit" mat-button color="primary">Iniciar sesión</button>
+    <br />
+
+    <!-- Enlace para recuperar contraseña -->
+    <p><a>Forgot your password?</a></p>
+
+    <!-- Enlace para crear una cuenta -->
+    <p>
+      Don't have an account?
+      <a (click)="modalService.openSignUpModal()">Create one</a>
+    </p>
+  </div>
+</form>

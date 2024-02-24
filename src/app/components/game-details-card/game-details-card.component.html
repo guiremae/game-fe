@@ -1,0 +1,33 @@
+<mat-grid-list cols="3" rows="2" rowHeight="100px">
+  <mat-grid-tile colspan="1" rowspan="4" class="cover">
+    <button mat-icon-button class="list-add-button">
+      <mat-icon>playlist_add</mat-icon>
+    </button>
+    <img mat-card-image [src]="coverURL" alt="Cover" />
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="2"></mat-grid-tile>
+
+  <mat-grid-tile colspan="1" rowspan="1"
+    ><h1>{{ game.name }}</h1></mat-grid-tile
+  >
+
+  <mat-grid-tile colspan="1" rowspan="2">
+    @if(game.rating){
+    <div class="rating">
+      <mat-progress-spinner mode="determinate" [value]="game.rating">
+      </mat-progress-spinner>
+      <span class="rating-number" [ngStyle]="{ color: ratingColor }">
+        {{ rating }}
+      </span>
+    </div>
+    <span class="rating-text" [ngStyle]="{ color: ratingColor }">{{
+      ratingText.toUpperCase()
+    }}</span
+    >}
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="1" rowspan="2"
+    ><p>{{ game.summary }}</p></mat-grid-tile
+  >
+</mat-grid-list>

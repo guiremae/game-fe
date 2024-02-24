@@ -1,0 +1,7 @@
+<app-header></app-header>
+
+<mat-sidenav #sidenav mode="side"><app-nav></app-nav></mat-sidenav>
+
+<main *ngIf="showContent">
+  <router-outlet></router-outlet>
+</main>

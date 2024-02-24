@@ -1,0 +1,23 @@
+h1 {
+  color: #c69749;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.banner {
+  width: 100%;
+  min-height: 100%;
+  filter: blur(0.3rem);
+  z-index: -1;
+}
+
+.card {
+  position: relative;
+  top: -10rem;
+}
+
+.media-container {
+  position: relative;
+  top: -5rem;
+  text-overflow: visible;
+}

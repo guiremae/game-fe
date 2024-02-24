@@ -1,0 +1,107 @@
+<div class="list-selection">
+  <div class="buttons-container">
+    <button mat-icon-button matPrefix (click)="adding = true">
+      <mat-icon [ngStyle]="{ color: 'white' }">add</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="deleteList()"
+      [disabled]="loadingGames"
+    >
+      <mat-icon [ngStyle]="{ color: 'white' }">delete</mat-icon>
+    </button>
+  </div>
+  <mat-selection-list
+    #list
+    [multiple]="false"
+    (selectionChange)="onListSelection($event)"
+  >
+    @if(adding){
+    <mat-form-field class="new-list-name" [formGroup]="formGroup">
+      <mat-label>Nombre de la lista</mat-label>
+      <input matInput formControlName="title" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="$event.stopPropagation(); adding = false; formGroup.reset()"
+      >
+        <mat-icon [ngStyle]="{ color: 'white' }">backspace</mat-icon>
+      </button>
+      <button mat-icon-button matSuffix (click)="saveNewList($event)">
+        <mat-icon [ngStyle]="{ color: 'white' }">save</mat-icon>
+      </button>
+    </mat-form-field>
+    } @if (listCollection && listCollection.length > 0) {@for (list of
+    listCollection; track list) {
+    <mat-list-option [value]="list.id">{{ list.title }}</mat-list-option>
+    }}
+  </mat-selection-list>
+</div>
+
+<div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
+  <div class="action-buttons">
+    <h1>{{ selectedOption?.title }}</h1>
+    <button
+      mat-icon-button
+      [disabled]="gamesFormArray.pristine"
+      color="primary"
+      (click)="undoChanges()"
+    >
+      <mat-icon>undo</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="saveChanges()"
+      [disabled]="gamesFormArray.pristine"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
+
+  @if (selectedOption?.games?.length > 0) { @if(loadingGames){
+  <mat-spinner class="loader"></mat-spinner>
+  } @else(){
+  <div
+    *ngFor="let game of gamesFormArray.controls; let i = index"
+    class="box"
+    cdkDrag
+  >
+    {{ game.get("name")?.value }}
+    <img
+      *cdkDragPreview
+      [src]="game.get('cover')?.value"
+      [alt]="game.get('name')?.value"
+    />
+    @if(game.get('rating')?.value){
+    <button mat-button class="rating">
+      <mat-progress-spinner
+        mode="determinate"
+        diameter="30"
+        [value]="game.get('rating')?.value"
+      >
+      </mat-progress-spinner>
+      <span
+        class="rating-number"
+        [ngStyle]="{ color: getColor(game.get('rating')?.value) }"
+      >
+        {{ getRoundRating(game.get("rating")?.value) }}
+      </span>
+    </button>
+    }
+    <div class="buttons-container">
+      <button type="button" routerLink="/game/{{ game.get('index')?.value }}">
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button type="button" (click)="removeGame(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  } } @else if (list.selectedOptions.selected[0]) {
+  <p>No hay juegos en esta lista</p>
+  } @else {
+  <p>Selecciona una lista</p>
+  }
+</div>

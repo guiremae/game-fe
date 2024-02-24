@@ -1,0 +1,38 @@
+/* carousel.component.css */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  margin: 0;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+}
+
+svg {
+  margin: 0 10px;
+}
+
+.content-container {
+  margin: 0 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.carousel-container {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.content-container {
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.content-container img {
+  cursor: pointer;
+}
