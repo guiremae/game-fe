@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiURL: string = environment.apiUrl;
+  private apiURL: string = environment.apiUsersUrl;
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn$(): Observable<boolean> {
