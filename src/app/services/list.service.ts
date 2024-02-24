@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ListService {
-  private apiURL: string = environment.apiListUrl;
+  private apiURL: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
