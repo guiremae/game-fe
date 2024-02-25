@@ -21,8 +21,7 @@
 
   <mat-form-field>
     <mat-label>Lista</mat-label>
-    <mat-select formControlName="list"
-      ><!-- (selectionChange)="onListSelectionChange($event)" -->
+    <mat-select formControlName="list">
       <mat-option *ngFor="let list of listCollection" [value]="list">
         {{ list.title }}
       </mat-option>
@@ -33,13 +32,14 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field *ngIf="addForm.controls['list'].value[0] === 'newList'">
+  @if(addForm.controls['list'].value === 'newList'){
+  <mat-form-field>
     <mat-label>Nombre</mat-label>
     <input matInput type="text" formControlName="listname" required />
     <mat-error *ngIf="addForm.controls['listname'].hasError('required')"
       >El nombre de la lista es obligatorio</mat-error
-    >
-  </mat-form-field>
+    > </mat-form-field
+  >}
 
   <br />
   <button type="submit" mat-button color="primary">Añadir</button>

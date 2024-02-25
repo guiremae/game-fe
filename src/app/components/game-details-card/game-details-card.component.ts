@@ -1,5 +1,8 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { Game } from 'src/app/models/interfaces/game.interface';
+import { AuthService } from 'src/app/services/auth.service';
+import { ListService } from 'src/app/services/list.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-game-details-card',
@@ -7,7 +10,12 @@ import { Game } from 'src/app/models/interfaces/game.interface';
   styleUrl: './game-details-card.component.scss',
 })
 export class GameDetailsCardComponent implements OnInit {
-  constructor(private elem: ElementRef) {}
+  constructor(
+    private elem: ElementRef,
+    private authService: AuthService,
+    private modalService: ModalService,
+    private listService: ListService
+  ) {}
 
   @Input() public game!: Game;
   public coverURL: string =
@@ -62,6 +70,22 @@ export class GameDetailsCardComponent implements OnInit {
       return 'Perfecto';
     } else {
       return 'Sin califiación';
+    }
+  }
+
+  onAddToList() {
+    const isLogged = this.authService.getLoggedInValue();
+    if (isLogged) {
+      this.listService.getLists().subscribe(
+        (response) => {
+          this.modalService.openAddToListModal(response, this.game);
+        },
+        (error) => {
+          this.modalService.openLoginModal();
+        }
+      );
+    } else {
+      this.modalService.openLoginModal();
     }
   }
 }
