@@ -88,6 +88,14 @@
 
 <div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
   <div class="action-buttons">
+    <button
+      mat-icon-button
+      (click)="modalService.openShareLink(generateListLink())"
+      [disabled]="!selectedOption"
+      color="primary"
+    >
+      <mat-icon>share</mat-icon>
+    </button>
     <h1>{{ selectedOption?.title }}</h1>
     <button
       mat-icon-button
@@ -98,7 +106,7 @@
       <mat-icon>undo</mat-icon>
     </button>
     <button
-      mat-icon-button
+      mat-icon-buttony
       color="primary"
       (click)="saveChanges()"
       [disabled]="gamesFormArray.pristine"

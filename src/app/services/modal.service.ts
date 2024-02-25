@@ -4,6 +4,7 @@ import { SignupComponent } from '../components/sign-up/sign-up.component';
 import { AddToListComponent } from '../components/add-to-list/add-to-list.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PictureModalComponent } from '../components/picture-modal/picture-modal.component';
+import { ShareComponent } from '../components/share/share.component';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class ModalService {
     | SignupComponent
     | AddToListComponent
     | PictureModalComponent
+    | ShareComponent
   >;
   constructor(public dialog: MatDialog) {}
 
@@ -58,6 +60,17 @@ export class ModalService {
     this.dialogRef = this.dialog.open(PictureModalComponent, {
       data: { imageUrl },
       width: '70vw',
+      panelClass: 'dialog-container',
+    });
+  }
+
+  openShareLink(url: string) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.dialogRef = this.dialog.open(ShareComponent, {
+      data: { url },
+      width: '400px',
       panelClass: 'dialog-container',
     });
   }
