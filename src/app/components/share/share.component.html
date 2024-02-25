@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Compartir Lista</h2>
+<mat-dialog-content>
+  <div class="button-container">
+    <button mat-icon-button color="primary" (click)="shareByEmail()">
+      <mat-icon>email</mat-icon>
+    </button>
+    <button mat-icon-button (click)="shareByWhatsApp()">
+      <mat-icon svgIcon="whatsapp"></mat-icon>
+    </button>
+    <button mat-icon-button (click)="shareByTelegram()">
+      <mat-icon svgIcon="telegram"></mat-icon>
+    </button>
+    <button mat-icon-button color="primary" (click)="copyLinkToClipboard()">
+      <mat-icon>file_copy</mat-icon>
+    </button>
+  </div>
+
+  <mat-form-field class="input-container">
+    <input
+      matInput
+      type="text"
+      [value]="data.url"
+      readonly
+      (click)="copyLinkToClipboard()"
+    />
+  </mat-form-field>
+</mat-dialog-content>

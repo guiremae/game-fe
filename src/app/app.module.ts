@@ -39,6 +39,9 @@ import { MyListsComponent } from './pages/my-lists/my-lists.component';
 import { CdkDropList, CdkDragPreview, CdkDrag } from '@angular/cdk/drag-drop';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LayoutService } from 'src/app/services/layout.service';
+import { ShareComponent } from './components/share/share.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ListComponent } from './pages/list/list.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +62,8 @@ import { LayoutService } from 'src/app/services/layout.service';
     PictureModalComponent,
     LoaderComponent,
     MyListsComponent,
+    ShareComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +89,7 @@ import { LayoutService } from 'src/app/services/layout.service';
     CdkDrag,
     CdkDragPreview,
     MatSidenavModule,
+    MatDialogModule,
   ],
   providers: [
     {

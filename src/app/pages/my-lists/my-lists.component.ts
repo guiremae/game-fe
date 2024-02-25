@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IgdbService } from 'src/app/services/igdb.service';
 import { ListService } from 'src/app/services/list.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-my-lists',
@@ -25,7 +26,8 @@ export class MyListsComponent {
     private route: ActivatedRoute,
     private igdbService: IgdbService,
     private listService: ListService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public modalService: ModalService
   ) {}
 
   gamesForm!: UntypedFormGroup;
@@ -280,5 +282,10 @@ export class MyListsComponent {
     } else {
       this.formGroup.markAllAsTouched();
     }
+  }
+
+  // Generar el enlace de la lista basado en el listID seleccionado
+  generateListLink(): string {
+    return `http://gamelog.hopto.org/list/${this.selectedOption.id}`;
   }
 }

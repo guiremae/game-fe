@@ -10,7 +10,9 @@ import { LatestGamesResolverService } from './resolvers/latest-games-resolver.se
 import { PlatformGamesResolverService } from './resolvers/platform-games-resolver.service';
 import { MyListsComponent } from './pages/my-lists/my-lists.component';
 import { MyListsResolverService } from './resolvers/my-lists-resolver.service';
+import { ListResolverService } from './resolvers/list-resolver.service';
 import { AuthGuard } from './guards/auth.guard';
+import { ListComponent } from './pages/list/list.component';
 
 // Importar componentes y servicios necesarios...
 
@@ -61,6 +63,14 @@ const routes: Routes = [
         resolve: { listCollection: MyListsResolverService },
         canActivate: [AuthGuard],
       },
+      {
+        path: 'list/:listid',
+        component: ListComponent,
+        resolve: {
+          resolver: ListResolverService,
+        },
+      },
+
       {
         path: ':platform/:page',
         component: HomeComponent,
