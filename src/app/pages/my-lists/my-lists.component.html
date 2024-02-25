@@ -1,13 +1,18 @@
 <div class="list-selection">
   <div class="buttons-container">
-    <button mat-icon-button matPrefix (click)="adding = true">
+    <button
+      mat-icon-button
+      matPrefix
+      (click)="isAdding = true"
+      [disabled]="isEditing"
+    >
       <mat-icon [ngStyle]="{ color: 'white' }">add</mat-icon>
     </button>
     <button
       mat-icon-button
       matSuffix
       (click)="deleteList()"
-      [disabled]="loadingGames"
+      [disabled]="loadingGames || !selectedOption || isAdding || isEditing"
     >
       <mat-icon [ngStyle]="{ color: 'white' }">delete</mat-icon>
     </button>
@@ -17,25 +22,63 @@
     [multiple]="false"
     (selectionChange)="onListSelection($event)"
   >
-    @if(adding){
+    @if(isAdding){
     <mat-form-field class="new-list-name" [formGroup]="formGroup">
       <mat-label>Nombre de la lista</mat-label>
-      <input matInput formControlName="title" />
+      <input
+        matInput
+        formControlName="title"
+        (keydown)="$event.stopPropagation()"
+      />
       <button
         mat-icon-button
         matSuffix
-        (click)="$event.stopPropagation(); adding = false; formGroup.reset()"
+        (click)="$event.stopPropagation(); isAdding = false; formGroup.reset()"
       >
         <mat-icon [ngStyle]="{ color: 'white' }">backspace</mat-icon>
       </button>
-      <button mat-icon-button matSuffix (click)="saveNewList($event)">
+      <button mat-icon-button matSuffix (click)="saveHandler($event)">
         <mat-icon [ngStyle]="{ color: 'white' }">save</mat-icon>
       </button>
     </mat-form-field>
     } @if (listCollection && listCollection.length > 0) {@for (list of
-    listCollection; track list) {
-    <mat-list-option [value]="list.id">{{ list.title }}</mat-list-option>
-    }}
+    listCollection; track list) { @if(!list.isEditing){
+    <mat-list-option [value]="list.id" [disabled]="isEditing || isAdding"
+      >{{ list.title }}
+      <button
+        class="editing-button"
+        mat-icon-button
+        matSuffix
+        (click)="$event.stopPropagation(); onEdit(list)"
+        [disabled]="isEditing || isAdding"
+      >
+        <mat-icon [ngStyle]="{ color: 'white' }">edit</mat-icon>
+      </button></mat-list-option
+    >} @else{
+    <mat-form-field class="new-list-name" [formGroup]="formGroup">
+      <mat-label>Nombre de la lista</mat-label>
+      <input
+        matInput
+        formControlName="title"
+        (keydown)="$event.stopPropagation()"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="
+          $event.stopPropagation();
+          list.isEditing = false;
+          this.isEditing = false;
+          formGroup.reset()
+        "
+      >
+        <mat-icon [ngStyle]="{ color: 'white' }">backspace</mat-icon>
+      </button>
+      <button mat-icon-button matSuffix (click)="saveHandler($event)">
+        <mat-icon [ngStyle]="{ color: 'white' }">save</mat-icon>
+      </button>
+    </mat-form-field>
+    } }}
   </mat-selection-list>
 </div>
 
@@ -91,7 +134,7 @@
     </button>
     }
     <div class="buttons-container">
-      <button type="button" routerLink="/game/{{ game.get('index')?.value }}">
+      <button type="button" routerLink="/game/{{ game.get('id')?.value }}">
         <mat-icon>visibility</mat-icon>
       </button>
       <button type="button" (click)="removeGame(i)">

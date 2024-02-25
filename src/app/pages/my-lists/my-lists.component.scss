@@ -58,6 +58,12 @@ h1 {
     width: 100%;
     border-bottom: 1px solid black;
   }
+
+  .editing-button {
+    position: absolute;
+    right: 40px;
+    top: -2px;
+  }
 }
 
 .list {
