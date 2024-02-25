@@ -4,7 +4,7 @@
       mat-icon-button
       matPrefix
       (click)="isAdding = true"
-      [disabled]="isEditing"
+      [disabled]="isEditing || loadingGames"
     >
       <mat-icon [ngStyle]="{ color: 'white' }">add</mat-icon>
     </button>
@@ -12,7 +12,9 @@
       mat-icon-button
       matSuffix
       (click)="deleteList()"
-      [disabled]="loadingGames || !selectedOption || isAdding || isEditing"
+      [disabled]="
+        loadingGames || !selectedOption || isAdding || isEditing || loadingGames
+      "
     >
       <mat-icon [ngStyle]="{ color: 'white' }">delete</mat-icon>
     </button>
@@ -43,14 +45,16 @@
     </mat-form-field>
     } @if (listCollection && listCollection.length > 0) {@for (list of
     listCollection; track list) { @if(!list.isEditing){
-    <mat-list-option [value]="list.id" [disabled]="isEditing || isAdding"
+    <mat-list-option
+      [value]="list.id"
+      [disabled]="isEditing || isAdding || loadingGames"
       >{{ list.title }}
       <button
         class="editing-button"
         mat-icon-button
         matSuffix
         (click)="$event.stopPropagation(); onEdit(list)"
-        [disabled]="isEditing || isAdding"
+        [disabled]="isEditing || isAdding || loadingGames"
       >
         <mat-icon [ngStyle]="{ color: 'white' }">edit</mat-icon>
       </button></mat-list-option

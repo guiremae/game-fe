@@ -22,7 +22,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class MyListsComponent {
   constructor(
     private formBuilder: FormBuilder,
-    private el: ElementRef,
     private route: ActivatedRoute,
     private igdbService: IgdbService,
     private listService: ListService,
