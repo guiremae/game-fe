@@ -72,7 +72,15 @@ export class MyListsComponent {
       cover: [gameData.cover.url.replace('thumb', 'cover_big')],
       rating: [gameData.rating],
     });
-    this.gamesFormArray.insert(gameData.index, gameGroup);
+    this.gamesFormArray.push(gameGroup);
+    this.sortGamesByIndex();
+  }
+
+  private sortGamesByIndex() {
+    // Ordenar los controles del formulario según el índice
+    this.gamesFormArray.controls.sort((a, b) => {
+      return a.get('index')!.value - b.get('index')!.value;
+    });
   }
 
   removeGame(index: number) {
