@@ -46,21 +46,6 @@ export class AddToListComponent {
     this.game = this.data.game;
   }
 
-  onListSelectionChange(ev: any) {
-    const selectedOption = ev.value[ev.value.length - 1];
-    const lastValue = this.prevValues;
-    if (selectedOption == 'newList') {
-      if (lastValue != 'newList') {
-        this.addForm.get('list')?.setValue(['newList']);
-      } else {
-        this.addForm.get('list')?.setValue([ev.value[0]]);
-      }
-    }
-    this.prevValues = selectedOption;
-    console.log(ev.value);
-    console.log(this.addForm.get('list')?.value);
-  }
-
   onSubmit() {
     if (this.addForm.get('list')?.value != 'newList') {
       const listID = this.addForm.get('list')?.value.id;

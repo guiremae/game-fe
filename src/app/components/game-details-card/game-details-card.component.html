@@ -1,6 +1,6 @@
 <mat-grid-list cols="3" rows="2" rowHeight="100px">
   <mat-grid-tile colspan="1" rowspan="4" class="cover">
-    <button mat-icon-button class="list-add-button">
+    <button mat-icon-button class="list-add-button" (click)="onAddToList()">
       <mat-icon>playlist_add</mat-icon>
     </button>
     <img mat-card-image [src]="coverURL" alt="Cover" />
