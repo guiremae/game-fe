@@ -32,7 +32,8 @@ export class MyListsComponent {
   gamesForm!: UntypedFormGroup;
   changesHistory: any[] = [];
   deletedgames: any[] = [];
-  public adding: boolean = false;
+  public isAdding: boolean = false;
+  public isEditing: boolean = false;
   originalData!: any[];
   selectedOption: any;
   public loadingGames: boolean = false;
@@ -95,7 +96,6 @@ export class MyListsComponent {
 
   saveChanges() {
     const list = this.selectedOption;
-    console.log(list);
     // Vaciar el array 'games'
     while (list.games.length > 0) {
       list.games.pop();
@@ -144,8 +144,7 @@ export class MyListsComponent {
     });
   }
 
-  saveNewList(event: any) {
-    event.stopPropagation();
+  saveNewList() {
     if (this.formGroup.valid) {
       const title = this.formGroup.get('title')?.value;
       const user = localStorage.getItem('userID');
@@ -153,7 +152,7 @@ export class MyListsComponent {
         (response) => {
           this.listService.getLists().subscribe((data) => {
             this.listCollection = data.lists;
-            this.adding = false;
+            this.isAdding = false;
             this.formGroup.reset();
             this._snackBar.open('Lista creada con éxito', 'Vale', {
               duration: 1500,
@@ -171,7 +170,8 @@ export class MyListsComponent {
   }
 
   deleteList() {
-    this.listService.deleteList(this.selectedOption[0].id).subscribe(() => {
+    this.listService.deleteList(this.selectedOption.id).subscribe(() => {
+      this.selectedOption = null;
       this.listService.getLists().subscribe((data) => {
         this.listCollection = data.lists;
         this._snackBar.open('Lista eliminada con éxito', 'Vale', {
@@ -218,6 +218,60 @@ export class MyListsComponent {
       return 'Perfecto';
     } else {
       return 'Sin califiación';
+    }
+  }
+
+  onEdit(list: List) {
+    this.isEditing = true;
+    this.formGroup.patchValue(list);
+    list.isEditing = !list.isEditing;
+  }
+
+  public saveHandler(event: any) {
+    event.stopPropagation();
+    if (this.formGroup.valid) {
+      const title = this.formGroup.get('title')?.value;
+      const id = this.formGroup.get('id')?.value;
+      const user = localStorage.getItem('userID');
+      if (this.isAdding)
+        this.listService
+          .createList(title, `${user}`, [`${user}`], [])
+          .subscribe(
+            (response) => {
+              this.listService.getLists().subscribe((data) => {
+                this.listCollection = data.lists;
+                this.isAdding = false;
+                this.formGroup.reset();
+                this._snackBar.open('Lista creada con éxito', 'Vale', {
+                  duration: 1500,
+                });
+              });
+            },
+            (error) => {
+              // Manejar errores de autenticación
+              console.error('Error durante el inicio de sesión:', error);
+            }
+          );
+      else {
+        this.listService.editeListTitle(title, id).subscribe(
+          (response) => {
+            this.listService.getLists().subscribe((data) => {
+              this.listCollection = data.lists;
+              this.isEditing = false;
+              this.formGroup.reset();
+              this._snackBar.open('Lista editada con éxito', 'Vale', {
+                duration: 1500,
+              });
+            });
+          },
+          (error) => {
+            // Manejar errores de autenticación
+            console.error('Error durante el inicio de sesión:', error);
+          }
+        );
+      }
+    } else {
+      this.formGroup.markAllAsTouched();
     }
   }
 }
