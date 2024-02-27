@@ -17,12 +17,8 @@ export class LoaderService {
   }
 
   hide() {
-    timer(1)
-      .pipe(take(1))
-      .subscribe(() => {
-        this.loaderSubject.next(false);
-        this.showContentSubject.next(true);
-      });
+    this.loaderSubject.next(false);
+    this.showContentSubject.next(true);
   }
 
   reset() {
