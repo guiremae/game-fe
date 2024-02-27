@@ -1,16 +1,15 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import {
-  Router,
-  NavigationStart,
-  NavigationEnd,
   NavigationCancel,
+  NavigationEnd,
   NavigationError,
+  NavigationStart,
+  Router,
 } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LoaderService } from 'src/app/services/loader.service';
-import { NavComponent } from '../nav/nav.component';
 import { LayoutService } from 'src/app/services/layout.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-layout',

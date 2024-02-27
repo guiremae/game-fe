@@ -1,6 +1,6 @@
 // loader.service.ts
 import { Injectable } from '@angular/core';
-import { Subject, take, timer } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

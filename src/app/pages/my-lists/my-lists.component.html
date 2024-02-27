@@ -4,19 +4,30 @@
       mat-icon-button
       matPrefix
       (click)="isAdding = true"
-      [disabled]="isEditing || loadingGames"
+      [disabled]="isAdding || isEditing || loadingGames"
     >
-      <mat-icon [ngStyle]="{ color: 'white' }">add</mat-icon>
+      <mat-icon
+        [ngStyle]="{
+          color: isAdding || isEditing || loadingGames ? 'grey' : 'white'
+        }"
+        >add</mat-icon
+      >
     </button>
     <button
       mat-icon-button
       matSuffix
       (click)="deleteList()"
-      [disabled]="
-        loadingGames || !selectedOption || isAdding || isEditing || loadingGames
-      "
+      [disabled]="loadingGames || !selectedOption || isAdding || isEditing"
     >
-      <mat-icon [ngStyle]="{ color: 'white' }">delete</mat-icon>
+      <mat-icon
+        [ngStyle]="{
+          color:
+            loadingGames || !selectedOption || isAdding || isEditing
+              ? 'grey'
+              : 'white'
+        }"
+        >delete</mat-icon
+      >
     </button>
   </div>
   <mat-selection-list
@@ -106,7 +117,7 @@
       <mat-icon>undo</mat-icon>
     </button>
     <button
-      mat-icon-buttony
+      mat-icon-button
       color="primary"
       (click)="saveChanges()"
       [disabled]="gamesFormArray.pristine"
