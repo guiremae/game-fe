@@ -4,12 +4,10 @@
   </h2>
 
   <div
-    class="lanzamientos-container grid grid-cols-1 place-content-center gap-y-20 mb-20 ml-40 md:grid-cols-2 lg:grid-cols-3 md:ml-28 lg:ml-2 xl:ml-28 2xl:ml-60"
+    class="lanzamientos-container grid grid-cols-1 place-content-center gap-y-20 mb-20 ml-10 md:grid-cols-2 lg:grid-cols-3 md:ml-8 lg:ml-2 xl:ml-28 2xl:ml-60"
   >
-    <app-game-card
-      *ngFor="let item of games; let i = index"
-      [game]="games[i]"
-    ></app-game-card>
+    @for (item of games; track $index) {
+    <app-game-card [game]="games[$index]"></app-game-card>}
   </div>
 
   <div

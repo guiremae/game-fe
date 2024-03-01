@@ -19,6 +19,7 @@ export class GameCardComponent implements OnInit {
 
   @Input() public game!: Game;
 
+  public descriptionText: string = '';
   public date!: string;
   public coverURL!: string;
   ngOnInit(): void {
@@ -28,6 +29,7 @@ export class GameCardComponent implements OnInit {
       ).toLocaleDateString('es-ES');
     if (this.game.cover?.url)
       this.coverURL = 'https://' + this.game.cover.url.replace('thumb', '720p');
+    this.descriptionText = this.generateDescriptionText();
   }
 
   onAddToList() {
@@ -44,5 +46,31 @@ export class GameCardComponent implements OnInit {
     } else {
       this.modalService.openLoginModal();
     }
+  }
+
+  generateDescriptionText(): string {
+    let description = `${this.game.name}`;
+
+    if (this.game.genres != null) {
+      description += ` es un ${this.game.genres[0].name} que`;
+    }
+
+    if (this.game.genres != null || this.date != null) {
+      description += ` ha salido`;
+    }
+
+    if (this.game.platforms != null) {
+      description += ` en `;
+      for (let i = 0; i < this.game.platforms.length; i++) {
+        description += `${this.game.platforms[i].name}`;
+        if (i < this.game.platforms.length - 2) {
+          description += `, `;
+        } else if (i === this.game.platforms.length - 2) {
+          description += ` y `;
+        }
+      }
+    }
+
+    return description;
   }
 }
