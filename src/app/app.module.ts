@@ -42,6 +42,7 @@ import { LayoutService } from 'src/app/services/layout.service';
 import { ShareComponent } from './components/share/share.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ListComponent } from './pages/list/list.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { ListComponent } from './pages/list/list.component';
     CdkDragPreview,
     MatSidenavModule,
     MatDialogModule,
+    MatTooltipModule,
   ],
   providers: [
     {

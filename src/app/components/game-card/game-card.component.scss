@@ -1,0 +1,22 @@
+@media only screen and (max-width: 841px) {
+  .card {
+    max-width: 95%;
+  }
+}
+
+@media only screen and (min-width: 842px) {
+  img {
+    height: 500px;
+  }
+  .card {
+    width: 100%;
+  }
+}
+
+.list-add-button {
+  background-color: rgba(0, 0, 0, 0.356);
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  color: gold;
+}
