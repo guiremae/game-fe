@@ -132,6 +132,7 @@ export class MyListsComponent {
   }
 
   onListSelection(ev: MatSelectionListChange) {
+    this.gamesFormArray?.markAsPristine();
     while (this.gamesFormArray.length !== 0) {
       this.gamesFormArray.removeAt(0);
     }
