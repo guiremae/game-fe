@@ -133,6 +133,8 @@
     <mat-spinner class="loader"></mat-spinner>
     } @else(){
     <div
+      cdkDrag
+      [cdkDragStartDelay]="delay"
       *ngFor="let game of gamesFormArray.controls; let i = index"
       class="box"
       cdkDrag

@@ -32,7 +32,8 @@ export class GameCardComponent implements OnInit {
     this.descriptionText = this.generateDescriptionText();
   }
 
-  onAddToList() {
+  onAddToList(event: Event) {
+    event.stopPropagation();
     const isLogged = this.authService.getLoggedInValue();
     if (isLogged) {
       this.listService.getLists().subscribe(

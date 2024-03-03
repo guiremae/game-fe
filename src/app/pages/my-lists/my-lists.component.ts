@@ -45,6 +45,7 @@ export class MyListsComponent {
 
   public listCollection: List[] = [];
   ratingColors: string[] = [];
+  public delay: number = 0;
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
@@ -53,6 +54,8 @@ export class MyListsComponent {
         games: this.formBuilder.array([]),
       });
     });
+    const userAgent = navigator.userAgent.toLowerCase();
+    this.delay = userAgent.includes('mobile') ? 500 : 0;
   }
 
   get gamesFormArray(): UntypedFormArray {
