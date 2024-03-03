@@ -25,11 +25,7 @@
     <a [routerLink]="['/game', game.id]">
       <div class="font-bold text-xl mb-2 text-[#C69749]">{{ game.name }}</div>
     </a>
-    <p
-      class="text-white text-base description"
-      matTooltip="{{ descriptionText }}"
-      [matTooltipPosition]="'below'"
-    >
+    <p class="text-white text-base description">
       {{ descriptionText }}
     </p>
   </div>
