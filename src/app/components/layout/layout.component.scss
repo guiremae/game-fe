@@ -5,3 +5,8 @@ app-nav {
   width: 0;
   transition: 0.5s;
 }
+
+app-header {
+  position: relative;
+  z-index: 1000;
+}
