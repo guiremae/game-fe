@@ -8,7 +8,10 @@ export class LayoutService {
   private toggleSidenavSubject = new Subject<boolean>();
   toggleSidenav$ = this.toggleSidenavSubject.asObservable();
 
+  private isSidenavOpen = false;
+
   toggleSidenav() {
-    this.toggleSidenavSubject.next(true);
+    this.isSidenavOpen = !this.isSidenavOpen;
+    this.toggleSidenavSubject.next(this.isSidenavOpen);
   }
 }
