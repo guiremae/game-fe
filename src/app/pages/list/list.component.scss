@@ -43,7 +43,7 @@ h1 {
   justify-content: space-between;
   box-sizing: border-box;
   background: white;
-  font-size: 14px;
+  font-size: 0.8rem;
 }
 
 .rating {
@@ -63,4 +63,10 @@ h1 {
   z-index: 1;
   font-size: 0.7rem;
   font-weight: bold;
+}
+
+@media screen and (min-width: 1280px) {
+  .box {
+    font-size: 1rem;
+  }
 }
