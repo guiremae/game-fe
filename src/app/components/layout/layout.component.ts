@@ -45,12 +45,24 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.layoutService.toggleSidenav$.subscribe(() => {
-      this.sidenav.toggle();
+    this.layoutService.toggleSidenav$.subscribe((data) => {
+      if (data) {
+        this.sideNavOpen();
+      } else {
+        this.sideNavClose();
+      }
     });
   }
 
   ngOnDestroy() {
     this.loaderSubscription.unsubscribe();
+  }
+
+  sideNavOpen() {
+    document.getElementById('sidenav')!.style.width = '5rem';
+  }
+
+  sideNavClose() {
+    document.getElementById('sidenav')!.style.width = '0';
   }
 }

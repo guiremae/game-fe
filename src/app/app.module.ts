@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -43,6 +43,7 @@ import { ShareComponent } from './components/share/share.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ListComponent } from './pages/list/list.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { GlobalErrorHandler } from './services/error-handler.service';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
   ],
   providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,

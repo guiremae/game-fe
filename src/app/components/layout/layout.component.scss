@@ -1,4 +1,7 @@
 app-nav {
   position: fixed;
   z-index: 1000;
+  overflow-x: hidden;
+  width: 0;
+  transition: 0.5s;
 }
