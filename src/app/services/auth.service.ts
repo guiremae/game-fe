@@ -54,4 +54,13 @@ export class AuthService {
     }
     return this.loggedIn.getValue();
   }
+
+  activateUser(userID: string, token: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.patch<any>(
+      `${this.apiURL}/user/${userID}/activate`,
+      undefined,
+      { headers }
+    );
+  }
 }

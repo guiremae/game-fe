@@ -57,3 +57,21 @@ body {
   background-image: url("./assets/img/background.jpg"); /* Reemplaza 'tu-imagen-de-fondo.jpg' con la ruta de tu imagen */
   background-attachment: fixed;
 }
+
+.center {
+  text-align: center;
+}
+
+.mat-mdc-snack-bar-container {
+  &.app-notification-error {
+    --mdc-snackbar-container-color: #f23a2f;
+    --mat-mdc-snack-bar-button-color: #ffffff;
+    --mdc-snackbar-supporting-text-color: #ffffff;
+  }
+
+  &.app-notification-success {
+    --mdc-snackbar-container-color: #43a446;
+    --mat-mdc-snack-bar-button-color: #ffffff;
+    --mdc-snackbar-supporting-text-color: #ffffff;
+  }
+}
