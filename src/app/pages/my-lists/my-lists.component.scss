@@ -37,7 +37,7 @@ h1 {
 
 .list-selection {
   width: 90%;
-  margin: 5vh 5% 0 5%;
+  margin: 1vh 5% 0 5%;
   border: 2px solid black;
   background: linear-gradient(to right, #17082d, #2c1b4a);
   max-height: 25vh;
@@ -78,7 +78,7 @@ h1 {
   background: white;
   border-radius: 4px;
   margin: auto;
-  margin-top: 5vh;
+  margin-top: 3vh;
   padding: 0px;
 
   h1 {
@@ -101,7 +101,7 @@ h1 {
   box-sizing: border-box;
   cursor: move;
   background: white;
-  font-size: 14px;
+  font-size: 0.8rem;
 }
 
 .cdk-drag-preview {
@@ -177,7 +177,7 @@ h1 {
     box-sizing: border-box;
     cursor: move;
     background: white;
-    font-size: 14px;
+    font-size: 1rem;
   }
 
   .list-selection {

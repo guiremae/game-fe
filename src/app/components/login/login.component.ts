@@ -44,8 +44,9 @@ export class LoginComponent {
           // Establecer el estado de autenticación en el servicio
           this.authService.setLoggedIn(true);
 
-          this._snackBar.open('Sesión iniciada con éxito', 'Vale', {
+          this._snackBar.open('Sesión iniciada con éxito', undefined, {
             duration: 1500,
+            panelClass: 'center',
           });
           // Cerrar la modal después de un inicio de sesión exitoso
           this.modalService.closeModal();

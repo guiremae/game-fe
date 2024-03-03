@@ -55,7 +55,7 @@ export class MyListsComponent {
       });
     });
     const userAgent = navigator.userAgent.toLowerCase();
-    this.delay = userAgent.includes('mobile') ? 500 : 0;
+    this.delay = userAgent.includes('mobile') ? 100 : 0;
   }
 
   get gamesFormArray(): UntypedFormArray {
@@ -120,8 +120,9 @@ export class MyListsComponent {
 
     this.listService.updateList(list).subscribe((data) => {
       this.gamesFormArray.markAsPristine();
-      this._snackBar.open('Lista actualizada con éxito', 'Vale', {
+      this._snackBar.open('Lista actualizada con éxito', undefined, {
         duration: 1500,
+        panelClass: ['app-notification-success', 'center'],
       });
     });
   }
@@ -166,8 +167,9 @@ export class MyListsComponent {
             this.listCollection = data.lists;
             this.isAdding = false;
             this.formGroup.reset();
-            this._snackBar.open('Lista creada con éxito', 'Vale', {
+            this._snackBar.open('Lista creada con éxito', undefined, {
               duration: 1500,
+              panelClass: ['app-notification-success', 'center'],
             });
           });
         },
@@ -186,8 +188,9 @@ export class MyListsComponent {
       this.selectedOption = null;
       this.listService.getLists().subscribe((data) => {
         this.listCollection = data.lists;
-        this._snackBar.open('Lista eliminada con éxito', 'Vale', {
+        this._snackBar.open('Lista eliminada con éxito', undefined, {
           duration: 1500,
+          panelClass: ['app-notification-success', 'center'],
         });
       });
     });
@@ -254,8 +257,9 @@ export class MyListsComponent {
                 this.listCollection = data.lists;
                 this.isAdding = false;
                 this.formGroup.reset();
-                this._snackBar.open('Lista creada con éxito', 'Vale', {
+                this._snackBar.open('Lista creada con éxito', undefined, {
                   duration: 1500,
+                  panelClass: ['app-notification-success', 'center'],
                 });
               });
             },
@@ -265,14 +269,15 @@ export class MyListsComponent {
             }
           );
       else {
-        this.listService.editeListTitle(title, id).subscribe(
-          (response) => {
+        this.listService.editListTitle(title, id).subscribe(
+          () => {
             this.listService.getLists().subscribe((data) => {
               this.listCollection = data.lists;
               this.isEditing = false;
               this.formGroup.reset();
-              this._snackBar.open('Lista editada con éxito', 'Vale', {
+              this._snackBar.open('Lista editada con éxito', undefined, {
                 duration: 1500,
+                panelClass: ['app-notification-success', 'center'],
               });
             });
           },

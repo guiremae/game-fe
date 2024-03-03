@@ -53,8 +53,9 @@ export class AddToListComponent {
       this.listService.addGame(listID, gameID).subscribe(
         (response) => {
           // Manejar la respuesta del backend, que debería incluir el token de sesión
-          this._snackBar.open('Lista con juego añadido con éxito', 'Vale', {
+          this._snackBar.open('Lista con juego añadido con éxito', undefined, {
             duration: 1500,
+            panelClass: ['app-notification-success', 'center'],
           });
           // Cerrar la modal después de un inicio de sesión exitoso
           this.modalService.closeModal();
@@ -72,9 +73,14 @@ export class AddToListComponent {
         .subscribe(
           (response) => {
             // Manejar la respuesta del backend, que debería incluir el token de sesión
-            this._snackBar.open('Lista con juego añadido con éxito', 'Vale', {
-              duration: 1500,
-            });
+            this._snackBar.open(
+              'Lista con juego añadido con éxito',
+              undefined,
+              {
+                duration: 1500,
+                panelClass: ['app-notification-success', 'center'],
+              }
+            );
             // Cerrar la modal después de un inicio de sesión exitoso
             this.modalService.closeModal();
           },

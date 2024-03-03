@@ -47,7 +47,7 @@ export class ListService {
     return this.http.post<any>(`${this.apiURL}`, listData, { headers });
   }
 
-  editeListTitle(title: string, listID: string): Observable<any> {
+  editListTitle(title: string, listID: string): Observable<any> {
     const listData = { title };
     const authToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders()

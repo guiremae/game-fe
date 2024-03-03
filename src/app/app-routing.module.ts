@@ -13,6 +13,8 @@ import { MyListsResolverService } from './resolvers/my-lists-resolver.service';
 import { ListResolverService } from './resolvers/list-resolver.service';
 import { AuthGuard } from './guards/auth.guard';
 import { ListComponent } from './pages/list/list.component';
+import { ActivateUserComponent } from './pages/activate-user/activate-user.component';
+import { ActivateUserResolver } from './resolvers/activate-user-resolver.service';
 
 // Importar componentes y servicios necesarios...
 
@@ -34,6 +36,13 @@ const routes: Routes = [
         component: HomeComponent,
         resolve: {
           resolver: LatestGamesResolverService,
+        },
+      },
+      {
+        path: 'activate/:userID/:token',
+        component: ActivateUserComponent,
+        resolve: {
+          success: ActivateUserResolver,
         },
       },
       {

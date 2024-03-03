@@ -62,9 +62,10 @@ export class ShareComponent {
 
   // Método para copiar el enlace al portapapeles
   copyLinkToClipboard() {
-    this._snackBar.open('Enlace copiado al portapapeles', 'Vale', {
+    this._snackBar.open('Enlace copiado al portapapeles', undefined, {
       horizontalPosition: 'center',
       verticalPosition: 'top',
+      panelClass: 'center',
     });
     const listLink = this.data.url;
     this.clipboard.copy(listLink);
