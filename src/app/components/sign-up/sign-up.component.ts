@@ -5,6 +5,7 @@ import {
   UntypedFormControl,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { tap, catchError, throwError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -24,7 +25,8 @@ export class SignupComponent {
 
   constructor(
     private authService: AuthService,
-    public modalService: ModalService
+    public modalService: ModalService,
+    private _snackBar: MatSnackBar
   ) {}
 
   onSubmit() {
@@ -34,8 +36,11 @@ export class SignupComponent {
       this.authService
         .signUp(email, username, name, password)
         .pipe(
-          tap((response) => {
-            console.log(response);
+          tap(() => {
+            this._snackBar.open('Usuario creado con éxito', undefined, {
+              duration: 1500,
+              panelClass: ['app-notification-success', 'center'],
+            });
             this.modalService.closeModal();
           }),
           catchError((error) => {
