@@ -145,10 +145,10 @@ export class IgdbService {
     );
   }
 
-  public getListGames(id: number): Observable<Game[]> {
+  public getListGames(id: number[]): Observable<Game[]> {
     return this.httpClient.post<Game[]>(
       `${this.cors_api_host}${this.baseURL}`,
-      `fields platforms.name, platforms.abbreviation, videos.video_id, cover.url, rating, screenshots.url , artworks.url, genres.name, summary, name; where id = (${id});`,
+      `fields platforms.name, platforms.abbreviation, videos.video_id, cover.url, rating, screenshots.url , artworks.url, genres.name, summary, name; where id = (${id});limit 500;`,
       {
         headers: {
           'Client-ID': this.clientID,
