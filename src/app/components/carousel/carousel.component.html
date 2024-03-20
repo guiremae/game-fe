@@ -15,32 +15,31 @@
       />
     </svg>
 
-    <ng-container *ngIf="mediaList && mediaList.length > 0">
-      <ng-container *ngFor="let content of visibleContent; let i = index">
-        <div class="content-container">
-          <ng-container *ngIf="content.type === 'video'">
-            <iframe
-              width="560"
-              height="315"
-              [src]="content.url"
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
-          </ng-container>
-          <ng-container *ngIf="content.type === 'image'">
-            <img
-              [src]="content.url"
-              alt="screenshot"
-              (click)="
-                modalService.openPicture(
-                  content.url.replace('screenshot_med', '1080p')
-                )
-              "
-            />
-          </ng-container>
-        </div>
+    @if(mediaList && mediaList.length > 0){ @for (content of visibleContent;
+    track $index) {
+    <div class="content-container">
+      <ng-container *ngIf="content.type === 'video'">
+        <iframe
+          width="560"
+          height="315"
+          [src]="content.url"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
       </ng-container>
-    </ng-container>
+      <ng-container *ngIf="content.type === 'image'">
+        <img
+          [src]="content.url"
+          alt="screenshot"
+          (click)="
+            modalService.openPicture(
+              content.url.replace('screenshot_med', '1080p')
+            )
+          "
+        />
+      </ng-container>
+    </div>
+    } }
 
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -57,110 +56,4 @@
       />
     </svg>
   </div>
-  <!--   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 20 20"
-  >
-    <polygon
-      points="10,0 0,10 10,20"
-      [style.fill]="showNextButton? '#c69749' : 'none'"
-      [attr.pointer-events]="showNextButton ? 'auto' : 'none'"
-      (click)="prevContent()"
-      [style.cursor]="showNextButton  ? 'pointer' : 'default'"
-    />
-  </svg> -->
-  <!-- <div class="video-container" *ngIf="videos && currentIndex < videos.length">
-    <iframe
-      width="560"
-      height="315"
-      [src]="videos[currentIndex]"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
-  </div>
-  <div
-    class="video-container"
-    *ngIf="videos && currentIndex + 1 < videos.length"
-  >
-    <iframe
-      width="560"
-      height="315"
-      [src]="videos[currentIndex + 1]"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
-  </div>
-  <div
-    class="video-container"
-    *ngIf="videos && currentIndex + 2 < videos.length"
-  >
-    <iframe
-      width="560"
-      height="315"
-      [src]="videos[currentIndex + 2]"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
-  </div>
-  <div
-    class="video-container"
-    *ngIf="
-      pictures &&
-      currentPictureIndex < pictures.length + 1 &&
-      currentIndex + 2 >= videos.length
-    "
-  >
-    <img [src]="picturesResized[currentPictureIndex].url" alt="" />
-  </div>
-  <div
-    class="video-container"
-    *ngIf="
-      pictures &&
-      currentPictureIndex + 1 < pictures.length + 1 &&
-      currentIndex + 1 >= videos.length
-    "
-  >
-    <img [src]="picturesResized[currentPictureIndex + 1].url" alt="" />
-  </div>
-  <div
-    class="video-container"
-    *ngIf="
-      pictures &&
-      currentPictureIndex + 2 < pictures.length + 1 &&
-      currentIndex >= videos.length
-    "
-  >
-    <img [src]="picturesResized[currentPictureIndex + 2].url" alt="" />
-  </div>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 20 20"
-  >
-    <polygon
-      points="0,0 10,10 0,20"
-      [style.fill]="
-        currentIndex < videos.length - 1 ||
-        (pictures && currentPictureIndex < pictures.length - 1)
-          ? '#c69749'
-          : 'none'
-      "
-      [attr.pointer-events]="
-        (videos && currentIndex < videos.length - 1) ||
-        (pictures && currentPictureIndex < pictures.length - 1)
-          ? 'auto'
-          : 'none'
-      "
-      (click)="nextContent()"
-      [style.cursor]="
-        (videos && currentIndex < videos.length - 1) ||
-        (pictures && currentPictureIndex < pictures.length - 1)
-          ? 'pointer'
-          : 'default'
-      "
-    />
-  </svg> -->
 </div>
