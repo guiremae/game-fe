@@ -16,16 +16,7 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./add-to-list.component.scss'],
 })
 export class AddToListComponent {
-  listCollection = [
-    { title: 'pizza', id: 1 },
-    { title: 'burger', id: 2 },
-    // ... otros alimentos
-  ];
-  foods = [
-    { value: 'pizza', viewValue: 'Pizza' },
-    { value: 'burger', viewValue: 'Burger' },
-    // ... otros alimentos
-  ];
+  listCollection = [{ title: '', id: '' }];
 
   addForm = new UntypedFormGroup({
     list: new UntypedFormControl('', Validators.required),

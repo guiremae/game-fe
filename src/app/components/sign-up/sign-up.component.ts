@@ -44,7 +44,6 @@ export class SignupComponent {
             this.modalService.closeModal();
           }),
           catchError((error) => {
-            console.log('Error durante el registro:', error);
             return [];
           })
         )

@@ -36,6 +36,7 @@ import { PageNavComponent } from './components/page-nav/page-nav.component';
 import { PictureModalComponent } from './components/picture-modal/picture-modal.component';
 import { ShareComponent } from './components/share/share.component';
 import { SignupComponent } from './components/sign-up/sign-up.component';
+import { EditRatingComponent } from './components/edit-rating/edit-rating.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { GameComponent } from './pages/game/game.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -64,6 +65,7 @@ import { GlobalErrorHandler } from './services/error-handler.service';
     MyListsComponent,
     ShareComponent,
     ListComponent,
+    EditRatingComponent,
   ],
   imports: [
     BrowserModule,

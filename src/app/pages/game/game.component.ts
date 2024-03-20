@@ -25,15 +25,14 @@ export class GameComponent implements OnInit {
     slidesToScroll: 1,
   };
 
-  constructor(
-    private route: ActivatedRoute,
-    private igdbService: IgdbService,
-    private sanitizer: DomSanitizer
-  ) {}
+  constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
-      this.game = data['game'][0];
+      this.game = data['game']['game'][0];
+      this.game.rating = data['game']['rating']
+        ? data['game']['rating']['score']
+        : null;
       const randomIndex = Math.floor(
         Math.random() *
           (this.game.screenshots?.length + this.game.artworks?.length)

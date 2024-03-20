@@ -1,10 +1,10 @@
-import { Inject, Injectable, Renderer2 } from '@angular/core';
-import { Game } from 'src/app/models/interfaces/game.interface';
-import { IgdbService } from './igdb.service';
-import { PlatformEvent } from 'src/app/models/interfaces/platformEvent.interface';
-import { BehaviorSubject } from 'rxjs';
 import { Location } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { Game } from 'src/app/models/interfaces/game.interface';
+import { PlatformEvent } from 'src/app/models/interfaces/platformEvent.interface';
+import { IgdbService } from './igdb.service';
 
 @Injectable({
   providedIn: 'root',

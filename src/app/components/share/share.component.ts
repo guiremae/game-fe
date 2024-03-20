@@ -65,6 +65,7 @@ export class ShareComponent {
     this._snackBar.open('Enlace copiado al portapapeles', undefined, {
       horizontalPosition: 'center',
       verticalPosition: 'top',
+      duration: 1000,
       panelClass: 'center',
     });
     const listLink = this.data.url;
