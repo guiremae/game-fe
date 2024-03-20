@@ -5,6 +5,8 @@ import { AddToListComponent } from '../components/add-to-list/add-to-list.compon
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PictureModalComponent } from '../components/picture-modal/picture-modal.component';
 import { ShareComponent } from '../components/share/share.component';
+import { EditRatingComponent } from '../components/edit-rating/edit-rating.component';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +18,7 @@ export class ModalService {
     | AddToListComponent
     | PictureModalComponent
     | ShareComponent
+    | EditRatingComponent
   >;
   constructor(public dialog: MatDialog) {}
 
@@ -40,9 +43,9 @@ export class ModalService {
     });
   }
 
-  closeModal(): void {
+  closeModal(data?: any): void {
     if (this.dialogRef) {
-      this.dialogRef.close();
+      this.dialogRef.close(data);
     }
   }
 
@@ -73,5 +76,17 @@ export class ModalService {
       width: '400px',
       panelClass: 'dialog-container',
     });
+  }
+
+  openEditRatingModal(game: any): Observable<number> {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.dialogRef = this.dialog.open(EditRatingComponent, {
+      width: '400px',
+      panelClass: 'dialog-container',
+      data: { game: game },
+    });
+    return this.dialogRef.afterClosed();
   }
 }

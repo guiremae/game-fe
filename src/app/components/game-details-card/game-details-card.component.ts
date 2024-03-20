@@ -20,25 +20,22 @@ export class GameDetailsCardComponent implements OnInit {
   @Input() public game!: Game;
   public coverURL: string =
     'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg';
-  public rating: number = 0;
   public ratingColor: string = '';
   public ratingText: string = '';
 
   ngOnInit(): void {
     if (this.game.cover.url)
       this.coverURL = 'https://' + this.game.cover.url.replace('thumb', '720p');
-    this.rating = this.game.rating
-      ? Math.round((this.game.rating / 10) * 10) / 10
-      : 0;
-    this.ratingColor = this.getColor(this.rating);
-    this.ratingText = this.getRating(this.rating);
-    const element = this.elem.nativeElement;
-    const circle = element.querySelector('circle');
-    if (circle) circle.style.stroke = this.ratingColor;
+    this.ratingColor = this.getColor(this.game.rating);
+    this.ratingText = this.getRating(this.game.rating);
+  }
+
+  ngAfterViewInit(): void {
+    this.setCircleColor();
   }
 
   getColor(value: number): string {
-    if (value >= 0 && value <= 4) {
+    if (value >= 0 && value < 5) {
       return 'red';
     } else if (value >= 5 && value < 7) {
       return 'yellow';
@@ -87,5 +84,29 @@ export class GameDetailsCardComponent implements OnInit {
     } else {
       this.modalService.openLoginModal();
     }
+  }
+
+  onEditRating() {
+    const isLogged = this.authService.getLoggedInValue();
+    if (isLogged) {
+      this.modalService
+        .openEditRatingModal(this.game)
+        .subscribe((rating: number) => {
+          if (rating) {
+            this.game.rating = rating;
+            this.ratingColor = this.getColor(this.game.rating);
+            this.ratingText = this.getRating(this.game.rating);
+            this.setCircleColor();
+          }
+        });
+    } else {
+      this.modalService.openLoginModal();
+    }
+  }
+
+  private setCircleColor() {
+    const element = this.elem.nativeElement;
+    const circle = element.querySelector('circle');
+    if (circle) circle.style.stroke = this.ratingColor;
   }
 }

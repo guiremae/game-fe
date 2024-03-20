@@ -18,7 +18,6 @@ export class ListComponent {
     this.route.data.subscribe((data) => {
       this.dataResolver = data['resolver'];
       this.games = this.dataResolver.games;
-      console.log(this.games);
       this.title = this.dataResolver.title;
     });
   }

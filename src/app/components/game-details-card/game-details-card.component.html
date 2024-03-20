@@ -14,17 +14,32 @@
 
   <mat-grid-tile colspan="1" rowspan="2">
     @if(game.rating){
-    <div class="rating">
-      <mat-progress-spinner mode="determinate" [value]="game.rating">
+    <button class="rating" (click)="onEditRating()">
+      <mat-progress-spinner
+        mode="determinate"
+        [value]="game.rating * 10"
+        [ngStyle]="{ color: ratingColor }"
+      >
       </mat-progress-spinner>
       <span class="rating-number" [ngStyle]="{ color: ratingColor }">
-        {{ rating }}
+        {{ game.rating }}
       </span>
-    </div>
+    </button>
     <span class="rating-text" [ngStyle]="{ color: ratingColor }">{{
       ratingText.toUpperCase()
     }}</span
-    >}
+    >} @else {
+    <button class="rating" (click)="onEditRating()">
+      <mat-progress-spinner mode="determinate" [value]="100">
+      </mat-progress-spinner>
+      <span
+        class="rating-number"
+        [ngStyle]="{ color: 'white', 'font-size': '12px' }"
+      >
+        Añadir puntuación
+      </span>
+    </button>
+    }
   </mat-grid-tile>
 
   <mat-grid-tile colspan="1" rowspan="2"
