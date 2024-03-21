@@ -12,21 +12,31 @@ import { LoaderService } from '../services/loader.service';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
+  private requestsCount = 0;
+
   constructor(private loaderService: LoaderService) {}
-  private excludeLoaderHeader = 'X-Exclude-Loader';
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const excludeLoader = req.headers.has(this.excludeLoaderHeader);
+    const excludeLoader = req.headers.has('X-Exclude-Loader');
+
     if (!excludeLoader) {
-      this.loaderService.show();
+      this.requestsCount++;
+      if (this.requestsCount === 1) {
+        this.loaderService.show();
+      }
     }
 
     return next.handle(req).pipe(
       finalize(() => {
-        this.loaderService.hide();
+        if (!excludeLoader) {
+          this.requestsCount--;
+          if (this.requestsCount === 0) {
+            this.loaderService.hide();
+          }
+        }
       })
     );
   }
