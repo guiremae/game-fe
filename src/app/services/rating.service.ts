@@ -13,9 +13,10 @@ export class RatingService {
   getRating(gameID: string) {
     const authToken = localStorage.getItem('authToken');
     const userID = localStorage.getItem('userID');
-    const headers = new HttpHeaders()
-      .set('X-Exclude-Loader', 'true')
-      .set('Authorization', `Bearer ${authToken}`);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${authToken}`
+    );
     return this.http.get<any>(
       `${this.apiURL}/user/${userID}/scores/${gameID}`,
       {
