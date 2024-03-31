@@ -8,12 +8,6 @@ WORKDIR /app
 RUN apt-get update && \
     apt-get install -y git
 
-# Install Angular CLI
-RUN npm install -g @angular/cli@latest
-
-# Install app dependencies
-RUN npm install
-
 COPY . .
 
 # Stage 2 - Deploy the production environment
