@@ -73,7 +73,7 @@ export class MyListsComponent {
       id: [gameData.id, Validators.required],
       name: [gameData.name, Validators.required],
       index: [gameData.index, Validators.required],
-      cover: [gameData.cover.url.replace('thumb', 'cover_big')],
+      cover: [gameData.cover?.url.replace('thumb', 'cover_big')],
       rating: [gameData.rating],
     });
     this.gamesFormArray.push(gameGroup);
@@ -204,37 +204,45 @@ export class MyListsComponent {
   getColor(value: number): string {
     if (value >= 0 && value <= 40) {
       return 'red';
-    } else if (value >= 50 && value < 70) {
-      return 'yellow';
-    } else if (value >= 70 && value < 90) {
-      return 'green';
-    } else if (value >= 90 && value < 100) {
-      return 'purple';
-    } else if (value == 100) {
-      return '#C69749';
-    } else {
-      return 'transparent';
     }
+    if (value >= 50 && value < 70) {
+      return 'yellow';
+    }
+    if (value >= 70 && value < 90) {
+      return 'green';
+    }
+    if (value >= 90 && value < 100) {
+      return 'purple';
+    }
+    if (value == 100) {
+      return '#C69749';
+    }
+    return 'transparent';
   }
 
   getRating(value: number): string {
     if (value >= 0 && value <= 2) {
       return 'Lamentable';
-    } else if (value >= 2 && value < 5) {
-      return 'Malo';
-    } else if (value >= 5 && value < 6) {
-      return 'Aceptable';
-    } else if (value >= 6 && value <= 7) {
-      return 'Bueno';
-    } else if (value >= 7 && value < 9) {
-      return 'Notable';
-    } else if (value >= 9 && value < 10) {
-      return 'Excelente';
-    } else if (value == 10) {
-      return 'Perfecto';
-    } else {
-      return 'Sin califiación';
     }
+    if (value >= 2 && value < 5) {
+      return 'Malo';
+    }
+    if (value >= 5 && value < 6) {
+      return 'Aceptable';
+    }
+    if (value >= 6 && value <= 7) {
+      return 'Bueno';
+    }
+    if (value >= 7 && value < 9) {
+      return 'Notable';
+    }
+    if (value >= 9 && value < 10) {
+      return 'Excelente';
+    }
+    if (value == 10) {
+      return 'Perfecto';
+    }
+    return 'Sin califiación';
   }
 
   onEdit(list: List) {
