@@ -53,7 +53,20 @@ export class LoginComponent {
         },
         (error) => {
           // Manejar errores de autenticación
-          console.error('Error durante el inicio de sesión:', error);
+          if (error.status === 403) {
+            return this._snackBar.open('Credenciales no válidas', undefined, {
+              duration: 1500,
+              panelClass: ['app-notification-error', 'center'],
+            });
+          }
+          return this._snackBar.open(
+            'Ha fallado la conexión con el servidor',
+            undefined,
+            {
+              duration: 1500,
+              panelClass: ['app-notification-error', 'center'],
+            }
+          );
         }
       );
     }
