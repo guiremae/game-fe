@@ -149,6 +149,12 @@ export class MyListsComponent {
           data.forEach((game: any) => {
             const gameIndex = games.findIndex((id: string) => id === game.id);
             game.index = gameIndex;
+            if (
+              this.selectedOption.scores &&
+              this.selectedOption.scores[game.id]
+            ) {
+              game.rating = this.selectedOption.scores[game.id];
+            }
             this.addGame(game);
           });
           this.originalData = this.gamesFormArray.getRawValue();
@@ -197,24 +203,20 @@ export class MyListsComponent {
     });
   }
 
-  getRoundRating(rating: number): number {
-    return Math.round((rating / 10) * 10) / 10;
-  }
-
   getColor(value: number): string {
-    if (value >= 0 && value <= 40) {
+    if (value >= 0 && value <= 4) {
       return 'red';
     }
-    if (value >= 50 && value < 70) {
+    if (value >= 5 && value < 7) {
       return 'yellow';
     }
-    if (value >= 70 && value < 90) {
+    if (value >= 7 && value < 9) {
       return 'green';
     }
-    if (value >= 90 && value < 100) {
+    if (value >= 9 && value < 10) {
       return 'purple';
     }
-    if (value == 100) {
+    if (value == 10) {
       return '#C69749';
     }
     return 'transparent';

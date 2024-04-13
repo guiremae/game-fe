@@ -150,14 +150,14 @@
         <mat-progress-spinner
           mode="determinate"
           diameter="30"
-          [value]="game.get('rating')?.value"
+          [value]="game.get('rating')?.value * 10"
         >
         </mat-progress-spinner>
         <span
           class="rating-number"
           [ngStyle]="{ color: getColor(game.get('rating')?.value) }"
         >
-          {{ getRoundRating(game.get("rating")?.value) }}
+          {{ game.get("rating")?.value }}
         </span>
       </button>
       }
