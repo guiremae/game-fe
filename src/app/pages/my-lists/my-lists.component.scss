@@ -75,7 +75,7 @@ h1 {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  background: white;
+  background: linear-gradient(to right, #17082d, #2c1b4a);
   border-radius: 4px;
   margin: auto;
   margin-top: 3vh;
@@ -93,14 +93,14 @@ h1 {
 .box {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
+  color: white;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
   cursor: move;
-  background: white;
+  background: transparent;
   font-size: 0.8rem;
 }
 
@@ -169,14 +169,14 @@ h1 {
   .box {
     padding: 20px 10px;
     border-bottom: solid 1px #ccc;
-    color: rgba(0, 0, 0, 0.87);
+    color: white;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
-    background: white;
+    background: transparent;
     font-size: 1rem;
   }
 
