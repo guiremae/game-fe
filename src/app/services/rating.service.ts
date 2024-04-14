@@ -18,7 +18,7 @@ export class RatingService {
       `Bearer ${authToken}`
     );
     return this.http.get<any>(
-      `${this.apiURL}/user/${userID}/scores/${gameID}`,
+      `${this.apiURL}/users/${userID}/scores/${gameID}`,
       {
         headers,
       }
@@ -33,7 +33,7 @@ export class RatingService {
       .set('X-Exclude-Loader', 'true')
       .set('Authorization', `Bearer ${authToken}`);
     return this.http.put<any>(
-      `${this.apiURL}/user/${userID}/scores/${gameID}`,
+      `${this.apiURL}/users/${userID}/scores/${gameID}`,
       rating,
       {
         headers,
