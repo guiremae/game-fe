@@ -57,7 +57,7 @@ export class AuthService {
 
   activateUser(userID: string, token: string): Observable<any> {
     return this.http.patch<any>(
-      `${this.apiURL}/user/${userID}/activate?token=${token}`,
+      `${this.apiURL}/users/${userID}/activate?token=${token}`,
       undefined
     );
   }
