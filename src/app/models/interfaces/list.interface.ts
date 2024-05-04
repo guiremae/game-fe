@@ -1,5 +1,5 @@
 export interface List {
-  id: number;
+  id: string;
   title: string;
   games: any[];
   isEditing: boolean;

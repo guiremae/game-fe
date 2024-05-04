@@ -33,7 +33,12 @@
     </div>
     <mat-selection-list
       #list
+      cdkDropList
+      #lists="cdkDropList"
+      [cdkDropListConnectedTo]="[gamesList]"
       [multiple]="false"
+      [cdkDropListData]="listCollection"
+      (cdkDropListDropped)="moveBetweenList($event)"
       (selectionChange)="onListSelection($event)"
     >
       @if(isAdding){
@@ -62,6 +67,7 @@
       <mat-list-option
         [value]="list.id"
         [disabled]="isEditing || isAdding || loadingGames"
+        (mouseenter)="getTargetID(list.id)"
         >{{ list.title }}
         <button
           class="editing-button"
@@ -100,7 +106,14 @@
     </mat-selection-list>
   </div>
 
-  <div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
+  <div
+    cdkDropList
+    #gamesList="cdkDropList"
+    [cdkDropListData]="selectedOption?.games"
+    [cdkDropListConnectedTo]="[lists]"
+    class="list"
+    (cdkDropListDropped)="drop($event)"
+  >
     <div class="action-buttons">
       <button
         mat-icon-button
@@ -137,7 +150,6 @@
       [cdkDragStartDelay]="delay"
       *ngFor="let game of gamesFormArray.controls; let i = index"
       class="box"
-      cdkDrag
     >
       {{ game.get("name")?.value }}
       <img

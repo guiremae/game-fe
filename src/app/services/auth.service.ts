@@ -32,7 +32,7 @@ export class AuthService {
   ): Observable<any> {
     const userData = { email, username, name, password };
     const headers = new HttpHeaders().set('X-Exclude-Loader', 'true');
-    return this.http.post<any>(`${this.apiURL}/user`, userData, { headers });
+    return this.http.post<any>(`${this.apiURL}/users`, userData, { headers });
   }
 
   logout() {
