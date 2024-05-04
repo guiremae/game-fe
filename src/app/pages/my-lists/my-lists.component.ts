@@ -1,5 +1,5 @@
-import { Component, ElementRef } from '@angular/core';
-import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   UntypedFormArray,
@@ -7,12 +7,12 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { List } from 'src/app/models/interfaces/list.interface';
 import { MatSelectionListChange } from '@angular/material/list';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { List } from 'src/app/models/interfaces/list.interface';
 import { IgdbService } from 'src/app/services/igdb.service';
 import { ListService } from 'src/app/services/list.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
@@ -46,6 +46,8 @@ export class MyListsComponent {
   public listCollection: List[] = [];
   ratingColors: string[] = [];
   public delay: number = 0;
+  public targetID!: string;
+  private lastListSelection!: MatSelectionListChange;
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
@@ -55,7 +57,7 @@ export class MyListsComponent {
       });
     });
     const userAgent = navigator.userAgent.toLowerCase();
-    this.delay = userAgent.includes('mobile') ? 100 : 0;
+    this.delay = userAgent.includes('mobile') ? 500 : 0;
   }
 
   get gamesFormArray(): UntypedFormArray {
@@ -132,6 +134,7 @@ export class MyListsComponent {
   }
 
   onListSelection(ev: MatSelectionListChange) {
+    this.lastListSelection = ev;
     this.gamesFormArray?.markAsPristine();
     while (this.gamesFormArray.length !== 0) {
       this.gamesFormArray.removeAt(0);
@@ -306,5 +309,38 @@ export class MyListsComponent {
   // Generar el enlace de la lista basado en el listID seleccionado
   generateListLink(): string {
     return `http://gamelog.hopto.org/list/${this.selectedOption.id}`;
+  }
+
+  getTargetID(listID: string) {
+    this.targetID = listID;
+  }
+
+  moveBetweenList(event: CdkDragDrop<List[], any, any>): void {
+    const originListID = this.selectedOption.id;
+    const gameID = event.previousContainer.data[event.previousIndex];
+    const destinationListID = this.targetID;
+    if (originListID != destinationListID) {
+      this.listService
+        .moveGameBetweenLists(originListID, gameID, destinationListID)
+        .subscribe(
+          (data) => {
+            this._snackBar.open('Juego movido con éxito', undefined, {
+              duration: 1500,
+              panelClass: ['app-notification-success', 'center'],
+            });
+            this.onListSelection(this.lastListSelection);
+          },
+          (error) => {
+            this._snackBar.open(
+              'No se ha podido mover el juego a la lista',
+              undefined,
+              {
+                duration: 1500,
+                panelClass: ['app-notification-error', 'center'],
+              }
+            );
+          }
+        );
+    }
   }
 }

@@ -99,4 +99,23 @@ export class ListService {
       headers,
     });
   }
+
+  moveGameBetweenLists(
+    originListID: string,
+    gameID: number,
+    destinationListID: string
+  ) {
+    const game_id = gameID;
+    const dest_list_id = destinationListID;
+    const listData = { game_id, dest_list_id };
+    const authToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders()
+      .set('X-Exclude-Loader', 'true')
+      .set('Authorization', `Bearer ${authToken}`);
+    return this.http.patch<any>(
+      `${this.apiURL}/${originListID}/game`,
+      listData,
+      { headers }
+    );
+  }
 }
