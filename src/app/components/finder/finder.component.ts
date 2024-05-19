@@ -45,6 +45,12 @@ export class FinderComponent implements OnInit {
 
   onSubmit() {
     const formData = this.searchForm.value;
+    const searchMenuButton = document.querySelector(
+      '.search-menu-button'
+    ) as HTMLElement;
+    searchMenuButton.click();
+    this.searchForm.reset();
+    this.searchTerms.next('');
     this.router.navigate([`/search/${formData.gameName}`]);
   }
 
@@ -53,6 +59,12 @@ export class FinderComponent implements OnInit {
   }
 
   selectSuggestion(suggestion: any): void {
+    const searchMenuButton = document.querySelector(
+      '.search-menu-button'
+    ) as HTMLElement;
+    searchMenuButton.click();
+    this.searchForm.reset();
+    this.searchTerms.next('');
     this.router.navigate([`/game/${suggestion.id}`]);
   }
 }
