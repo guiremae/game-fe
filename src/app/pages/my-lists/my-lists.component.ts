@@ -47,7 +47,7 @@ export class MyListsComponent {
   ratingColors: string[] = [];
   public delay: number = 0;
   public targetID!: string;
-  private lastListSelection!: MatSelectionListChange;
+  public lastListSelection!: MatSelectionListChange;
 
   ngOnInit() {
     this.route.data.subscribe((data) => {

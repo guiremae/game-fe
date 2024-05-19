@@ -30,7 +30,10 @@
         >
       </button>
       <mat-menu #searchMenu="matMenu" xPosition="before">
-        <app-finder (click)="$event.stopPropagation()"></app-finder>
+        <app-finder
+          mode="search"
+          (click)="$event.stopPropagation()"
+        ></app-finder>
       </mat-menu>
 
       <button
