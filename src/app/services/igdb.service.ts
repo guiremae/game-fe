@@ -90,6 +90,22 @@ export class IgdbService {
     );
   }
 
+  public findSuggestedGames(search: string) {
+    this.searching = search;
+    this.platform = 0;
+    return this.httpClient.post<Game[]>(
+      this.cors_api_host + this.baseURL,
+      `fields platforms.name, cover.url, genres.name, *; limit 50; search "${search}";`,
+      {
+        headers: {
+          'Client-ID': this.clientID,
+          Authorization: 'Bearer ' + this.authToken,
+          'X-Exclude-Loader': 'true',
+        },
+      }
+    );
+  }
+
   public changePageNumber(date: number, page: number): Observable<Game[]> {
     if (this.platform === 0 && this.searching === '')
       return this.findLastGames(date, page);

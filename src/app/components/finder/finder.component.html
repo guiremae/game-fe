@@ -24,6 +24,30 @@
       id="search-navbar"
       class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       placeholder="Search..."
+      (input)="search($any($event.target).value)"
     />
   </div>
 </form>
+<ul
+  *ngIf="suggestions$ | async as suggestions"
+  class="z-10 w-full border border-gray-300 rounded-lg shadow-lg mt-1"
+>
+  <li
+    *ngFor="let suggestion of suggestions"
+    class="p-2 bg-white hover:bg-gray-100 cursor-pointer"
+    (click)="selectSuggestion(suggestion)"
+  >
+    <div class="flex items-center justify-between">
+      <span>{{ suggestion.name }}</span>
+      <mat-chip-set *ngIf="suggestion.platforms?.length">
+        <mat-chip
+          *ngFor="let platform of suggestion.platforms.slice(0, 3)"
+          class="platform-chip"
+          [title]="platform.name"
+        >
+          {{ platform.name }}
+        </mat-chip>
+      </mat-chip-set>
+    </div>
+  </li>
+</ul>

@@ -43,6 +43,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from './pages/list/list.component';
 import { MyListsComponent } from './pages/my-lists/my-lists.component';
 import { GlobalErrorHandler } from './services/error-handler.service';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { GlobalErrorHandler } from './services/error-handler.service';
     CdkDrag,
     CdkDragPreview,
     MatDialogModule,
+    MatChipsModule,
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
