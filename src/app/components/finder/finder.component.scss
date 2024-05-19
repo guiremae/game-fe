@@ -1,0 +1,44 @@
+ul {
+  max-height: 30vh;
+  overflow-y: scroll;
+}
+
+li {
+  background-color: white;
+  overflow-x: hidden;
+}
+
+mat-chip-set {
+  max-width: 25%;
+}
+
+.platform-chip {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.platform-chip:hover {
+  overflow: visible;
+}
+
+::ng-deep {
+  .mdc-evolution-chip__text-label.mat-mdc-chip-action-label {
+    font-size: 0.7rem !important;
+  }
+
+  .mat-mdc-standard-chip .mdc-evolution-chip__cell--primary,
+  .mat-mdc-standard-chip .mdc-evolution-chip__action--primary,
+  .mat-mdc-standard-chip .mat-mdc-chip-action-label {
+    overflow: hidden !important;
+  }
+
+  .mat-mdc-standard-chip .mdc-evolution-chip__cell--primary:hover,
+  .mat-mdc-standard-chip .mdc-evolution-chip__action--primary:hover,
+  .mat-mdc-standard-chip .mat-mdc-chip-action-label:hover {
+    overflow: visible !important;
+  }
+}

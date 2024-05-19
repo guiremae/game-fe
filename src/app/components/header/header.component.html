@@ -23,14 +23,17 @@
       <button
         mat-icon-button
         [matMenuTriggerFor]="searchMenu"
-        class="icon-button"
+        class="icon-button search-menu-button"
       >
         <mat-icon [ngStyle]="{ color: 'white', 'font-size': '2rem' }"
           >search</mat-icon
         >
       </button>
       <mat-menu #searchMenu="matMenu" xPosition="before">
-        <app-finder (click)="$event.stopPropagation()"></app-finder>
+        <app-finder
+          mode="search"
+          (click)="$event.stopPropagation()"
+        ></app-finder>
       </mat-menu>
 
       <button

@@ -126,6 +126,23 @@
       <h1>{{ selectedOption?.title }}</h1>
       <button
         mat-icon-button
+        [matMenuTriggerFor]="searchMenu"
+        [disabled]="!selectedOption"
+        color="primary"
+        class="add-game-search-menu-button"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-menu #searchMenu="matMenu" xPosition="before">
+        <app-finder
+          mode="add"
+          (gameAddedSuccessfully)="onListSelection(lastListSelection)"
+          [selectedList]="selectedOption?.id"
+          (click)="$event.stopPropagation()"
+        ></app-finder>
+      </mat-menu>
+      <button
+        mat-icon-button
         [disabled]="gamesFormArray.pristine"
         color="primary"
         (click)="undoChanges()"
