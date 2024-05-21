@@ -174,22 +174,28 @@
         [src]="game.get('cover')?.value"
         [alt]="game.get('name')?.value"
       />
-      @if(game.get('rating')?.value){
-      <button mat-button class="rating">
+
+      <button mat-button class="rating" (click)="onEditRating(game.value)">
         <mat-progress-spinner
           mode="determinate"
           diameter="30"
-          [value]="game.get('rating')?.value * 10"
+          [value]="
+            game.get('rating')?.value ? game.get('rating')?.value * 10 : 100
+          "
         >
         </mat-progress-spinner>
         <span
           class="rating-number"
-          [ngStyle]="{ color: getColor(game.get('rating')?.value) }"
+          [ngStyle]="{
+            color: game.get('rating')?.value
+              ? getColor(game.get('rating')?.value)
+              : '#C69749'
+          }"
         >
-          {{ game.get("rating")?.value }}
+          {{ game.get("rating")?.value ? game.get("rating")?.value : "+" }}
         </span>
       </button>
-      }
+
       <div class="buttons-container">
         <button type="button" routerLink="/game/{{ game.get('id')?.value }}">
           <mat-icon>visibility</mat-icon>
