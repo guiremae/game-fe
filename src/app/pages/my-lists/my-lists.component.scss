@@ -5,6 +5,15 @@
     margin-bottom: -20px !important;
     margin-top: -9px !important;
   }
+
+  #cdk-drop-list-1
+    > div
+    > button
+    > span.mat-mdc-button-persistent-ripple.mdc-button__ripple,
+  #cdk-drop-list-1 > div > button span.mat-ripple.mat-mdc-button-ripple {
+    width: 30px;
+    margin-left: 26px;
+  }
 }
 
 :host {
@@ -25,7 +34,8 @@
   }
 }
 
-h1 {
+h1,
+p {
   color: white;
 }
 

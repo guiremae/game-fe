@@ -11,6 +11,7 @@ import { MatSelectionListChange } from '@angular/material/list';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { List } from 'src/app/models/interfaces/list.interface';
+import { AuthService } from 'src/app/services/auth.service';
 import { IgdbService } from 'src/app/services/igdb.service';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -27,7 +28,8 @@ export class MyListsComponent {
     private igdbService: IgdbService,
     private listService: ListService,
     private _snackBar: MatSnackBar,
-    public modalService: ModalService
+    public modalService: ModalService,
+    private authService: AuthService
   ) {}
 
   gamesForm!: UntypedFormGroup;
@@ -341,6 +343,21 @@ export class MyListsComponent {
             );
           }
         );
+    }
+  }
+
+  onEditRating(game: any) {
+    const isLogged = this.authService.getLoggedInValue();
+    if (isLogged) {
+      this.modalService
+        .openEditRatingModal(game)
+        .subscribe((rating: number) => {
+          if (rating) {
+            this.onListSelection(this.lastListSelection);
+          }
+        });
+    } else {
+      this.modalService.openLoginModal();
     }
   }
 }
