@@ -178,6 +178,7 @@
       <button mat-button class="rating" (click)="onEditRating(game.value)">
         <mat-progress-spinner
           mode="determinate"
+          [color]="game.get('rating')?.value ? 'primary' : 'warn'"
           diameter="30"
           [value]="
             game.get('rating')?.value ? game.get('rating')?.value * 10 : 100
@@ -189,7 +190,7 @@
           [ngStyle]="{
             color: game.get('rating')?.value
               ? getColor(game.get('rating')?.value)
-              : '#C69749'
+              : 'red'
           }"
         >
           {{ game.get("rating")?.value ? game.get("rating")?.value : "+" }}
