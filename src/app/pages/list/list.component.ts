@@ -20,10 +20,6 @@ export class ListComponent {
       this.dataResolver = data['resolver'];
       this.games = this.dataResolver.games;
       this.title = this.dataResolver.title;
-      this.scores = this.dataResolver.scores;
-      this.games.forEach((game) => {
-        game.rating = this.scores[game.id];
-      });
     });
   }
 

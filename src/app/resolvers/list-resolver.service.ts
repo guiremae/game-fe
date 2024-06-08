@@ -24,19 +24,21 @@ export class ListResolverService implements Resolve<any> {
         // Utilizar los datos de listInfo para realizar la otra llamada
         const games = data.games;
 
-        const scores = data.scores;
-
         // Si hay juegos en la lista
         if (games.length > 0) {
           // Realizar la otra llamada para obtener información de los juegos
           return this.igdbService.getListGames(games).pipe(
             switchMap((listGames: any[]) => {
               // Ordenar la lista de listGames según el índice de listInfo
-              const sortedListGames = games.map((gameId: string) =>
-                listGames.find((game) => game.id === gameId)
-              );
+              const sortedListGames = games.map((gameId: string) => {
+                const game = listGames.find((game) => game.id === gameId);
+                if (game) {
+                  return { ...game, rating: data.scores[game.id] };
+                }
+                return null;
+              });
               // Devolver un objeto con el título y la lista ordenada de juegos
-              return of({ title, games: sortedListGames, scores });
+              return of({ title, games: sortedListGames });
             })
           );
         } else {
