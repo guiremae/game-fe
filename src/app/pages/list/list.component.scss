@@ -6,6 +6,7 @@ h1 {
   background-color: rgb(23 8 45);
   display: flex;
   justify-content: flex-end;
+  border-bottom: solid 1px #ccc;
 }
 
 .list {
@@ -17,7 +18,7 @@ h1 {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  background: white;
+  background: linear-gradient(to right, #17082d, #2c1b4a);
   border-radius: 4px;
   margin: auto;
   margin-top: 5vh;
@@ -25,7 +26,6 @@ h1 {
 
   h1 {
     margin: auto;
-    background-color: #17082d;
   }
 
   p {
@@ -36,13 +36,14 @@ h1 {
 .box {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
+  color: white;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  background: white;
+  background: linear-gradient(to right, #17082d, #2c1b4a);
+
   font-size: 0.8rem;
 }
 

@@ -12,6 +12,7 @@ export class ListComponent {
 
   private dataResolver: any;
   public games: any[] = [];
+  public scores: any[] = [];
   public title: string = '';
 
   ngOnInit(): void {
@@ -19,23 +20,23 @@ export class ListComponent {
       this.dataResolver = data['resolver'];
       this.games = this.dataResolver.games;
       this.title = this.dataResolver.title;
+      this.scores = this.dataResolver.scores;
+      this.games.forEach((game) => {
+        game.rating = this.scores[game.id];
+      });
     });
   }
 
-  getRoundRating(rating: number): number {
-    return Math.round((rating / 10) * 10) / 10;
-  }
-
   getColor(value: number): string {
-    if (value >= 0 && value <= 40) {
+    if (value >= 0 && value <= 4) {
       return 'red';
-    } else if (value >= 50 && value < 70) {
+    } else if (value >= 5 && value < 7) {
       return 'yellow';
-    } else if (value >= 70 && value < 90) {
+    } else if (value >= 7 && value < 9) {
       return 'green';
-    } else if (value >= 90 && value < 100) {
+    } else if (value >= 9 && value < 10) {
       return 'purple';
-    } else if (value == 100) {
+    } else if (value == 10) {
       return '#C69749';
     } else {
       return 'transparent';

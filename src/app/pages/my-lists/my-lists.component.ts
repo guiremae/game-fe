@@ -227,31 +227,6 @@ export class MyListsComponent {
     return 'transparent';
   }
 
-  getRating(value: number): string {
-    if (value >= 0 && value <= 2) {
-      return 'Lamentable';
-    }
-    if (value >= 2 && value < 5) {
-      return 'Malo';
-    }
-    if (value >= 5 && value < 6) {
-      return 'Aceptable';
-    }
-    if (value >= 6 && value <= 7) {
-      return 'Bueno';
-    }
-    if (value >= 7 && value < 9) {
-      return 'Notable';
-    }
-    if (value >= 9 && value < 10) {
-      return 'Excelente';
-    }
-    if (value == 10) {
-      return 'Perfecto';
-    }
-    return 'Sin califiación';
-  }
-
   onEdit(list: List) {
     this.isEditing = true;
     this.formGroup.patchValue(list);

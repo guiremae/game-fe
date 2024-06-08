@@ -6,15 +6,15 @@
   <div *ngFor="let game of games" class="box">
     {{ game.name }}
     @if(game.rating){
-    <button mat-button class="rating">
+    <button mat-button class="rating" disabled>
       <mat-progress-spinner
         mode="determinate"
         diameter="30"
-        [value]="game.rating"
+        [value]="game.rating * 10"
       >
       </mat-progress-spinner>
       <span class="rating-number" [ngStyle]="{ color: getColor(game.rating) }">
-        {{ getRoundRating(game.rating) }}
+        {{ game.rating }}
       </span>
     </button>
     <div class="buttons-container">

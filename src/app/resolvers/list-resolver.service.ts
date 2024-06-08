@@ -24,6 +24,8 @@ export class ListResolverService implements Resolve<any> {
         // Utilizar los datos de listInfo para realizar la otra llamada
         const games = data.games;
 
+        const scores = data.scores;
+
         // Si hay juegos en la lista
         if (games.length > 0) {
           // Realizar la otra llamada para obtener información de los juegos
@@ -34,7 +36,7 @@ export class ListResolverService implements Resolve<any> {
                 listGames.find((game) => game.id === gameId)
               );
               // Devolver un objeto con el título y la lista ordenada de juegos
-              return of({ title, games: sortedListGames });
+              return of({ title, games: sortedListGames, scores });
             })
           );
         } else {
