@@ -10,7 +10,7 @@ export class IgdbService {
   private baseURL = 'https://api.igdb.com/v4/games';
   private clientID: string = 'pev408euurhwg577z5h615cjapf84y';
   private clientSecret: string = 'vmfiabbeu2bgf8xr4pgoilzm7xtlsp';
-  private cors_api_host: string = 'http://localhost:8080/';
+  private cors_api_host: string = 'http://localhost:9090/';
   private authToken: string = '';
   private platform: number = 0;
   private searching: string = '';
