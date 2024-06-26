@@ -54,14 +54,11 @@ export class IgdbService {
     this.platform = platformId;
     this.searching = '';
     return this.httpClient.post<Game[]>(
-      this.cors_api_host + this.baseURL,
-      'fields platforms.name, platforms.abbreviation, cover.url, genres.name, *; sort first_release_date desc; where first_release_date != null & first_release_date < ' +
-        date +
-        ' & platforms = (' +
-        platformId +
-        ') & genres != null & category = (0,4,6,8,9,10) & version_parent = null & cover != null; limit 6; offset ' +
-        (page - 1) * 6 +
-        ';',
+      `
+      ${this.cors_api_host}${this.baseURL}`,
+      `'fields platforms.name, platforms.abbreviation, cover.url, genres.name, *; sort first_release_date desc; where first_release_date != null & first_release_date < ${date} & platforms = (${platformId}) & genres != null & category = (0,4,6,8,9,10) & version_parent = null & cover != null; limit 6; offset ${
+        (page - 1) * 6
+      };'`,
       {
         headers: {
           'Client-ID': this.clientID,
