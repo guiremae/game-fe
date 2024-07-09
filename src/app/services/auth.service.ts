@@ -1,9 +1,10 @@
 // auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AuthService {
     return this.loggedIn.asObservable().pipe(shareReplay(1));
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(id: string, password: string): Observable<any> {
     const loginData = { id, password };
@@ -35,12 +36,35 @@ export class AuthService {
     return this.http.post<any>(`${this.apiURL}/users`, userData, { headers });
   }
 
-  logout() {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userID');
-
-    this.setLoggedIn(false);
-    window.location.reload();
+  logout(isRefreshToken: boolean): void {
+    const headers = new HttpHeaders().set('X-Exclude-Loader', 'true');
+    this.http
+      .post<any>(`${this.apiURL}/logout`, {}, { headers })
+      .pipe(
+        tap(() => {
+          // Clear the local storage or any other storage mechanism
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('userID');
+          // Update the authentication state
+          this.setLoggedIn(false);
+          // Redirect to the login page
+          if (!isRefreshToken) {
+            window.location.reload();
+          }
+          this.router
+            .navigateByUrl('/latest', { skipLocationChange: true })
+            .then(() => {
+              this.router.navigate(['/latest'], {
+                state: { openLoginModal: true },
+              });
+            });
+        }),
+        catchError((error) => {
+          console.error('Logout request failed', error);
+          return of(null); // Continue regardless of error
+        })
+      )
+      .subscribe();
   }
 
   setLoggedIn(value: boolean) {
@@ -60,5 +84,11 @@ export class AuthService {
       `${this.apiURL}/users/${userID}/activate?token=${token}`,
       undefined
     );
+  }
+
+  refreshToken() {
+    const body = { refreshToken: localStorage.getItem('authToken') };
+    const headers = new HttpHeaders().set('X-Exclude-Loader', 'true');
+    return this.http.post<any>(`${this.apiURL}/refresh`, body, { headers });
   }
 }

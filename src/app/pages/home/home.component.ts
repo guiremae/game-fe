@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Game } from 'src/app/models/interfaces/game.interface';
 import { GamesService } from '../../services/games.service';
+import { ModalService } from 'src/app/services/modal.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,9 @@ export class HomeComponent implements OnInit {
   constructor(
     public gamesService: GamesService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: ModalService,
+    private _snackBar: MatSnackBar
   ) {}
 
   private dataResolver: any;
@@ -39,6 +43,19 @@ export class HomeComponent implements OnInit {
       this.pageTitle = this.dataResolver.title;
       this.pageNumber = parseInt(this.dataResolver.page);
     });
+    const navigation = window.history.state;
+
+    if (navigation && navigation.openLoginModal === true) {
+      this._snackBar.open(
+        'Tu sesión ha caducado. Por favor, inicia de nuevo tu sesión',
+        undefined,
+        {
+          duration: 1500,
+          panelClass: ['app-notification-error', 'center'],
+        }
+      );
+      this.modalService.openLoginModal();
+    }
   }
 
   ngOnDestroy(): void {

@@ -37,13 +37,13 @@ import { PictureModalComponent } from './components/picture-modal/picture-modal.
 import { ShareComponent } from './components/share/share.component';
 import { SignupComponent } from './components/sign-up/sign-up.component';
 import { EditRatingComponent } from './components/edit-rating/edit-rating.component';
-import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { GameComponent } from './pages/game/game.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from './pages/list/list.component';
 import { MyListsComponent } from './pages/my-lists/my-lists.component';
 import { GlobalErrorHandler } from './services/error-handler.service';
 import { MatChipsModule } from '@angular/material/chips';
+import { GlobalInterceptor } from './interceptors/global.interceptor';
 
 @NgModule({
   declarations: [
@@ -96,9 +96,14 @@ import { MatChipsModule } from '@angular/material/chips';
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    {
+    /*     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,
+      multi: true,
+    }, */
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GlobalInterceptor,
       multi: true,
     },
     LayoutService,
