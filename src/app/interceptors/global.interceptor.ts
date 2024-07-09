@@ -37,7 +37,11 @@ export class GlobalInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 418 && req.url.startsWith(this.apiURL)) {
+        if (
+          error.status === 418 &&
+          req.url.startsWith(this.apiURL) &&
+          !req.url.includes('refresh')
+        ) {
           // If we get a 418, call refreshToken and retry the request
           return this.authService.refreshToken().pipe(
             switchMap(() => {
