@@ -32,12 +32,14 @@ export class LoginComponent {
       this.authService.login(formData.username, formData.password).subscribe(
         (response) => {
           // Manejar la respuesta del backend, que debería incluir el token de sesión
-          const token = response.authToken;
+          const authToken = response.authToken;
+          const refreshToken = response.refreshToken;
           const id = response.id;
           const username = response.userName;
 
           // Guardar el token de sesión en localStorage o en una cookie
-          localStorage.setItem('authToken', token);
+          localStorage.setItem('authToken', authToken);
+          localStorage.setItem('refreshToken', refreshToken);
           localStorage.setItem('userID', id);
           localStorage.setItem('userName', username);
 

@@ -44,6 +44,7 @@ export class AuthService {
         tap(() => {
           // Clear the local storage or any other storage mechanism
           localStorage.removeItem('authToken');
+          localStorage.removeItem('refreshToken');
           localStorage.removeItem('userID');
           // Update the authentication state
           this.setLoggedIn(false);
@@ -87,7 +88,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    const body = { refreshToken: localStorage.getItem('authToken') };
+    const body = { refreshToken: localStorage.getItem('refreshToken') };
     const headers = new HttpHeaders().set('X-Exclude-Loader', 'true');
     return this.http.post<any>(`${this.apiURL}/refresh`, body, { headers });
   }
