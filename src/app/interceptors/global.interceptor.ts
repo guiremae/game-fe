@@ -37,27 +37,17 @@ export class GlobalInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (
-          error.status === 418 &&
-          req.url.startsWith(this.apiURL) &&
-          !req.url.includes('refresh')
-        ) {
-          // If we get a 418, call refreshToken and retry the request
-          return this.authService.refreshToken().pipe(
-            switchMap(() => {
-              // Clone the original request and retry it
-              const clonedRequest = req.clone();
-              return next.handle(clonedRequest);
-            }),
-            catchError((refreshError) => {
-              // If refreshToken fails, call logout
-              this.authService.logout(true);
-              return throwError(refreshError);
-            })
-          );
+        if (req.url.includes('refresh')) {
+          this.authService.logout(true);
+          return next.handle(req);
+        } else {
+          switch (error.status) {
+            case 418:
+              return this.handle418Error(req, next);
+            default:
+              return throwError(() => error);
+          }
         }
-        // If it's not a 418, throw the error
-        return throwError(error);
       }),
       finalize(() => {
         if (!excludeLoader) {
@@ -66,6 +56,15 @@ export class GlobalInterceptor implements HttpInterceptor {
             this.loaderService.hide();
           }
         }
+      })
+    );
+  }
+
+  private handle418Error(req: HttpRequest<any>, next: HttpHandler) {
+    return this.authService.refreshToken().pipe(
+      switchMap(() => {
+        const clonedRequest = req.clone();
+        return next.handle(clonedRequest);
       })
     );
   }
