@@ -123,7 +123,10 @@
       >
         <mat-icon>share</mat-icon>
       </button>
-      <h1>{{ selectedOption?.title }}</h1>
+      <h1>
+        {{ selectedOption?.title }} @if(selectedOption?.games?.length > 0) {
+        <span class="game-count">({{ selectedOption?.games?.length }})</span> }
+      </h1>
       <button
         mat-icon-button
         [matMenuTriggerFor]="searchMenu"

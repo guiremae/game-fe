@@ -1,6 +1,8 @@
 <div class="list">
   <div class="title">
-    <h1>{{ title }}</h1>
+    <h1>
+      {{ title }} <span class="game-count">({{ games.length }})</span>
+    </h1>
   </div>
 
   <div *ngFor="let game of games" class="box">
