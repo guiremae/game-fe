@@ -91,6 +91,14 @@ export class MyListsComponent {
     });
   }
 
+  public sortGamesByRating() {
+    // Ordenar los controles del formulario según la puntuación
+    this.gamesFormArray.controls.sort((a, b) => {
+      return b.get('rating')!.value - a.get('rating')!.value;
+    });
+    this.gamesFormArray.markAsDirty();
+  }
+
   removeGame(index: number) {
     const removedGame = this.gamesFormArray.at(index).value;
     this.deletedgames.push(removedGame);

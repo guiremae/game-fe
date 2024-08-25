@@ -123,6 +123,15 @@
       >
         <mat-icon>share</mat-icon>
       </button>
+
+      <button
+        mat-icon-button
+        (click)="sortGamesByRating()"
+        [disabled]="!selectedOption"
+        color="primary"
+      >
+        <mat-icon>sort</mat-icon>
+      </button>
       <h1>
         {{ selectedOption?.title }} @if(selectedOption?.games?.length > 0) {
         <span class="game-count">({{ selectedOption?.games?.length }})</span> }
