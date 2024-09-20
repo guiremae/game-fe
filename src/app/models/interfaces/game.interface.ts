@@ -15,4 +15,6 @@ export interface Game {
   videos: any[];
   artworks: any[];
   screenshots: any[];
+  timeToBeat: any;
+  aggregated_rating: number;
 }

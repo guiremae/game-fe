@@ -210,10 +210,14 @@
       </button>
 
       <div class="buttons-container">
-        <button type="button" routerLink="/game/{{ game.get('id')?.value }}">
+        <button
+          class="btn"
+          type="button"
+          routerLink="/game/{{ game.get('id')?.value }}"
+        >
           <mat-icon>visibility</mat-icon>
         </button>
-        <button type="button" (click)="removeGame(i)">
+        <button class="btn" type="button" (click)="removeGame(i)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>

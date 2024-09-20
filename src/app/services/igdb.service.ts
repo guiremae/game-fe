@@ -7,7 +7,7 @@ import { Game } from '../models/interfaces/game.interface';
   providedIn: 'root',
 })
 export class IgdbService {
-  private baseURL = 'https://api.igdb.com/v4/games';
+  private baseURL = 'https://api.igdb.com/v4/';
   private clientID: string = 'pev408euurhwg577z5h615cjapf84y';
   private clientSecret: string = 'vmfiabbeu2bgf8xr4pgoilzm7xtlsp';
   private cors_api_host: string = 'http://gamelog.hopto.org:9090/';
@@ -33,7 +33,7 @@ export class IgdbService {
     this.searching = '';
     this.platform = 0;
     return this.httpClient.post<Game[]>(
-      `${this.cors_api_host}${this.baseURL}`,
+      `${this.cors_api_host}${this.baseURL}/games`,
       `fields platforms.name, platforms.abbreviation, cover.url, genres.name, *; sort first_release_date desc; where first_release_date != null & first_release_date < ${date} & category = (0,4,6,8,9,10) & version_parent = null & genres != null & cover != null & name != null; limit 6; offset ${
         (page - 1) * 6
       };`,
@@ -54,8 +54,7 @@ export class IgdbService {
     this.platform = platformId;
     this.searching = '';
     return this.httpClient.post<Game[]>(
-      `
-      ${this.cors_api_host}${this.baseURL}`,
+      `${this.cors_api_host}${this.baseURL}/games`,
       `'fields platforms.name, platforms.abbreviation, cover.url, genres.name, *; sort first_release_date desc; where first_release_date != null & first_release_date < ${date} & platforms = (${platformId}) & genres != null & category = (0,4,6,8,9,10) & version_parent = null & cover != null; limit 6; offset ${
         (page - 1) * 6
       };'`,
@@ -72,7 +71,7 @@ export class IgdbService {
     this.searching = search;
     this.platform = 0;
     return this.httpClient.post<Game[]>(
-      this.cors_api_host + this.baseURL,
+      `${this.cors_api_host}${this.baseURL}/games`,
       'fields platforms.name, cover.url, genres.name, *; limit 6; offset ' +
         (page - 1) * 6 +
         '; search "' +
@@ -91,7 +90,7 @@ export class IgdbService {
     this.searching = search;
     this.platform = 0;
     return this.httpClient.post<Game[]>(
-      this.cors_api_host + this.baseURL,
+      `${this.cors_api_host}${this.baseURL}/games`,
       `fields platforms.name, cover.url, genres.name, *; limit 50; search "${search}";`,
       {
         headers: {
@@ -116,7 +115,7 @@ export class IgdbService {
   }
 
   public getPlatformName(id: number): Observable<any> {
-    const apiUrl = this.cors_api_host + 'https://api.igdb.com/v4/platforms';
+    const apiUrl = this.cors_api_host + this.baseURL + '/platforms';
 
     return this.httpClient.post<any>(
       apiUrl,
@@ -131,7 +130,7 @@ export class IgdbService {
   }
 
   public getPlatformID(name: string): Observable<any> {
-    const apiUrl = this.cors_api_host + 'https://api.igdb.com/v4/platforms';
+    const apiUrl = this.cors_api_host + this.baseURL + '/platforms';
 
     return this.httpClient.post<any>(
       apiUrl,
@@ -147,8 +146,8 @@ export class IgdbService {
 
   public getGame(id: number): Observable<Game[]> {
     return this.httpClient.post<Game[]>(
-      `${this.cors_api_host}${this.baseURL}`,
-      `fields platforms.name, platforms.abbreviation, videos.video_id, cover.url, screenshots.url , artworks.url, genres.name, summary, name; where id = ${id};`,
+      `${this.cors_api_host}${this.baseURL}/games`,
+      `fields platforms.name, platforms.abbreviation, videos.video_id, cover.url, screenshots.url , artworks.url, genres.name, summary, name, aggregated_rating; where id = ${id};`,
       {
         headers: {
           'Client-ID': this.clientID,
@@ -160,13 +159,32 @@ export class IgdbService {
 
   public getListGames(id: number[]): Observable<Game[]> {
     return this.httpClient.post<Game[]>(
-      `${this.cors_api_host}${this.baseURL}`,
+      `${this.cors_api_host}${this.baseURL}/games`,
       `fields platforms.name, platforms.abbreviation, videos.video_id, cover.url, screenshots.url , artworks.url, genres.name, summary, name; where id = (${id});limit 500;`,
       {
         headers: {
           'Client-ID': this.clientID,
           Authorization: `Bearer ${this.authToken}`,
           'X-Exclude-Loader': 'true',
+        },
+      }
+    );
+  }
+
+  public getMostPopularGames(
+    popularity_type: number,
+    limit: number
+  ): Observable<any[]> {
+    this.searching = '';
+    this.platform = 0;
+    return this.httpClient.post<Game[]>(
+      `${this.cors_api_host}${this.baseURL}/popularity_primitives`,
+      `fields game_id; sort value desc; where popularity_type = ${popularity_type} ; limit ${limit};
+      };`,
+      {
+        headers: {
+          'Client-ID': this.clientID,
+          Authorization: 'Bearer ' + this.authToken,
         },
       }
     );

@@ -139,6 +139,18 @@ export class MyListsComponent {
     });
   }
   undoChanges() {
+    const deletedGames = this.originalData.length - this.gamesFormArray.length;
+    if (deletedGames) {
+      for (let i = 0; i < deletedGames; i++) {
+        this.addGame({
+          id: `${i}`,
+          name: `Game ${i + 1}`,
+          index: this.gamesFormArray.length + i,
+          cover: { url: 'some-cover-url' },
+          rating: Math.floor(Math.random() * 100),
+        });
+      }
+    }
     this.gamesFormArray.setValue(this.originalData);
     this.gamesFormArray.markAsPristine();
   }

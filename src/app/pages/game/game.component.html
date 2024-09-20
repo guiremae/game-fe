@@ -1,28 +1,19 @@
-<mat-grid-list cols="20" rowHeight="100px">
-  @if(cover){
-  <mat-grid-tile colspan="20" rowspan="3"
-    ><img
-      [src]="cover"
-      onerror="this.src='//img.freepik.com/vector-premium/banner-videojuegos-fondo-juego-cibernetico_705714-84.jpg'"
-      alt="Banner"
-      class="banner"
-    />
-  </mat-grid-tile>
-  } @else {
-  <mat-grid-tile colspan="20" rowspan="3"
-    ><img
-      src="//img.freepik.com/vector-premium/banner-videojuegos-fondo-juego-cibernetico_705714-84.jpg"
-      alt="Banner"
-      class="banner"
-    /> </mat-grid-tile
-  >}
-</mat-grid-list>
+<div class="banner-container">
+  <div
+    class="background-blur"
+    [ngStyle]="{
+      'background-image':
+        'url(' +
+        (cover
+          ? cover
+          : '//img.freepik.com/vector-premium/banner-videojuegos-fondo-juego-cibernetico_705714-84.jpg') +
+        ')'
+    }"
+  ></div>
 
-<app-game-details-card [game]="game" class="card" />
-
-@if (videos.length > 0 || pictures.length > 0) {
-<div class="media-container">
-  <h1>Media:</h1>
-  <app-carousel [videos]="videos" [pictures]="pictures"></app-carousel>
+  <app-game-details-card
+    [game]="game"
+    [videos]="videos"
+    [pictures]="pictures"
+  ></app-game-details-card>
 </div>
-}

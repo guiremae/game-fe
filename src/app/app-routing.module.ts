@@ -15,6 +15,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { ListComponent } from './pages/list/list.component';
 import { ActivateUserComponent } from './pages/activate-user/activate-user.component';
 import { ActivateUserResolver } from './resolvers/activate-user-resolver.service';
+import { LatestComponent } from './pages/latest/latest.component';
+import { HomeResolverService } from './resolvers/home-resolver.service';
 
 // Importar componentes y servicios necesarios...
 
@@ -25,15 +27,22 @@ const routes: Routes = [
     canActivate: [IgdbAuthGuard],
     children: [
       {
-        path: 'latest',
+        path: 'home',
         component: HomeComponent,
+        resolve: {
+          resolver: HomeResolverService,
+        },
+      },
+      {
+        path: 'latest',
+        component: LatestComponent,
         resolve: {
           resolver: LatestGamesResolverService,
         },
       },
       {
         path: 'latest/:page',
-        component: HomeComponent,
+        component: LatestComponent,
         resolve: {
           resolver: LatestGamesResolverService,
         },
@@ -47,14 +56,14 @@ const routes: Routes = [
       },
       {
         path: 'search/:name',
-        component: HomeComponent,
+        component: LatestComponent,
         resolve: {
           resolver: SearchGameResolverService,
         },
       },
       {
         path: 'search/:name/:page',
-        component: HomeComponent,
+        component: LatestComponent,
         resolve: {
           resolver: SearchGameResolverService,
         },
@@ -82,14 +91,14 @@ const routes: Routes = [
 
       {
         path: ':platform/:page',
-        component: HomeComponent,
+        component: LatestComponent,
         resolve: {
           resolver: PlatformGamesResolverService,
         },
       },
       {
         path: ':platform',
-        component: HomeComponent,
+        component: LatestComponent,
         resolve: {
           resolver: PlatformGamesResolverService,
         },
@@ -97,13 +106,13 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/latest',
+        redirectTo: '/home',
       },
     ],
   },
   {
     path: '**',
-    redirectTo: '/latest',
+    redirectTo: '/home',
   },
 ];
 

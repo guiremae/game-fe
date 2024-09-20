@@ -1,3 +1,21 @@
+input {
+  height: 80%;
+}
+
+.search-button {
+  color: white;
+  border: none;
+}
+
+.search-button:hover {
+  color: #c69649;
+}
+
+.search-button:disabled {
+  color: gray;
+  border: none;
+}
+
 ul {
   max-height: 30vh;
   overflow-y: scroll;
@@ -23,6 +41,43 @@ mat-chip-set {
 
 .platform-chip:hover {
   overflow: visible;
+}
+
+/* Estilo común */
+.suggestions-list {
+  max-height: 30vh;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
+  padding: 0;
+  list-style: none;
+  background-color: white;
+}
+
+/* Superposición para el modo nav */
+.nav-mode {
+  position: absolute;
+  top: 100%; /* Debajo del input */
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+/* Flujo normal para otros casos */
+.default-mode {
+  position: static;
+}
+
+/* Estilos de los ítems */
+.suggestion-item {
+  padding: 0.5rem;
+  background-color: white;
+  cursor: pointer;
+}
+.suggestion-item:hover {
+  background-color: #f1f1f1;
 }
 
 ::ng-deep {

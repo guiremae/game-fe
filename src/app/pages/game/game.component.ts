@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/models/interfaces/game.interface';
-import { IgdbService } from 'src/app/services/igdb.service';
 
 @Component({
   selector: 'app-game',

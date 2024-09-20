@@ -22,12 +22,22 @@ export class GameDetailsCardComponent implements OnInit {
     'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg';
   public ratingColor: string = '';
   public ratingText: string = '';
+  public starsArray: any[] = [];
+  public mediaStarsArray: any[] = [];
+  public aggregatedRating: number = 0;
+  @Input() public videos: any[] = [];
+  @Input() public pictures: any[] = [];
 
   ngOnInit(): void {
-    if (this.game.cover.url)
+    if (this.game.cover && this.game.cover.url)
       this.coverURL = 'https://' + this.game.cover.url.replace('thumb', '720p');
     this.ratingColor = this.getColor(this.game.rating);
     this.ratingText = this.getRating(this.game.rating);
+    this.aggregatedRating = this.game.aggregated_rating
+      ? this.game.aggregated_rating / 10
+      : 0;
+    this.updateStars();
+    this.updateMediaStars();
   }
 
   ngAfterViewInit(): void {
@@ -94,6 +104,7 @@ export class GameDetailsCardComponent implements OnInit {
         .subscribe((rating: number) => {
           if (rating) {
             this.game.rating = rating;
+            this.updateStars();
             this.ratingColor = this.getColor(this.game.rating);
             this.ratingText = this.getRating(this.game.rating);
             this.setCircleColor();
@@ -102,6 +113,56 @@ export class GameDetailsCardComponent implements OnInit {
     } else {
       this.modalService.openLoginModal();
     }
+  }
+
+  updateStars() {
+    const ratingAdapted = Math.floor(this.game.rating / 2);
+    const fullStars =
+      this.game.rating / 2 - ratingAdapted > 1
+        ? ratingAdapted + 1
+        : ratingAdapted;
+
+    const halfStar = this.game.rating / 2 - ratingAdapted > 0.5;
+    const totalStars = 5;
+
+    this.starsArray = Array(totalStars).fill({ icon: 'star_border' });
+
+    for (let i = 0; i < fullStars; i++) {
+      this.starsArray[i] = { icon: 'star' };
+    }
+
+    if (halfStar && fullStars < totalStars) {
+      this.starsArray[fullStars] = { icon: 'star_half' };
+    }
+  }
+
+  updateMediaStars() {
+    const ratingAdapted = Math.floor(this.aggregatedRating / 2);
+    const fullStars =
+      this.aggregatedRating / 2 - ratingAdapted > 1
+        ? ratingAdapted + 1
+        : ratingAdapted;
+
+    const halfStar = this.aggregatedRating / 2 - ratingAdapted > 0.5;
+    const totalStars = 5;
+
+    this.mediaStarsArray = Array(totalStars).fill({ icon: 'star_border' });
+
+    for (let i = 0; i < fullStars; i++) {
+      this.mediaStarsArray[i] = { icon: 'star' };
+    }
+
+    if (halfStar && fullStars < totalStars) {
+      this.mediaStarsArray[fullStars] = { icon: 'star_half' };
+    }
+  }
+
+  getStarBackground(rating: number, index: number): string {
+    const fullStar = 1;
+    const ratingValue = Math.max(0, Math.min(fullStar, rating - index));
+    return `linear-gradient(90deg, gold ${ratingValue * 100}%, lightgray ${
+      ratingValue * 100
+    }%)`;
   }
 
   private setCircleColor() {

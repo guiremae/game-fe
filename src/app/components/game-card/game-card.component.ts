@@ -18,6 +18,9 @@ export class GameCardComponent implements OnInit {
   ) {}
 
   @Input() public game!: Game;
+  @Input() public minInfo: boolean = false;
+  @Input() public width!: string;
+  @Input() public height!: string;
 
   public descriptionText: string = '';
   public date!: string;

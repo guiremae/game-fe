@@ -11,13 +11,17 @@ h1 {
   z-index: -1;
 }
 
-.card {
-  position: relative;
-  top: -10rem;
+.banner-container {
+  width: 100%;
 }
 
-.media-container {
-  position: relative;
-  top: -5rem;
-  text-overflow: visible;
+.background-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 555px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(0.3rem);
 }

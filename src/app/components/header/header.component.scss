@@ -1,13 +1,55 @@
 ::ng-deep {
-  #mat-menu-panel-0 {
-    background-color: transparent !important ;
-    width: 110% !important;
+  .mat-mdc-menu-panel {
+    background-color: #17082d !important ;
   }
 }
 
-nav {
+.navbar {
+  background-color: #17082d;
+  position: sticky;
+  top: 0;
   height: 50px;
-  padding-top: 10px;
+}
+
+.navbar-brand,
+.nav-link {
+  color: white;
+}
+
+.navbar-brand:hover,
+.nav-link:hover,
+.platforms:hover {
+  color: #c69649;
+}
+
+.platforms {
+  color: white;
+  cursor: pointer;
+}
+
+.logo {
+  height: 2rem;
+  margin-right: 0.75rem;
+}
+
+.web-name {
+  color: white;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.avatar {
+  border-radius: 50px;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+app-finder {
+  margin-top: 5px;
+  margin-right: 20px;
+  position: relative;
 }
 
 button[mat-icon-button] {
