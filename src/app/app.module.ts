@@ -44,11 +44,13 @@ import { MyListsComponent } from './pages/my-lists/my-lists.component';
 import { GlobalErrorHandler } from './services/error-handler.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { GlobalInterceptor } from './interceptors/global.interceptor';
+import { LatestComponent } from './pages/latest/latest.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    LatestComponent,
     HeaderComponent,
     GameCardComponent,
     NavComponent,

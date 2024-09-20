@@ -7,11 +7,11 @@ import { ModalService } from 'src/app/services/modal.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-latest',
+  templateUrl: './latest.component.html',
+  styleUrls: ['./latest.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class LatestComponent implements OnInit {
   constructor(
     public gamesService: GamesService,
     private route: ActivatedRoute,
@@ -23,10 +23,6 @@ export class HomeComponent implements OnInit {
   private dataResolver: any;
 
   public latestGames: Game[] = [];
-  public mostVisitedGame!: Game;
-  public mostWantedGames: Game[] = [];
-  public mostPlayingGame!: Game;
-  public mostPlayedGame!: Game;
   public platforms!: any[];
   public platformName: string = '';
   public isThereAnyError: boolean = true;
@@ -38,19 +34,14 @@ export class HomeComponent implements OnInit {
   public hasResponse: boolean = false;
   public pageTitle: string = 'Nuevos lanzamientos';
   private subs = new Subscription();
-  public mostVisitedGameCover!: string;
-  public mostWantedGamesCovers: string[] = [];
-  public mostPlayingGameCover!: string;
-  public mostPlayedGameCover!: string;
+  public games!: Game[];
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.dataResolver = data['resolver'];
-      this.latestGames = this.dataResolver.latestGames;
-      this.mostVisitedGame = this.dataResolver.mostVisitedGame;
-      this.mostWantedGames = this.dataResolver.mostWantedGames;
-      this.mostPlayingGame = this.dataResolver.mostPlayingGame;
-      this.mostPlayedGame = this.dataResolver.mostPlayedGame;
+      this.games = this.dataResolver.games;
+      this.pageTitle = this.dataResolver.title;
+      this.pageNumber = parseInt(this.dataResolver.page);
     });
     const navigation = window.history.state;
 
@@ -65,24 +56,6 @@ export class HomeComponent implements OnInit {
       );
       this.modalService.openLoginModal();
     }
-
-    this.mostVisitedGameCover = this.mostVisitedGame.cover
-      ? `https://${this.mostVisitedGame.cover.url.replace('thumb', '720p')}`
-      : 'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg';
-
-    this.mostWantedGamesCovers = this.mostWantedGames.map((game) =>
-      game.cover
-        ? `https://${game.cover.url.replace('thumb', '720p')}`
-        : 'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg'
-    );
-
-    this.mostPlayingGameCover = this.mostPlayingGame.cover
-      ? `https://${this.mostPlayingGame.cover.url.replace('thumb', '720p')}`
-      : 'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg';
-
-    this.mostPlayedGameCover = this.mostPlayedGame.cover
-      ? `https://${this.mostPlayedGame.cover.url.replace('thumb', '720p')}`
-      : 'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg';
   }
 
   ngOnDestroy(): void {

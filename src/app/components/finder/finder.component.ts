@@ -13,6 +13,7 @@ import {
   distinctUntilChanged,
   of,
   switchMap,
+  tap,
 } from 'rxjs';
 import { IgdbService } from 'src/app/services/igdb.service';
 import { ListService } from 'src/app/services/list.service';
@@ -29,7 +30,7 @@ export class FinderComponent implements OnInit {
 
   @Output() textSearched = new EventEmitter<string>();
   @Output() gameAddedSuccessfully = new EventEmitter<void>();
-  @Input() mode: string = 'search ';
+  @Input() mode: string = 'nav';
   @Input() selectedList: string = '';
 
   public searchingInput: string = '';
@@ -47,6 +48,7 @@ export class FinderComponent implements OnInit {
     this.suggestions$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
+      tap((term: string) => (this.searchingInput = term)),
       switchMap((term: string) =>
         term ? this.igdbService.findSuggestedGames(term) : of([])
       )
@@ -54,15 +56,13 @@ export class FinderComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.mode === 'search') {
+    if (this.mode === 'nav') {
       const formData = this.searchForm.value;
-      const searchMenuButton = document.querySelector(
-        '.search-menu-button'
-      ) as HTMLElement;
-      searchMenuButton.click();
-      this.searchForm.reset();
-      this.searchTerms.next('');
-      this.router.navigate([`/search/${formData.gameName}`]);
+      if (formData.gameName) {
+        this.searchForm.reset();
+        this.searchTerms.next('');
+        this.router.navigate([`/search/${formData.gameName}`]);
+      }
     }
   }
 
@@ -71,13 +71,9 @@ export class FinderComponent implements OnInit {
   }
 
   selectSuggestion(suggestion: any): void {
-    if (this.mode === 'search') {
+    if (this.mode === 'nav') {
       this.searchForm.reset();
       this.searchTerms.next('');
-      const searchMenuButton = document.querySelector(
-        '.search-menu-button'
-      ) as HTMLElement;
-      searchMenuButton.click();
       this.router.navigate([`/game/${suggestion.id}`]);
     }
     if (this.mode === 'add') {
@@ -94,10 +90,6 @@ export class FinderComponent implements OnInit {
           console.error('Error durante el inicio de sesión:', error);
         }
       );
-      /*       const searchMenuButton = document.querySelector(
-        '.add-game-search-menu-button'
-      ) as HTMLElement;
-      searchMenuButton.click(); */
     }
   }
 }

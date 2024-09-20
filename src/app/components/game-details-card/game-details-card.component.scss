@@ -4,12 +4,8 @@
   }
 }
 
-.home-card {
-  border-radius: 4px;
-  margin-top: 100px;
-  padding: 0 !important;
-  width: 100%;
-  background-color: transparent;
+* {
+  margin-top: 10px;
 }
 
 img {
@@ -28,6 +24,14 @@ h1 {
     1px 1px 0 #000;
 }
 
+h2 {
+  color: #c69749;
+  text-align: center;
+  font-size: 2rem;
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff,
+    1px 1px 0 #ffffff;
+}
+
 p {
   color: white;
   text-align: justify;
@@ -36,6 +40,10 @@ p {
 h2 {
   font-size: 2rem;
   font-weight: "bold";
+}
+
+.rating-card {
+  background-color: #3e158aaf;
 }
 
 .rating {
@@ -49,7 +57,6 @@ h2 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -59,7 +66,6 @@ h2 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, 350%);
-  z-index: 1;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -70,10 +76,56 @@ h2 {
   margin: auto;
   translate: -125px;
   color: gold;
-  background-color: rgba(0, 0, 0, 0.356);
+  background-color: rgba(57, 1, 68, 0.979);
+
+  .icon {
+    position: relative;
+    bottom: 33%;
+    left: 10%;
+  }
 }
 
 .cover {
   position: relative;
   padding: 0px;
+}
+
+.rating-header {
+  color: white;
+  margin: 0; /* Quitar margen para mejor alineación */
+  font-size: 20px; /* Ajustar tamaño del texto según necesites */
+}
+
+.rating-display {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  margin-bottom: 8px; /* Espacio entre el título y la puntuación */
+}
+
+.rating-value {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  display: inline-flex;
+}
+
+.stars-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.star-icon {
+  color: gold;
+  font-size: 24px;
+  transition: color 0.3s ease; /* Transición para un efecto más suave */
+}
+
+.stars-container.editable:hover .star-icon {
+  color: orange; /* Cambia el color al pasar el ratón */
+}
+
+.stars-container.editable {
+  cursor: pointer; /* Cambia el cursor a un icono personalizado */
 }

@@ -10,12 +10,10 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, switchMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { LoaderService } from '../services/loader.service';
-import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class GlobalInterceptor implements HttpInterceptor {
   private requestsCount = 0;
-  private apiURL: string = environment.apiUrl;
 
   constructor(
     private authService: AuthService,

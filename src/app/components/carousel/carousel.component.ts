@@ -35,7 +35,7 @@ export class CarouselComponent {
     const remainingElements = this.mediaList.length - this.currentIndex;
     return this.mediaList.slice(
       this.currentIndex,
-      this.currentIndex + Math.min(3, remainingElements)
+      this.currentIndex + Math.min(1, remainingElements)
     );
   }
 
@@ -44,12 +44,12 @@ export class CarouselComponent {
   }
 
   get showNextButton(): boolean {
-    return this.currentIndex < this.mediaList.length - 3;
+    return this.currentIndex < this.mediaList.length - 1;
   }
 
   prevContent() {
     if (this.showPrevButton) {
-      this.currentIndex = Math.max(0, this.currentIndex - 3);
+      this.currentIndex = Math.max(0, this.currentIndex - 1);
     }
   }
 
@@ -57,7 +57,7 @@ export class CarouselComponent {
     if (this.showNextButton) {
       this.currentIndex = Math.min(
         this.mediaList.length - 1,
-        this.currentIndex + 3
+        this.currentIndex + 1
       );
     }
   }

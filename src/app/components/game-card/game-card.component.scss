@@ -6,11 +6,13 @@
 
 @media only screen and (min-width: 842px) {
   img {
-    height: 500px;
+    max-height: 500px;
   }
-  .card {
-    width: 100%;
-  }
+}
+
+.min-info {
+  height: 250px;
+  width: 200px;
 }
 
 .list-add-button {
@@ -19,4 +21,16 @@
   top: 5px;
   left: 5px;
   color: gold;
+}
+
+.platform-button {
+  color: rgb(55 65 81);
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.25rem 0.75rem;
+  background-color: rgb(229 231 235);
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
 }
