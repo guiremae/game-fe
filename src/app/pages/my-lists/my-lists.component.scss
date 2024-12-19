@@ -83,6 +83,7 @@ p {
   border: solid 1px #ccc;
   min-height: 60px;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   background: linear-gradient(to right, #17082d, #2c1b4a);
