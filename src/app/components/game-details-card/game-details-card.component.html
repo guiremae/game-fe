@@ -2,22 +2,66 @@
   <mat-grid-tile colspan="20"
     ><h1>{{ game.name }}</h1></mat-grid-tile
   >
-  <mat-grid-tile colspan="6" rowspan="8" class="cover">
+  <mat-grid-tile [colspan]="isSmallScreen ? 20 : 6" rowspan="8" class="cover">
     <button mat-icon-button class="list-add-button" (click)="onAddToList()">
       <mat-icon class="icon">playlist_add</mat-icon>
     </button>
     <img mat-card-image [src]="coverURL" alt="Cover" />
   </mat-grid-tile>
 
-  <mat-grid-tile colspan="8" rowspan="8">
+  @if(isSmallScreen){
+  <mat-grid-tile colspan="20" rowspan="4"
+    ><p>{{ game.summary }}</p></mat-grid-tile
+  >
+  } @else{<mat-grid-tile colspan="8" rowspan="8">
     <div class="media-container">
-      <app-carousel [videos]="videos" [pictures]="pictures"></app-carousel></div
-  ></mat-grid-tile>
+      <app-carousel
+        [videos]="videos"
+        [pictures]="pictures"
+      ></app-carousel></div></mat-grid-tile
+  >} @if(isSmallScreen){
+  <mat-grid-tile colspan="20" rowspan="5" class="rating-card">
+    <div class="card-body text-center">
+      <h3 class="rating-header">
+        Tu puntuación:
+        <span class="rating-value">{{
+          game.rating ? game.rating.toFixed(1) : ""
+        }}</span>
+      </h3>
+      <div class="rating-display">
+        <div class="stars-container editable" (click)="onEditRating()">
+          <ng-container *ngFor="let star of starsArray">
+            <mat-icon class="star-icon">{{ star.icon }}</mat-icon>
+          </ng-container>
+        </div>
+      </div>
+
+      <h3 class="rating-header">
+        Puntuación de la prensa:
+        <span class="rating-value">{{
+          aggregatedRating ? aggregatedRating.toFixed(1) : "N/A"
+        }}</span>
+      </h3>
+      <div class="rating-display">
+        <div class="stars-container">
+          <ng-container *ngFor="let star of mediaStarsArray">
+            <mat-icon class="star-icon">{{ star.icon }}</mat-icon>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+  } @else {
 
   <mat-grid-tile colspan="1" rowspan="8"></mat-grid-tile>
 
   <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>
-
+  } @if(isSmallScreen){
+  <mat-grid-tile colspan="20" rowspan="6">
+    <div class="media-container">
+      <app-carousel [videos]="videos" [pictures]="pictures"></app-carousel></div
+  ></mat-grid-tile>
+  } @else {
   <mat-grid-tile colspan="3" rowspan="5" class="rating-card">
     <div class="card-body text-center">
       <h3 class="rating-header">
@@ -49,10 +93,13 @@
       </div>
     </div>
   </mat-grid-tile>
-
   <mat-grid-tile colspan="5" rowspan="2"> </mat-grid-tile>
+  }
 
-  <mat-grid-tile colspan="6" rowspan="4">
+  <mat-grid-tile
+    [colspan]="isSmallScreen ? 20 : 6"
+    [rowspan]="isSmallScreen ? 2 : 4"
+  >
     @if(getWebsiteByCagegory('Reddit')){
     <a
       class="logo"
@@ -71,11 +118,11 @@
       ><img
         src="../../../assets/img/platforms-logos/steam-logo.svg"
         alt="Steam"
-        class="store-icon"
-    /></a>
-    }
+        class="store-icon" /></a
+    >}
   </mat-grid-tile>
 
+  @if(!isSmallScreen){
   <mat-grid-tile colspan="8" rowspan="4"
     ><p>{{ game.summary }}</p></mat-grid-tile
   >
@@ -83,4 +130,5 @@
   <mat-grid-tile colspan="6"></mat-grid-tile>
 
   <mat-grid-tile colspan="20"> </mat-grid-tile>
+  }
 </mat-grid-list>

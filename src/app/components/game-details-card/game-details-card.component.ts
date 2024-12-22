@@ -4,6 +4,7 @@ import { Game } from 'src/app/models/interfaces/game.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-game-details-card',
@@ -15,8 +16,15 @@ export class GameDetailsCardComponent implements OnInit {
     private elem: ElementRef,
     private authService: AuthService,
     private modalService: ModalService,
-    private listService: ListService
-  ) {}
+    private listService: ListService,
+    private breakpointObserver: BreakpointObserver
+  ) {
+    this.breakpointObserver
+      .observe('(max-width: 1279.98px)')
+      .subscribe((result) => {
+        this.isSmallScreen = result.matches;
+      });
+  }
 
   @Input() public game!: Game;
   public coverURL: string =
@@ -26,6 +34,7 @@ export class GameDetailsCardComponent implements OnInit {
   public starsArray: any[] = [];
   public mediaStarsArray: any[] = [];
   public aggregatedRating: number = 0;
+  public isSmallScreen = false;
   @Input() public videos: any[] = [];
   @Input() public pictures: any[] = [];
   @Input() public websites: any[] = [];
@@ -176,10 +185,6 @@ export class GameDetailsCardComponent implements OnInit {
   getWebsiteByCagegory(category: string) {
     if (category in Category) {
       const categoryValue = Category[category as keyof typeof Category];
-      console.log(categoryValue);
-      console.log(
-        this.websites.filter((website) => website.category === categoryValue)[0]
-      );
       return this.websites.filter(
         (website) => website.category === categoryValue
       )[0];

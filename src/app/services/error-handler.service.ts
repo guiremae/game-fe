@@ -14,7 +14,7 @@ export class GlobalErrorHandler implements ErrorHandler {
   handleError(error: any): void {
     this.ngZone.run(() => {
       // Redirigir a la pantalla principal
-      this.router.navigate(['/latest']);
+      this.router.navigate(['/home']);
 
       this._snackBar.open('Página no encontrada', undefined, {
         duration: 1500,

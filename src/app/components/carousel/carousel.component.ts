@@ -1,3 +1,4 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
 
@@ -7,7 +8,18 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrl: './carousel.component.scss',
 })
 export class CarouselComponent {
-  constructor(public modalService: ModalService) {}
+  constructor(
+    public modalService: ModalService,
+    private breakpointObserver: BreakpointObserver
+  ) {
+    this.breakpointObserver
+      .observe('(max-width: 1279.98px)')
+      .subscribe((result) => {
+        this.isSmallScreen = result.matches;
+      });
+  }
+
+  public isSmallScreen = false;
   @Input() public videos!: string[];
   @Input() public pictures!: any[];
   currentIndex = 0;
