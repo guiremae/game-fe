@@ -41,14 +41,17 @@ label {
   color: #ffffff;
 }
 
+p {
+  text-align: center;
+}
+
 a {
-  color: #c69749;
-  text-decoration: none;
+  color: #c69749 !important;
   cursor: pointer;
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 button[type="submit"] {

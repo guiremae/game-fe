@@ -50,9 +50,31 @@
     </div>
   </mat-grid-tile>
 
-  <mat-grid-tile colspan="5" rowspan="2"></mat-grid-tile>
+  <mat-grid-tile colspan="5" rowspan="2"> </mat-grid-tile>
 
-  <mat-grid-tile colspan="6"></mat-grid-tile>
+  <mat-grid-tile colspan="6" rowspan="4">
+    @if(getWebsiteByCagegory('Reddit')){
+    <a
+      class="logo"
+      href="{{ getWebsiteByCagegory('Reddit').url }}"
+      target="_blank"
+      ><img
+        src="../../../assets/img/platforms-logos/reddit-logo.svg"
+        alt="Reddit"
+        class="store-icon"
+    /></a>
+    } @if(getWebsiteByCagegory('Steam')){
+    <a
+      class="logo"
+      href="{{ getWebsiteByCagegory('Steam').url }}"
+      target="_blank"
+      ><img
+        src="../../../assets/img/platforms-logos/steam-logo.svg"
+        alt="Steam"
+        class="store-icon"
+    /></a>
+    }
+  </mat-grid-tile>
 
   <mat-grid-tile colspan="8" rowspan="4"
     ><p>{{ game.summary }}</p></mat-grid-tile
@@ -60,5 +82,5 @@
 
   <mat-grid-tile colspan="6"></mat-grid-tile>
 
-  <mat-grid-tile colspan="20"></mat-grid-tile>
+  <mat-grid-tile colspan="20"> </mat-grid-tile>
 </mat-grid-list>

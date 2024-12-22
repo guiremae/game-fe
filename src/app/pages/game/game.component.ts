@@ -13,6 +13,7 @@ export class GameComponent implements OnInit {
   cover: string = '';
   videos: any[] = [];
   pictures: any[] = [];
+  websites: any[] = [];
 
   slickConfig: any = {
     arrows: true,
@@ -50,6 +51,8 @@ export class GameComponent implements OnInit {
             )
           )
         );
+
+      this.websites = data['game']['websites'];
     });
   }
 

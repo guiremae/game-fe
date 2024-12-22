@@ -45,6 +45,7 @@ import { GlobalErrorHandler } from './services/error-handler.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { GlobalInterceptor } from './interceptors/global.interceptor';
 import { LatestComponent } from './pages/latest/latest.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { LatestComponent } from './pages/latest/latest.component';
     ShareComponent,
     ListComponent,
     EditRatingComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,

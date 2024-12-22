@@ -189,4 +189,17 @@ export class IgdbService {
       }
     );
   }
+
+  public getWebsites(game_id: number): Observable<Game[]> {
+    return this.httpClient.post<Game[]>(
+      `${this.cors_api_host}${this.baseURL}/websites`,
+      `fields *; where game = ${game_id};`,
+      {
+        headers: {
+          'Client-ID': this.clientID,
+          Authorization: `Bearer ${this.authToken}`,
+        },
+      }
+    );
+  }
 }

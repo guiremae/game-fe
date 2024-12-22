@@ -17,10 +17,15 @@ import { ActivateUserComponent } from './pages/activate-user/activate-user.compo
 import { ActivateUserResolver } from './resolvers/activate-user-resolver.service';
 import { LatestComponent } from './pages/latest/latest.component';
 import { HomeResolverService } from './resolvers/home-resolver.service';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 // Importar componentes y servicios necesarios...
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginPageComponent,
+  },
   {
     path: '',
     component: LayoutComponent,

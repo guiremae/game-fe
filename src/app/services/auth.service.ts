@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -17,7 +18,11 @@ export class AuthService {
     return this.loggedIn.asObservable().pipe(shareReplay(1));
   }
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private _snackBar: MatSnackBar
+  ) {}
 
   login(id: string, password: string): Observable<any> {
     const loginData = { id, password };
@@ -48,17 +53,17 @@ export class AuthService {
           localStorage.removeItem('userID');
           // Update the authentication state
           this.setLoggedIn(false);
-          // Redirect to the login page
-          if (!isRefreshToken) {
-            window.location.reload();
+          let message = 'Se ha cerrado la sesión';
+          let panelClass = ['app-notification-success', 'center'];
+          if (isRefreshToken) {
+            message = 'La sesión ha expirado';
+            panelClass = ['app-notification-error', 'center'];
           }
-          this.router
-            .navigateByUrl('/latest', { skipLocationChange: true })
-            .then(() => {
-              this.router.navigate(['/latest'], {
-                state: { openLoginModal: true },
-              });
-            });
+          this._snackBar.open(message, undefined, {
+            duration: 2000,
+            panelClass,
+          });
+          this.router.navigate(['/login']);
         }),
         catchError((error) => {
           console.error('Logout request failed', error);
