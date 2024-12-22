@@ -21,13 +21,7 @@
     track $index) {
     <div class="content-container">
       <ng-container *ngIf="content.type === 'video'">
-        <iframe
-          width="560"
-          height="315"
-          [src]="content.url"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
+        <iframe [src]="content.url" frameborder="0" allowfullscreen></iframe>
       </ng-container>
       <ng-container *ngIf="content.type === 'image'">
         <img
