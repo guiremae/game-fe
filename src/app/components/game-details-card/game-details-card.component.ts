@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Category } from 'src/app/enums/category';
 import { Game } from 'src/app/models/interfaces/game.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { ListService } from 'src/app/services/list.service';
@@ -27,6 +28,7 @@ export class GameDetailsCardComponent implements OnInit {
   public aggregatedRating: number = 0;
   @Input() public videos: any[] = [];
   @Input() public pictures: any[] = [];
+  @Input() public websites: any[] = [];
 
   ngOnInit(): void {
     if (this.game.cover && this.game.cover.url)
@@ -169,5 +171,20 @@ export class GameDetailsCardComponent implements OnInit {
     const element = this.elem.nativeElement;
     const circle = element.querySelector('circle');
     if (circle) circle.style.stroke = this.ratingColor;
+  }
+
+  getWebsiteByCagegory(category: string) {
+    if (category in Category) {
+      const categoryValue = Category[category as keyof typeof Category];
+      console.log(categoryValue);
+      console.log(
+        this.websites.filter((website) => website.category === categoryValue)[0]
+      );
+      return this.websites.filter(
+        (website) => website.category === categoryValue
+      )[0];
+    } else {
+      return null;
+    }
   }
 }

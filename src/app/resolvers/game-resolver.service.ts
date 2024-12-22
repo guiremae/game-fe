@@ -18,6 +18,7 @@ export class GameResolverService {
     return forkJoin({
       game: this.igdbService.getGame(gameId),
       rating: this.ratingService.getRating(gameId),
+      websites: this.igdbService.getWebsites(gameId),
     });
   }
 }
