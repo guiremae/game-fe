@@ -32,71 +32,65 @@
   margin-right: 0.75rem;
 }
 
-.web-name {
-  color: white;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
 .avatar {
   border-radius: 50px;
   width: 2.5rem;
   height: 2.5rem;
 }
 
-app-finder {
-  margin-top: 5px;
-  margin-right: 20px;
-  position: relative;
-}
+@media (min-width: 1400px) {
+  app-finder {
+    margin-top: 5px;
+    margin-right: 20px;
+    position: relative;
+  }
 
-button[mat-icon-button] {
-  $size-button: 2.5rem;
-  $size-icon: 2.5rem;
+  button[mat-icon-button] {
+    $size-button: 2.5rem;
+    $size-icon: 2.5rem;
 
-  &.icon-button {
-    width: $size-button;
-    height: $size-button;
-    line-height: $size-button;
-    padding: 0;
+    &.icon-button {
+      width: $size-button;
+      height: $size-button;
+      line-height: $size-button;
+      padding: 0;
 
-    .mat-icon {
-      font-size: $size-icon;
-      width: $size-icon;
-      height: $size-icon;
-      line-height: $size-icon;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .mat-icon {
+        font-size: $size-icon;
+        width: $size-icon;
+        height: $size-icon;
+        line-height: $size-icon;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .mat-button-ripple {
-      font-size: inherit;
-      width: inherit;
-      height: inherit;
-      line-height: inherit;
+      .mat-button-ripple {
+        font-size: inherit;
+        width: inherit;
+        height: inherit;
+        line-height: inherit;
+      }
     }
   }
-}
 
-.rounded {
-  border-radius: 50px;
-  width: 2.5rem;
-  height: 2.5rem;
-}
+  .rounded {
+    border-radius: 50px;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 
-.logo-container {
-  position: absolute;
-  left: 0;
-}
+  .logo-container {
+    position: absolute;
+    left: 0;
+  }
 
-.buttons-container {
-  position: absolute;
-  right: 10px;
+  .buttons-container {
+    position: absolute;
+    right: 10px;
 
-  button {
-    margin-right: 20px;
+    button {
+      margin-right: 20px;
+    }
   }
 }
