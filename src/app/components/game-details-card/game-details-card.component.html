@@ -1,26 +1,21 @@
-<mat-grid-list cols="20" rows="2" rowHeight="50px">
-  <mat-grid-tile colspan="20"
+@if(isSmallScreen){
+<mat-grid-list cols="1" rows="2" rowHeight="50px">
+  <mat-grid-tile colspan="1"
     ><h1>{{ game.name }}</h1></mat-grid-tile
   >
-  <mat-grid-tile [colspan]="isSmallScreen ? 20 : 6" rowspan="8" class="cover">
+  <mat-grid-tile rowspan="8" class="cover">
     <button mat-icon-button class="list-add-button" (click)="onAddToList()">
       <mat-icon class="icon">playlist_add</mat-icon>
     </button>
     <img mat-card-image [src]="coverURL" alt="Cover" />
   </mat-grid-tile>
 
-  @if(isSmallScreen){
-  <mat-grid-tile colspan="20" rowspan="4"
+  <mat-grid-tile rowspan="5"
     ><p>{{ game.summary }}</p></mat-grid-tile
   >
-  } @else{<mat-grid-tile colspan="8" rowspan="8">
-    <div class="media-container">
-      <app-carousel
-        [videos]="videos"
-        [pictures]="pictures"
-      ></app-carousel></div></mat-grid-tile
-  >} @if(isSmallScreen){
-  <mat-grid-tile colspan="20" rowspan="5" class="rating-card">
+
+  > @if(isSmallScreen){
+  <mat-grid-tile rowspan="5" class="rating-card">
     <div class="card-body text-center">
       <h3 class="rating-header">
         Tu puntuación:
@@ -51,17 +46,55 @@
       </div>
     </div>
   </mat-grid-tile>
-  } @else {
-
-  <mat-grid-tile colspan="1" rowspan="8"></mat-grid-tile>
-
-  <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>
-  } @if(isSmallScreen){
-  <mat-grid-tile colspan="20" rowspan="6">
+  }
+  <mat-grid-tile rowspan="6">
     <div class="media-container">
       <app-carousel [videos]="videos" [pictures]="pictures"></app-carousel></div
   ></mat-grid-tile>
-  } @else {
+
+  <mat-grid-tile colspan="1" rowspan="2">
+    @if(getWebsiteByCagegory('Reddit')){
+    <a
+      class="logo"
+      href="{{ getWebsiteByCagegory('Reddit').url }}"
+      target="_blank"
+      ><img
+        src="../../../assets/img/platforms-logos/reddit-logo.svg"
+        alt="Reddit"
+        class="store-icon"
+    /></a>
+    } @if(getWebsiteByCagegory('Steam')){
+    <a
+      class="logo"
+      href="{{ getWebsiteByCagegory('Steam').url }}"
+      target="_blank"
+      ><img
+        src="../../../assets/img/platforms-logos/steam-logo.svg"
+        alt="Steam"
+        class="store-icon" /></a
+    >}
+  </mat-grid-tile>
+</mat-grid-list>
+
+} @else {<mat-grid-list cols="20" rows="2" rowHeight="50px">
+  <mat-grid-tile colspan="20"
+    ><h1>{{ game.name }}</h1></mat-grid-tile
+  >
+  <mat-grid-tile colspan="6" rowspan="8" class="cover">
+    <button mat-icon-button class="list-add-button" (click)="onAddToList()">
+      <mat-icon class="icon">playlist_add</mat-icon>
+    </button>
+    <img mat-card-image [src]="coverURL" alt="Cover" />
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="8" rowspan="8">
+    <div class="media-container">
+      <app-carousel [videos]="videos" [pictures]="pictures"></app-carousel></div
+  ></mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="8"></mat-grid-tile>
+
+  <mat-grid-tile colspan="5" rowspan="1"></mat-grid-tile>
+
   <mat-grid-tile colspan="3" rowspan="5" class="rating-card">
     <div class="card-body text-center">
       <h3 class="rating-header">
@@ -94,12 +127,8 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile colspan="5" rowspan="2"> </mat-grid-tile>
-  }
 
-  <mat-grid-tile
-    [colspan]="isSmallScreen ? 20 : 6"
-    [rowspan]="isSmallScreen ? 2 : 4"
-  >
+  <mat-grid-tile colspan="6" rowspan="4">
     @if(getWebsiteByCagegory('Reddit')){
     <a
       class="logo"
@@ -122,13 +151,11 @@
     >}
   </mat-grid-tile>
 
-  @if(!isSmallScreen){
   <mat-grid-tile colspan="8" rowspan="4"
     ><p>{{ game.summary }}</p></mat-grid-tile
   >
 
   <mat-grid-tile colspan="6"></mat-grid-tile>
 
-  <mat-grid-tile colspan="20"> </mat-grid-tile>
-  }
-</mat-grid-list>
+  <mat-grid-tile colspan="20"> </mat-grid-tile> </mat-grid-list
+>}
