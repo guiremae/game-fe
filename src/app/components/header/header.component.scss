@@ -8,7 +8,7 @@
   background-color: #17082d;
   position: sticky;
   top: 0;
-  height: 50px;
+  height: 60px;
 }
 
 .navbar-brand,
@@ -27,18 +27,24 @@
   cursor: pointer;
 }
 
-.logo {
-  height: 2rem;
-  margin-right: 0.75rem;
+.logo-container {
+  position: absolute;
+  left: 0;
 }
 
-.avatar {
-  border-radius: 50px;
-  width: 2.5rem;
-  height: 2.5rem;
+li a {
+  font-size: 0.8rem;
+}
+
+span {
+  font-size: 0.8rem;
 }
 
 @media (min-width: 1400px) {
+  .navbar {
+    height: 50px;
+  }
+
   app-finder {
     margin-top: 5px;
     margin-right: 20px;
@@ -73,24 +79,22 @@
       }
     }
   }
+  .logo {
+    height: 2rem;
+    margin-right: 0.75rem;
+  }
 
-  .rounded {
+  .avatar {
     border-radius: 50px;
     width: 2.5rem;
     height: 2.5rem;
   }
 
-  .logo-container {
-    position: absolute;
-    left: 0;
+  li a {
+    font-size: 1rem;
   }
 
-  .buttons-container {
-    position: absolute;
-    right: 10px;
-
-    button {
-      margin-right: 20px;
-    }
+  span {
+    font-size: 1rem;
   }
 }
