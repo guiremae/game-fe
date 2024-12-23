@@ -16,7 +16,7 @@ img {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2rem;
   color: white;
   text-overflow: ellipsis;
   text-align: center;
@@ -137,5 +137,11 @@ h2 {
 .logo {
   img {
     width: 60px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  h1 {
+    font-size: 3rem;
   }
 }

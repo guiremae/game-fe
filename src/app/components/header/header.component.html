@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
+@if(isSmallScreen){
+<nav class="navbar">
+  <div class="navbar-nav container-fluid d-flex flex-row">
     <a class="navbar-brand" routerLink="/home">
       <img
         src="./assets/img/logo.png"
@@ -10,8 +11,89 @@
       />
       GAMELOG
     </a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        style="color: white"
+        dir="rtl"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/latest">
+          <span>Novedades</span>
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="vertebrates">
+          <span>Plataformas</span>
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="userMenu">
+          <span>Usuario</span>
+        </button>
+      </mat-menu>
+      <mat-menu #vertebrates="matMenu">
+        <button mat-menu-item routerLink="/PC">
+          <span>PC</span>
+        </button>
+        <button mat-menu-item routerLink="/PS5">
+          <span>PS5</span>
+        </button>
+        <button mat-menu-item routerLink="/Series X|S">
+          <span>Series X|S</span>
+        </button>
+        <button mat-menu-item routerLink="/Switch">
+          <span>Switch</span>
+        </button>
+      </mat-menu>
+
+      <mat-menu #userMenu="matMenu" xPosition="before">
+        <button
+          mat-menu-item
+          *ngIf="authService.getLoggedInValue()"
+          routerLink="/mylists"
+        >
+          <mat-icon>list</mat-icon>
+          <span>Mis listas</span>
+        </button>
+        <button mat-menu-item *ngIf="authService.getLoggedInValue()">
+          <mat-icon>settings</mat-icon>
+          <span>Configuración</span>
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="authService.getLoggedInValue()"
+          (click)="authService.logout(false)"
+        >
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!authService.getLoggedInValue()"
+          (click)="modalService.openLoginModal()"
+        >
+          <mat-icon>login</mat-icon>
+          <span>Iniciar sesión</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</nav>
+}@else{
+<nav class="navbar navbar-expand">
+  <div class="container-fluid">
+    <div class="navbar-nav">
+      <a class="navbar-brand" routerLink="/home">
+        <img
+          src="./assets/img/logo.png"
+          alt="Logo"
+          width="30"
+          height="24"
+          class="d-inline-block align-text-top"
+        />
+        GAMELOG
+      </a>
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" routerLink="/latest">Novedades</a>
         </li>
@@ -37,6 +119,8 @@
           </mat-menu>
         </li>
       </ul>
+    </div>
+    <div class="navbar-nav">
       <app-finder
         mode="nav"
         class="nav-item"
@@ -89,78 +173,4 @@
     </div>
   </div>
 </nav>
-
-<!-- <nav class="navbar navbar-expanded">
-  <div class="logo-container flex align-items-center">
-    <button
-      mat-icon-button
-      (click)="layoutService.toggleSidenav()"
-      class="icon-button"
-    >
-      <mat-icon [ngStyle]="{ color: 'white', 'font-size': '2rem' }"
-        >menu</mat-icon
-      >
-    </button>
-    <a routerLink="/home" class="d-inline-flex align-items-center">
-      <img src="./assets/img/logo.png" class="logo" alt="Logo" />
-      <span class="web-name">GAMELOG</span>
-    </a>
-  </div>
-
-  <div class="buttons-container d-flex align-items-center">
-    <button
-      mat-icon-button
-      [matMenuTriggerFor]="searchMenu"
-      class="icon-button search-menu-button"
-    >
-      <mat-icon [ngStyle]="{ color: 'white', 'font-size': '2rem' }"
-        >search</mat-icon
-      >
-    </button>
-    <mat-menu #searchMenu="matMenu" xPosition="before">
-      <app-finder mode="search" (click)="$event.stopPropagation()"></app-finder>
-    </mat-menu>
-
-    <button mat-icon-button [matMenuTriggerFor]="userMenu" class="icon-button">
-      <mat-icon [ngStyle]="{ color: 'white', 'font-size': '2rem' }">
-        <img
-          class="avatar"
-          src="//surgassociates.com/wp-content/uploads/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg"
-          onerror="this.src='//surgassociates.com/wp-content/uploads/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg'"
-          alt="user photo"
-        />
-      </mat-icon>
-    </button>
-    <mat-menu #userMenu="matMenu" xPosition="before">
-      <button
-        mat-menu-item
-        *ngIf="authService.getLoggedInValue()"
-        routerLink="/mylists"
-      >
-        <mat-icon>list</mat-icon>
-        <span>Mis listas</span>
-      </button>
-      <button mat-menu-item *ngIf="authService.getLoggedInValue()">
-        <mat-icon>settings</mat-icon>
-        <span>Configuración</span>
-      </button>
-      <button
-        mat-menu-item
-        *ngIf="authService.getLoggedInValue()"
-        (click)="authService.logout(false)"
-      >
-        <mat-icon>logout</mat-icon>
-        <span>Cerrar sesión</span>
-      </button>
-      <button
-        mat-menu-item
-        *ngIf="!authService.getLoggedInValue()"
-        (click)="modalService.openLoginModal()"
-      >
-        <mat-icon>login</mat-icon>
-        <span>Iniciar sesión</span>
-      </button>
-    </mat-menu>
-  </div>
-</nav>
- -->
+}
