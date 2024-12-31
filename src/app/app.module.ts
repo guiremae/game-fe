@@ -46,6 +46,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { GlobalInterceptor } from './interceptors/global.interceptor';
 import { LatestComponent } from './pages/latest/latest.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     ListComponent,
     EditRatingComponent,
     LoginPageComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

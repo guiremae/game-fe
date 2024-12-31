@@ -47,11 +47,9 @@ export class AuthService {
       .post<any>(`${this.apiURL}/logout`, {}, { headers })
       .pipe(
         tap(() => {
-          // Clear the local storage or any other storage mechanism
           localStorage.removeItem('authToken');
           localStorage.removeItem('refreshToken');
           localStorage.removeItem('userID');
-          // Update the authentication state
           this.setLoggedIn(false);
           let message = 'Se ha cerrado la sesión';
           let panelClass = ['app-notification-success', 'center'];
@@ -67,7 +65,7 @@ export class AuthService {
         }),
         catchError((error) => {
           console.error('Logout request failed', error);
-          return of(null); // Continue regardless of error
+          return of(null);
         })
       )
       .subscribe();
@@ -96,5 +94,31 @@ export class AuthService {
     const body = { refreshToken: localStorage.getItem('refreshToken') };
     const headers = new HttpHeaders().set('X-Exclude-Loader', 'true');
     return this.http.post<any>(`${this.apiURL}/refresh`, body, { headers });
+  }
+
+  sendRequestPassword(userID: string, email: string) {
+    const body = { email };
+    const headers = new HttpHeaders().set('X-Exclude-Loader', 'true');
+    return this.http.put<any>(`${this.apiURL}/users/${userID}/remember`, body, {
+      headers,
+    });
+  }
+
+  checkIfAbleToResetPassword(userID: string, token: string) {
+    const headers = new HttpHeaders().set('X-Exclude-Loader', 'true');
+    return this.http.get<any>(
+      `${this.apiURL}/users/${userID}/resetPassword?token=${token}`,
+      { headers }
+    );
+  }
+
+  resetPassword(userID: string, token: string, password: string) {
+    const body = { password };
+    const headers = new HttpHeaders().set('X-Exclude-Loader', 'true');
+    return this.http.patch<any>(
+      `${this.apiURL}/users/${userID}/resetPassword?token=${token}`,
+      body,
+      { headers }
+    );
   }
 }

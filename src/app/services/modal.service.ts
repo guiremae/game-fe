@@ -7,6 +7,7 @@ import { PictureModalComponent } from '../components/picture-modal/picture-modal
 import { ShareComponent } from '../components/share/share.component';
 import { EditRatingComponent } from '../components/edit-rating/edit-rating.component';
 import { Observable } from 'rxjs';
+import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class ModalService {
     | PictureModalComponent
     | ShareComponent
     | EditRatingComponent
+    | ResetPasswordComponent
   >;
   constructor(public dialog: MatDialog) {}
 
@@ -54,6 +56,16 @@ export class ModalService {
       this.dialogRef.close();
     }
     this.dialogRef = this.dialog.open(SignupComponent, {
+      width: '400px',
+      panelClass: 'dialog-container',
+    });
+  }
+
+  openResetPasswordModal(): void {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.dialogRef = this.dialog.open(ResetPasswordComponent, {
       width: '400px',
       panelClass: 'dialog-container',
     });
