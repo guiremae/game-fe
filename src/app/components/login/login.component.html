@@ -44,10 +44,12 @@
     <button type="submit" mat-button color="primary">Iniciar sesión</button>
     <br />
 
-    <!-- Enlace para recuperar contraseña -->
-    <p><a>¿Has olvidado tu contraseña?</a></p>
+    <p>
+      <a (click)="modalService.openResetPasswordModal()"
+        >¿Has olvidado tu contraseña?</a
+      >
+    </p>
 
-    <!-- Enlace para crear una cuenta -->
     <p>
       ¿No tienes cuenta?
       <a (click)="modalService.openSignUpModal()">Crea una</a>

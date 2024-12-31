@@ -8,6 +8,7 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-login-page',
@@ -23,6 +24,7 @@ export class LoginPageComponent {
   public isLogged = false;
 
   constructor(
+    public modalService: ModalService,
     private authService: AuthService,
     private _snackBar: MatSnackBar,
     private router: Router
