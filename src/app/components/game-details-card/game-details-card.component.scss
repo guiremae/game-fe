@@ -1,9 +1,3 @@
-::ng-deep {
-  mat-grid-tile:nth-child(5) > div {
-    align-items: normal !important;
-  }
-}
-
 * {
   margin-top: 10px;
 }
@@ -46,30 +40,6 @@ h2 {
   background-color: #3e158aaf;
 }
 
-.rating {
-  position: relative;
-  margin-top: 20px;
-  display: flex;
-}
-
-.rating-number {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.rating-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 350%);
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
 .list-add-button {
   position: absolute;
   top: 0%;
@@ -92,15 +62,15 @@ h2 {
 
 .rating-header {
   color: white;
-  margin: 0; /* Quitar margen para mejor alineación */
-  font-size: 20px; /* Ajustar tamaño del texto según necesites */
+  margin: 0;
+  font-size: 20px;
 }
 
 .rating-display {
   display: inline-flex;
   align-items: center;
-  justify-content: center; /* Centra el contenido horizontalmente */
-  margin-bottom: 8px; /* Espacio entre el título y la puntuación */
+  justify-content: center;
+  margin-bottom: 8px;
 }
 
 .rating-value {
@@ -119,15 +89,15 @@ h2 {
 .star-icon {
   color: gold;
   font-size: 24px;
-  transition: color 0.3s ease; /* Transición para un efecto más suave */
+  transition: color 0.3s ease;
 }
 
 .stars-container.editable:hover .star-icon {
-  color: orange; /* Cambia el color al pasar el ratón */
+  color: orange;
 }
 
 .stars-container.editable {
-  cursor: pointer; /* Cambia el cursor a un icono personalizado */
+  cursor: pointer;
 }
 
 .logo {

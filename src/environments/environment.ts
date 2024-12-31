@@ -1,10 +1,11 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
 export const environment = {
   production: false,
   apiUrl: 'http://gamelog.hopto.org:8080/api/v1',
+  igdbClientID: 'pev408euurhwg577z5h615cjapf84y',
+  igdbClientSecret: 'vmfiabbeu2bgf8xr4pgoilzm7xtlsp',
 };
 
 /*

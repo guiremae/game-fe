@@ -85,14 +85,12 @@ export class MyListsComponent {
   }
 
   private sortGamesByIndex() {
-    // Ordenar los controles del formulario según el índice
     this.gamesFormArray.controls.sort((a, b) => {
       return a.get('index')!.value - b.get('index')!.value;
     });
   }
 
   public sortGamesByRating() {
-    // Ordenar los controles del formulario según la puntuación
     this.gamesFormArray.controls.sort((a, b) => {
       return b.get('rating')!.value - a.get('rating')!.value;
     });
@@ -120,12 +118,10 @@ export class MyListsComponent {
 
   saveChanges() {
     const list = this.selectedOption;
-    // Vaciar el array 'games'
     while (list.games.length > 0) {
       list.games.pop();
     }
 
-    // Hacer push de los IDs del 'gamesFormArray'
     this.gamesFormArray.controls.forEach((control) => {
       list.games.push(control.value.id);
     });
@@ -206,7 +202,6 @@ export class MyListsComponent {
           });
         },
         (error) => {
-          // Manejar errores de autenticación
           console.error('Error durante el inicio de sesión:', error);
         }
       );
@@ -275,7 +270,6 @@ export class MyListsComponent {
               });
             },
             (error) => {
-              // Manejar errores de autenticación
               console.error('Error durante el inicio de sesión:', error);
             }
           );
@@ -293,7 +287,6 @@ export class MyListsComponent {
             });
           },
           (error) => {
-            // Manejar errores de autenticación
             console.error('Error durante el inicio de sesión:', error);
           }
         );
@@ -303,7 +296,6 @@ export class MyListsComponent {
     }
   }
 
-  // Generar el enlace de la lista basado en el listID seleccionado
   generateListLink(): string {
     return `http://gamelog.hopto.org/list/${this.selectedOption.id}`;
   }

@@ -11,7 +11,6 @@ export class HomeResolverService {
   async resolve(): Promise<any> {
     const date = Math.round(Date.now() / 1000);
 
-    // Aumentamos el límite a 5 para asegurar más variedad
     const latestGames$ = this.igdbService.findLastGames(date, 1);
 
     const [
@@ -23,12 +22,11 @@ export class HomeResolverService {
       forkJoin([
         this.igdbService.getMostPopularGames(1, 1),
         this.igdbService.getMostPopularGames(2, 2),
-        this.igdbService.getMostPopularGames(3, 4), // Aumentamos el límite a 5
-        this.igdbService.getMostPopularGames(4, 5), // Aumentamos el límite a 5
+        this.igdbService.getMostPopularGames(3, 4),
+        this.igdbService.getMostPopularGames(4, 5),
       ])
     );
 
-    // Aquí filtramos para que los juegos no se repitan en cada categoría
     const uniqueGameIDs = new Set();
 
     const getUniqueGameId = (gameIDs: any[]) => {
@@ -52,7 +50,6 @@ export class HomeResolverService {
     const mostPlayedGameId = getUniqueGameId(mostPlayedGameIDs).game_id;
     uniqueGameIDs.add(mostPlayedGameId);
 
-    // Hacemos las llamadas a los servicios usando los IDs seleccionados
     const [mostVisitedGame, mostWantedGames, mostPlayingGame, mostPlayedGame] =
       await lastValueFrom(
         forkJoin([

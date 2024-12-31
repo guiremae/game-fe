@@ -1,12 +1,12 @@
 // login.component.ts
 import { Component } from '@angular/core';
 import {
-  UntypedFormGroup,
   UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { tap, catchError, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 

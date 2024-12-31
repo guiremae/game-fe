@@ -15,16 +15,6 @@ export class GameComponent implements OnInit {
   pictures: any[] = [];
   websites: any[] = [];
 
-  slickConfig: any = {
-    arrows: true,
-    dots: true,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-  };
-
   constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
@@ -33,27 +23,29 @@ export class GameComponent implements OnInit {
       this.game.rating = data['game']['rating']
         ? data['game']['rating']['score']
         : null;
-      const randomIndex = Math.floor(
-        Math.random() *
-          (this.game.screenshots?.length + this.game.artworks?.length)
-      );
-      this.pictures = this.game.artworks
-        ? this.game.artworks.concat(this.game.screenshots)
-        : this.game.screenshots;
-      const banner = this.pictures[randomIndex];
-      this.cover = `https://${banner?.url.replace('thumb', '1080p')}`;
-
-      if (this.game.videos)
-        this.game.videos.forEach((video) =>
-          this.videos.push(
-            this.sanitizer.bypassSecurityTrustResourceUrl(
-              `https://www.youtube.com/embed/${video.video_id}`
-            )
-          )
-        );
-
+      this.getRandomBanner();
+      this.getVideos();
       this.websites = data['game']['websites'];
     });
+  }
+
+  getRandomBanner() {
+    const randomIndex = Math.floor(
+      Math.random() *
+        (this.game.screenshots?.length + this.game.artworks?.length)
+    );
+    this.pictures = this.game.artworks
+      ? this.game.artworks.concat(this.game.screenshots)
+      : this.game.screenshots;
+    const banner = this.pictures[randomIndex];
+    this.cover = `https://${banner?.url.replace('thumb', '1080p')}`;
+  }
+
+  getVideos() {
+    if (this.game.videos)
+      this.game.videos.forEach((video) =>
+        this.videos.push(this.getVideoURL(video.video_id))
+      );
   }
 
   getVideoURL(videoID: string) {

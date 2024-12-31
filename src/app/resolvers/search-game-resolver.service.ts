@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, forkJoin, of } from 'rxjs';
-import { IgdbService } from '../services/igdb.service'; // Ajusta la importación según tu estructura
-
+import { IgdbService } from '../services/igdb.service';
 @Injectable({
   providedIn: 'root',
 })

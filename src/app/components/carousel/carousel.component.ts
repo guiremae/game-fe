@@ -11,13 +11,7 @@ export class CarouselComponent {
   constructor(
     public modalService: ModalService,
     private breakpointObserver: BreakpointObserver
-  ) {
-    this.breakpointObserver
-      .observe('(max-width: 1279.98px)')
-      .subscribe((result) => {
-        this.isSmallScreen = result.matches;
-      });
-  }
+  ) {}
 
   public isSmallScreen = false;
   @Input() public videos!: string[];
@@ -57,6 +51,14 @@ export class CarouselComponent {
 
   get showNextButton(): boolean {
     return this.currentIndex < this.mediaList.length - 1;
+  }
+
+  ngOnInit(): void {
+    this.breakpointObserver
+      .observe('(max-width: 1279.98px)')
+      .subscribe((result) => {
+        this.isSmallScreen = result.matches;
+      });
   }
 
   prevContent() {

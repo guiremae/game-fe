@@ -24,7 +24,6 @@ export class PlatformGamesResolverService {
               ? platform[0].id
               : route.params['platform'];
 
-            // Obtén el nombre de la plataforma
             return forkJoin({
               games: this.igdbService.findLastGamesForPlatform(
                 date,
