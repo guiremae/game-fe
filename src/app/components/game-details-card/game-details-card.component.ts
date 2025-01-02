@@ -1,10 +1,11 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Category } from 'src/app/enums/category';
 import { Game } from 'src/app/models/interfaces/game.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
-import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-game-details-card',
@@ -13,37 +14,35 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class GameDetailsCardComponent implements OnInit {
   constructor(
-    private elem: ElementRef,
     private authService: AuthService,
     private modalService: ModalService,
     private listService: ListService,
     private breakpointObserver: BreakpointObserver
-  ) {
-    this.breakpointObserver
-      .observe('(max-width: 1279.98px)')
-      .subscribe((result) => {
-        this.isSmallScreen = result.matches;
-      });
-  }
+  ) {}
 
   @Input() public game!: Game;
   public coverURL: string =
     'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg';
-  public ratingColor: string = '';
-  public ratingText: string = '';
   public starsArray: any[] = [];
   public mediaStarsArray: any[] = [];
   public aggregatedRating: number = 0;
   public isSmallScreen = false;
+  private subs = new Subscription();
   @Input() public videos: any[] = [];
   @Input() public pictures: any[] = [];
   @Input() public websites: any[] = [];
 
   ngOnInit(): void {
+    this.subs.add(
+      this.breakpointObserver
+        .observe('(max-width: 1279.98px)')
+        .subscribe((result) => {
+          this.isSmallScreen = result.matches;
+        })
+    );
+
     if (this.game.cover && this.game.cover.url)
       this.coverURL = 'https://' + this.game.cover.url.replace('thumb', '720p');
-    this.ratingColor = this.getColor(this.game.rating);
-    this.ratingText = this.getRating(this.game.rating);
     this.aggregatedRating = this.game.aggregated_rating
       ? this.game.aggregated_rating / 10
       : 0;
@@ -51,44 +50,8 @@ export class GameDetailsCardComponent implements OnInit {
     this.updateMediaStars();
   }
 
-  ngAfterViewInit(): void {
-    this.setCircleColor();
-  }
-
-  getColor(value: number): string {
-    if (value >= 0 && value < 5) {
-      return 'red';
-    } else if (value >= 5 && value < 7) {
-      return 'yellow';
-    } else if (value >= 7 && value < 9) {
-      return 'green';
-    } else if (value >= 9 && value < 10) {
-      return 'purple';
-    } else if (value == 10) {
-      return '#C69749';
-    } else {
-      return 'transparent';
-    }
-  }
-
-  getRating(value: number): string {
-    if (value >= 0 && value <= 2) {
-      return 'Lamentable';
-    } else if (value >= 2 && value < 5) {
-      return 'Malo';
-    } else if (value >= 5 && value < 6) {
-      return 'Aceptable';
-    } else if (value >= 6 && value <= 7) {
-      return 'Bueno';
-    } else if (value >= 7 && value < 9) {
-      return 'Notable';
-    } else if (value >= 9 && value < 10) {
-      return 'Excelente';
-    } else if (value == 10) {
-      return 'Perfecto';
-    } else {
-      return 'Sin califiación';
-    }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
   onAddToList() {
@@ -116,9 +79,6 @@ export class GameDetailsCardComponent implements OnInit {
           if (rating) {
             this.game.rating = rating;
             this.updateStars();
-            this.ratingColor = this.getColor(this.game.rating);
-            this.ratingText = this.getRating(this.game.rating);
-            this.setCircleColor();
           }
         });
     } else {
@@ -174,12 +134,6 @@ export class GameDetailsCardComponent implements OnInit {
     return `linear-gradient(90deg, gold ${ratingValue * 100}%, lightgray ${
       ratingValue * 100
     }%)`;
-  }
-
-  private setCircleColor() {
-    const element = this.elem.nativeElement;
-    const circle = element.querySelector('circle');
-    if (circle) circle.style.stroke = this.ratingColor;
   }
 
   getWebsiteByCagegory(category: string) {

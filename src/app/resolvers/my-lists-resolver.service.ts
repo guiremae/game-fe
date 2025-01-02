@@ -14,9 +14,7 @@ export class MyListsResolverService {
     return this.listService.getLists().pipe(
       catchError((error) => {
         console.error('Error en el resolver:', error);
-        // Redirigir a otra ruta en caso de fallo
-        this.router.navigate(['latest']);
-        // Devolver un observable vacío o null para indicar que el resolver ha terminado
+        this.router.navigate(['home']);
         return of(null);
       })
     );

@@ -2,14 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Game } from '../models/interfaces/game.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IgdbService {
   private baseURL = 'https://api.igdb.com/v4/';
-  private clientID: string = 'pev408euurhwg577z5h615cjapf84y';
-  private clientSecret: string = 'vmfiabbeu2bgf8xr4pgoilzm7xtlsp';
+  private clientID: string = environment.igdbClientID
+    ? environment.igdbClientID
+    : '';
   private cors_api_host: string = 'http://gamelog.hopto.org:9090/';
   private authToken: string = '';
   private platform: number = 0;
@@ -20,7 +22,7 @@ export class IgdbService {
   public authAPI(): Observable<any> {
     return this.httpClient.post<any>('https://id.twitch.tv/oauth2/token', {
       client_id: this.clientID,
-      client_secret: this.clientSecret,
+      client_secret: environment.igdbClientSecret,
       grant_type: 'client_credentials',
     });
   }

@@ -1,4 +1,3 @@
-// login.component.ts
 import { Component } from '@angular/core';
 import {
   UntypedFormControl,
@@ -11,16 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss'],
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrl: './reset-password.component.scss',
 })
-export class SignupComponent {
-  signUpForm = new UntypedFormGroup({
+export class ResetPasswordComponent {
+  resetPasswordForm = new UntypedFormGroup({
+    userID: new UntypedFormControl('', [Validators.required]),
     email: new UntypedFormControl('', [Validators.required, Validators.email]),
-    username: new UntypedFormControl('', Validators.required),
-    name: new UntypedFormControl('', Validators.required),
-    password: new UntypedFormControl('', Validators.required),
   });
 
   constructor(
@@ -30,17 +27,21 @@ export class SignupComponent {
   ) {}
 
   onSubmit() {
-    if (this.signUpForm.valid) {
-      const { email, username, name, password } = this.signUpForm.value;
+    if (this.resetPasswordForm.valid) {
+      const { userID, email } = this.resetPasswordForm.value;
 
       this.authService
-        .signUp(email, username, name, password)
+        .sendRequestPassword(userID, email)
         .pipe(
           tap(() => {
-            this._snackBar.open('Usuario creado con éxito', undefined, {
-              duration: 1500,
-              panelClass: ['app-notification-success', 'center'],
-            });
+            this._snackBar.open(
+              'Se ha enviado un correo para recuperar la contraseña',
+              undefined,
+              {
+                duration: 1500,
+                panelClass: ['center'],
+              }
+            );
             this.modalService.closeModal();
           }),
           catchError((error) => {
